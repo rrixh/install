@@ -1,27 +1,488 @@
+// esign kreation .plists
+
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Install DELTA iOS</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<script>
-window.onload = function () {
-    window.location.href =
-    "itms-services://?action=download-manifest&url=https://website.khoindvn.io.vn/plists/qachwvhuyyhu.plist";
-};
-</script>
+<title>Install App</title>
 
+<style>
+    body {
+        margin: 0;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        background: #ffffff;
+        font-family: Arial, sans-serif;
+        text-align: center;
+    }
+
+    .installer {
+        width: min(90%, 420px);
+        margin-top: 80px;
+    }
+
+    #appIcon {
+        width: 96px;
+        height: 96px;
+        border-radius: 22px;
+        object-fit: cover;
+        display: none;
+        margin: 0 auto 18px;
+    }
+
+    #title {
+        margin: 0 0 10px;
+        font-size: 25px;
+    }
+
+    #subtitle,
+    #description,
+    #appDetails {
+        display: none;
+    }
+
+    #subtitle {
+        margin: 0 0 8px;
+        font-size: 17px;
+        font-weight: 600;
+    }
+
+    #description {
+        margin: 0 auto 14px;
+        max-width: 360px;
+        line-height: 1.4;
+    }
+
+    #appDetails {
+        margin-bottom: 18px;
+        font-size: 14px;
+        color: #666666;
+    }
+
+    #message {
+        margin: 14px 0;
+    }
+
+    #installButton {
+        display: inline-block;
+        padding: 12px 28px;
+        border-radius: 12px;
+        background: #007aff;
+        color: #ffffff;
+        text-decoration: none;
+        font-size: 17px;
+        font-weight: 600;
+    }
+
+    #error {
+        display: none;
+        color: #c62828;
+        line-height: 1.4;
+    }
+</style>
 </head>
 
-<body style="font-family:Arial;text-align:center;margin-top:80px;">
+<body>
 
-<h2>Install App</h2>
+<div class="installer">
+    <img id="appIcon" alt="App icon">
 
-<p>If nothing happens, tap below.</p>
+    <h1 id="title">Loading...</h1>
 
-<a href="itms-services://?action=download-manifest&url=https://website.khoindvn.io.vn/plists/qachwvhuyyhu.plist">
-Install
-</a>
+    <div id="subtitle"></div>
+    <div id="description"></div>
+    <div id="appDetails"></div>
+
+    <p id="message">if you are not redirekted, tap below.</p>
+
+    <a id="installButton" href="#">Install</a>
+
+    <p id="error"></p>
+</div>
+
+<script>
+// ====================================================
+// APPS — 
+// ====================================================
+
+const apps = {
+
+    esignmoving: {
+        name: "ESign",
+        icon: "icons/esign-moving.png",
+        plist: "https://rrixh.github.io/install/plists/esign-moving.plist",
+subtitle: "Moving Increasingly Interconnected Technology Co., Ltd",
+        // version: "1.0",
+        // developer: "ESign Team",
+        // description: "Install ESign direktly on your iPhone.",
+    },
+
+    esign2: {
+        name: "ESign 2",
+        icon: "icons/esign2.png",
+        plist: "https://rrixh.github.io/install/plists/esign2.plist",
+
+        // subtitle: "IPA Signer",
+        // version: "1.0",
+        // developer: "ESign Team",
+        // description: "Install ESign direktly on your iPhone.",
+    },
+
+    esign3: {
+        name: "ESign 3",
+        icon: "icons/esign3.png",
+        plist: "https://rrixh.github.io/install/plists/esign3.plist",
+
+        // version: "1.0",
+        // developer: "ESign Team",
+        // description: "Install ESign direktly on your iPhone.",
+    },
+
+    esign4: {
+        name: "ESign 4",
+        icon: "icons/esign4.png",
+        plist: "https://rrixh.github.io/install/plists/esign4.plist",
+
+        // version: "1.0",
+        // developer: "ESign Team",
+        // description: "Install ESign direktly on your iPhone.",
+    },
+
+    esign5: {
+        name: "ESign 5",
+        icon: "icons/esign5.png",
+        plist: "https://rrixh.github.io/install/plists/esign5.plist",
+
+        // version: "1.0",
+        // developer: "ESign Team",
+        // description: "Install ESign direktly on your iPhone.",
+    },
+
+    esign6: {
+        name: "ESign 6",
+        icon: "icons/esign6.png",
+        plist: "https://rrixh.github.io/install/plists/esign6.plist",
+
+        // version: "1.0",
+        // developer: "ESign Team",
+        // description: "Install ESign direktly on your iPhone.",
+    },
+
+    esign7: {
+        name: "ESign 7",
+        icon: "icons/esign7.png",
+        plist: "https://rrixh.github.io/install/plists/esign7.plist",
+
+        // version: "1.0",
+        // developer: "ESign Team",
+        // description: "Install ESign direktly on your iPhone.",
+    },
+
+    esign8: {
+        name: "ESign 8",
+        icon: "icons/esign8.png",
+        plist: "https://rrixh.github.io/install/plists/esign8.plist",
+
+        // version: "1.0",
+        // developer: "ESign Team",
+        // description: "Install ESign direktly on your iPhone.",
+    },
+
+    esign9: {
+        name: "ESign 9",
+        icon: "icons/esign9.png",
+        plist: "https://rrixh.github.io/install/plists/esign9.plist",
+
+        // version: "1.0",
+        // developer: "ESign Team",
+        // description: "Install ESign direktly on your iPhone.",
+    },
+
+    esign10: {
+        name: "ESign 10",
+        icon: "icons/esign10.png",
+        plist: "https://rrixh.github.io/install/plists/esign10.plist",
+
+        // version: "1.0",
+        // developer: "ESign Team",
+        // description: "Install ESign direktly on your iPhone.",
+    },
+
+    esign11: {
+        name: "ESign 11",
+        icon: "icons/esign11.png",
+        plist: "https://rrixh.github.io/install/plists/esign11.plist",
+
+        // version: "1.0",
+        // developer: "ESign Team",
+        // description: "Install ESign direktly on your iPhone.",
+    },
+
+    esign12: {
+        name: "ESign 12",
+        icon: "icons/esign12.png",
+        plist: "https://rrixh.github.io/install/plists/esign12.plist",
+
+        // version: "1.0",
+        // developer: "ESign Team",
+        // description: "Install ESign direktly on your iPhone.",
+    },
+
+    esign13: {
+        name: "ESign 13",
+        icon: "icons/esign13.png",
+        plist: "https://rrixh.github.io/install/plists/esign13.plist",
+
+        // version: "1.0",
+        // developer: "ESign Team",
+        // description: "Install ESign direktly on your iPhone.",
+    },
+
+    esign14: {
+        name: "ESign 14",
+        icon: "icons/esign14.png",
+        plist: "https://rrixh.github.io/install/plists/esign14.plist",
+
+        // version: "1.0",
+        // developer: "ESign Team",
+        // description: "Install ESign direktly on your iPhone.",
+    },
+
+    esign15: {
+        name: "ESign 15",
+        icon: "icons/esign15.png",
+        plist: "https://rrixh.github.io/install/plists/esign15.plist",
+
+        // version: "1.0",
+        // developer: "ESign Team",
+        // description: "Install ESign direktly on your iPhone.",
+    },
+
+    esign16: {
+        name: "ESign 16",
+        icon: "icons/esign16.png",
+        plist: "https://rrixh.github.io/install/plists/esign16.plist",
+
+        // version: "1.0",
+        // developer: "ESign Team",
+        // description: "Install ESign direktly on your iPhone.",
+    },
+
+    esign17: {
+        name: "ESign 17",
+        icon: "icons/esign17.png",
+        plist: "https://rrixh.github.io/install/plists/esign17.plist",
+
+        // version: "1.0",
+        // developer: "ESign Team",
+        // description: "Install ESign direktly on your iPhone.",
+    },
+
+    esign18: {
+        name: "ESign 18",
+        icon: "icons/esign18.png",
+        plist: "https://rrixh.github.io/install/plists/esign18.plist",
+
+        // version: "1.0",
+        // developer: "ESign Team",
+        // description: "Install ESign direktly on your iPhone.",
+    },
+
+    esign19: {
+        name: "ESign 19",
+        icon: "icons/esign19.png",
+        plist: "https://rrixh.github.io/install/plists/esign19.plist",
+
+        // version: "1.0",
+        // developer: "ESign Team",
+        // description: "Install ESign direktly on your iPhone.",
+    },
+
+    esign20: {
+        name: "ESign 20",
+        icon: "icons/esign20.png",
+        plist: "https://rrixh.github.io/install/plists/esign20.plist",
+
+        // version: "1.0",
+        // developer: "ESign Team",
+        // description: "Install ESign direktly on your iPhone.",
+    },
+
+    esign21: {
+        name: "ESign 21",
+        icon: "icons/esign21.png",
+        plist: "https://rrixh.github.io/install/plists/esign21.plist",
+
+        // version: "1.0",
+        // developer: "ESign Team",
+        // description: "Install ESign direktly on your iPhone.",
+    },
+
+    esign22: {
+        name: "ESign 22",
+        icon: "icons/esign22.png",
+        plist: "https://rrixh.github.io/install/plists/esign22.plist",
+
+        // version: "1.0",
+        // developer: "ESign Team",
+        // description: "Install ESign direktly on your iPhone.",
+    },
+
+    esign23: {
+        name: "ESign 23",
+        icon: "icons/esign23.png",
+        plist: "https://rrixh.github.io/install/plists/esign23.plist",
+
+        // version: "1.0",
+        // developer: "ESign Team",
+        // description: "Install ESign direktly on your iPhone.",
+    },
+
+    esign24: {
+        name: "ESign 24",
+        icon: "icons/esign24.png",
+        plist: "https://rrixh.github.io/install/plists/esign24.plist",
+
+        // version: "1.0",
+        // developer: "ESign Team",
+        // description: "Install ESign direktly on your iPhone.",
+    },
+
+    esign25: {
+        name: "ESign 25",
+        icon: "icons/esign25.png",
+        plist: "https://rrixh.github.io/install/plists/esign25.plist",
+
+        // version: "1.0",
+        // developer: "ESign Team",
+        // description: "Install ESign direktly on your iPhone.",
+    },
+
+    esign26: {
+        name: "ESign 26",
+        icon: "icons/esign26.png",
+        plist: "https://rrixh.github.io/install/plists/esign26.plist",
+
+        // version: "1.0",
+        // developer: "ESign Team",
+        // description: "Install ESign direktly on your iPhone.",
+    },
+
+    esign27: {
+        name: "ESign 27",
+        icon: "icons/esign27.png",
+        plist: "https://rrixh.github.io/install/plists/esign27.plist",
+
+        // version: "1.0",
+        // developer: "ESign Team",
+        // description: "Install ESign direktly on your iPhone.",
+    },
+
+    esign28: {
+        name: "ESign 28",
+        icon: "icons/esign28.png",
+        plist: "https://rrixh.github.io/install/plists/esign28.plist",
+
+        // version: "1.0",
+        // developer: "ESign Team",
+        // description: "Install ESign direktly on your iPhone.",
+    },
+
+    esign29: {
+        name: "ESign 29",
+        icon: "icons/esign29.png",
+        plist: "https://rrixh.github.io/install/plists/esign29.plist",
+
+        // version: "1.0",
+        // developer: "ESign Team",
+        // description: "Install ESign direktly on your iPhone.",
+    },
+
+    esign30: {
+        name: "ESign 30",
+        icon: "icons/esign30.png",
+        plist: "https://rrixh.github.io/install/plists/esign30.plist",
+
+        // version: "1.0",
+        // developer: "ESign Team",
+        // description: "Install ESign direktly on your iPhone.",
+    },
+
+};
+
+// ====================================================
+// WEBSITE LOGIC — YOU USUALLY DO NOT EDIT BELOW
+// ====================================================
+
+const appKey = new URLSearchParams(window.location.search).get("app");
+const app = apps[appKey];
+
+const titleElement = document.getElementById("title");
+const iconElement = document.getElementById("appIcon");
+const subtitleElement = document.getElementById("subtitle");
+const descriptionElement = document.getElementById("description");
+const detailsElement = document.getElementById("appDetails");
+const messageElement = document.getElementById("message");
+const installButton = document.getElementById("installButton");
+const errorElement = document.getElementById("error");
+
+if (!app) {
+    document.title = "App Not Found";
+    titleElement.textContent = "App not found";
+    messageElement.style.display = "none";
+    installButton.style.display = "none";
+    errorElement.style.display = "block";
+    errorElement.textContent =
+        "The app name in the URL does not match an app inside this installer.";
+} else {
+    const installUrl =
+        "itms-services://?action=download-manifest&url=" +
+        encodeURIComponent(app.plist);
+
+    document.title = "Install " + app.name;
+    titleElement.textContent = app.name + " installation";
+    installButton.href = installUrl;
+
+    if (app.icon) {
+        iconElement.src = app.icon;
+        iconElement.alt = app.name + " icon";
+        iconElement.style.display = "block";
+    }
+
+    if (app.subtitle) {
+        subtitleElement.textContent = app.subtitle;
+        subtitleElement.style.display = "block";
+    }
+
+    if (app.description) {
+        descriptionElement.textContent = app.description;
+        descriptionElement.style.display = "block";
+    }
+
+    const details = [];
+
+    if (app.version) {
+        details.push("Version " + app.version);
+    }
+
+    if (app.developer) {
+        details.push(app.developer);
+    }
+
+    if (details.length > 0) {
+        detailsElement.textContent = details.join(" • ");
+        detailsElement.style.display = "block";
+    }
+
+    window.addEventListener("load", function () {
+        window.location.href = installUrl;
+    });
+}
+</script>
 
 </body>
 </html>
