@@ -97,7 +97,7 @@
     <div id="description"></div>
     <div id="appDetails"></div>
 
-    <p id="message">if you are not redirekted, tap below.</p>
+    <p id="message">If you are not redirected or you mis-clicked, tap below</p>
 
     <a id="installButton" href="#">Install</a>
 
@@ -115,7 +115,7 @@ const apps = {
         name: "ESign",
         icon: "icons/esign-moving.png",
         plist: "https://rrixh.pages.dev/plists/esign-moving.plist",
-subtitle: "Moving Increasingly Interconnected Technology Co., Ltd",
+subtitle: "Certificate: Moving Increasingly Interconnected Technology Co., Ltd",
         // version: "1.0",
         // developer: "ESign Team",
         // description: "Install ESign direktly on your iPhone.",
@@ -418,7 +418,13 @@ subtitle: "Moving Increasingly Interconnected Technology Co., Ltd",
 // WEBSITE LOGIC â YOU USUALLY DO NOT EDIT BELOW
 // ====================================================
 
-const appKey = new URLSearchParams(window.location.search).get("app");
+<!--
+const appKey = new URLSearchParams(window.location.search).get("app"); 
+-->
+const appKey = window.location.pathname
+    .replace(/^\/+|\/+$/g, "")
+    .toLowerCase();
+
 const app = apps[appKey];
 
 const titleElement = document.getElementById("title");
@@ -444,7 +450,7 @@ if (!app) {
         encodeURIComponent(app.plist);
 
     document.title = "Install " + app.name;
-    titleElement.textContent = app.name + " installation";
+    titleElement.textContent = app.name + " Installation";
     installButton.href = installUrl;
 
     if (app.icon) {
