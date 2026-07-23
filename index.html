@@ -415,12 +415,11 @@ subtitle: "Certificate: Moving Increasingly Interconnected Technology Co., Ltd",
 };
 
 // ====================================================
-// WEBSITE LOGIC â YOU USUALLY DO NOT EDIT BELOW
+// WEBSITE LOGIK
 // ====================================================
 
-<!--
-const appKey = new URLSearchParams(window.location.search).get("app"); 
--->
+// const appKey = new URLSearchParams(window.location.search).get("app");
+
 const appKey = window.location.pathname
     .replace(/^\/+|\/+$/g, "")
     .toLowerCase();
