@@ -49,6 +49,7 @@
         margin: 0 0 8px;
         font-size: 17px;
         font-weight: 600;
+        color: green;
     }
 
     #description {
@@ -115,7 +116,7 @@ const apps = {
         name: "ESign",
         icon: "icons/esign-moving.png",
         plist: "https://rrixh.pages.dev/plists/esign-moving.plist",
-subtitle: "Certificate: Moving Increasingly Interconnected Technology Co., Ltd",
+subtitle: "<span style='color:red'>Certificate:</span><br>Moving Increasingly Interconnected Technology Co., Ltd",
         // version: "1.0",
         // developer: "ESign Team",
         // description: "Install ESign direktly on your iPhone.",
@@ -459,7 +460,7 @@ if (!app) {
     }
 
     if (app.subtitle) {
-        subtitleElement.textContent = app.subtitle;
+        subtitleElement.innerHTML = app.subtitle;
         subtitleElement.style.display = "block";
     }
 
