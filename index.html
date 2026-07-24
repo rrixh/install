@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>RRixh iOS</title>
+  <meta name="description" content="Kraxked, modded and hacked IPA and APK files with free VIP, Pro, Premium and mod menu features.">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- PAGE BACKGROUND -->
+  <div class="glow glow-one"></div>
+  <div class="glow glow-two"></div>
+
+  <main class="site-shell">
+    <!-- HEADER / PROFILE -->
+    <header class="section-card hero" id="top">
+      <!-- ANIMATED HEADER IMAGE: edit SITE_SETTINGS.headerImage in script.js -->
+      <div class="hero-image-stage">
+        <img id="headerImage" class="hero-image" src="" alt="RRixh iOS header image">
+      </div>
+
+      <!-- PAGE NAME -->
+      <h1 id="pageTitle">RRixh iOS</h1>
+
+      <!-- PAGE DESCRIPTION -->
+      <p id="pageDescription" class="hero-description"></p>
+
+      <!-- LAST UPDATED TEXT -->
+      <p id="lastUpdated" class="last-updated"></p>
+
+      <!-- SOCIAL LINKS -->
+      <section class="social-section" aria-label="Social links">
+        <button id="socialToggle" class="social-toggle" type="button" aria-expanded="false">
+          <span>Social Links</span>
+          <i class="fa-solid fa-chevron-down"></i>
+        </button>
+        <div id="socialLinks" class="social-links"></div>
+      </section>
+    </header>
+
+    <!-- DNS METHOD -->
+    <section class="section-card content-section" id="dns-method">
+      <div class="section-heading">
+        <p class="section-kicker">iOS SETUP</p>
+        <h2>DNS METHOD</h2>
+        <p id="dnsDescription" class="section-description"></p>
+      </div>
+
+      <!-- DNS PROFILE INSTALL BUTTON -->
+      <a id="dnsProfileButton" class="wide-action-card" href="#" target="_blank" rel="noopener noreferrer">
+        <img id="dnsProfileImage" src="" alt="DNS profile icon">
+        <span class="wide-action-copy">
+          <span class="wide-action-title">
+            Install DNS Profile <strong class="required-text">(required)</strong>
+          </span>
+          <span class="wide-action-subtitle">Install this before trying an ESign app</span>
+        </span>
+        <i class="fa-solid fa-arrow-right"></i>
+      </a>
+
+      <!-- ESIGN INSTALLATION STEPS -->
+      <div class="steps-panel">
+        <h3>ESign Installation for DNS method</h3>
+        <ol id="dnsSteps" class="dns-steps"></ol>
+      </div>
+    </section>
+
+    <!-- ESIGN INSTALLATIONS -->
+    <section class="section-card content-section" id="esign-apps">
+      <div class="section-heading">
+        <p class="section-kicker">DIRECT INSTALL</p>
+        <h2>ESign Apps</h2>
+        <p class="section-description">Klick any ESign to install it.</p>
+        <p class="section-note">
+          The certificate you import in ESign should have the same name as the ESign you installed.
+        </p>
+      </div>
+      <!-- HORIZONTAL ESIGN CAROUSEL -->
+      <div id="esignList" class="horizontal-list" aria-label="ESign applications"></div>
+    </section>
+
+    <!-- ROBLOX EXECUTORS -->
+    <section class="section-card content-section" id="roblox-executors">
+      <div class="section-heading">
+        <p class="section-kicker">ROBLOX TOOLS</p>
+        <h2>ROBLOX EXECUTORS</h2>
+        <p class="section-description">iOS &amp; ANDROID</p>
+      </div>
+
+      <!-- STATUS LEGEND -->
+      <div class="status-legend">
+        <div><span class="status-dot status-green"></span><span>undetected &amp; working (safe)</span></div>
+        <div><span class="status-dot status-yellow"></span><span>detected &amp; working (spoofed/unsafe)</span></div>
+        <div><span class="status-dot status-red"></span><span>needs update</span></div>
+      </div>
+
+      <!-- IOS EXECUTORS -->
+      <div class="library-block">
+        <div class="library-heading-row">
+          <div><p class="section-kicker">APPLE</p><h3>iOS Executors</h3></div>
+          <span class="swipe-hint">Swipe</span>
+        </div>
+        <div id="iosExecutors" class="horizontal-list compact-list"></div>
+      </div>
+
+      <!-- ANDROID EXECUTORS -->
+      <div class="library-block">
+        <div class="library-heading-row">
+          <div><p class="section-kicker">ANDROID</p><h3>Android Executors</h3></div>
+          <span class="swipe-hint">Swipe</span>
+        </div>
+        <div id="androidExecutors" class="horizontal-list compact-list"></div>
+      </div>
+    </section>
+
+    <!-- IPA LIBRARY -->
+    <section class="section-card content-section" id="ipa-library">
+      <div class="section-heading">
+        <p class="section-kicker">DOWNLOADS</p>
+        <h2>iPA LIBRARY</h2>
+        <p class="section-description">iOS ONLY (iPhone/iPad)</p>
+      </div>
+      <div id="ipaLibrary" class="horizontal-list"></div>
+    </section>
+
+    <!-- APK LIBRARY -->
+    <section class="section-card content-section" id="apk-library">
+      <div class="section-heading">
+        <p class="section-kicker">DOWNLOADS</p>
+        <h2>APK LIBRARY</h2>
+        <p class="section-description">ANDROID ONLY (Phone/Tablet)</p>
+      </div>
+      <div id="apkLibrary" class="horizontal-list"></div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+      <a href="#top">Back to top</a>
+      <p>RRixh iOS</p>
+    </footer>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
