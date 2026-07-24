@@ -1,4 +1,4 @@
-script.js
+
 /* =========================================================
 RRIXH IOS WEBSITE SETTINGS
 Edit text, images, links, app names, statuses and plist URLs here.
