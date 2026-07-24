@@ -1,3 +1,4 @@
+script.js
 /* =========================================================
 RRIXH IOS WEBSITE SETTINGS
 Edit text, images, links, app names, statuses and plist URLs here.
@@ -9,7 +10,7 @@ const SITE_SETTINGS = {
   lastUpdated: "LAST UPDATED: EDIT THIS DATE & TIME",
 
   // Replace with the direct raw GitHub URL for your remix of the 👺 emoji.
-  headerImage: "https://raw.githubusercontent.com/rrixh/install/refs/heads/main/esign.png",
+  headerImage: "https://raw.githubusercontent.com/rrixh/install/refs/heads/main/imgs/rrixh.PNG",
 
   // false = icons always show | true = Social Links dropdown
   socialsDropdown: false
@@ -19,6 +20,7 @@ const SITE_SETTINGS = {
 iconType: "font" uses Font Awesome.
 iconType: "image" uses your own GitHub image URL.
 */
+
 const SOCIAL_LINKS = [
   { name:"Snapchat", iconType:"font", icon:"fa-brands fa-snapchat", url:"https://story.snapchat.com/s/clpped" },
   { name:"Discord", iconType:"font", icon:"fa-brands fa-discord", url:"https://discordapp.com/users/1284685023630458963" },
@@ -32,7 +34,7 @@ const SOCIAL_LINKS = [
 const DNS_PROFILE = {
   description: "DNS method is like a VPN that blocks Apple from blacklisting you and lets you use revoked/expired certificates.",
   image: "https://raw.githubusercontent.com/rrixh/install/refs/heads/main/esign.png",
-  url: "https://rrixh.pages.dev/dns.mobileconfig"
+  url: "https://release-assets.githubusercontent.com/github-production-release-asset/1224449257/fd3e744b-b96b-4ecf-a206-531e54013d60?sp=r&sv=2018-11-09&sr=b&spr=https&se=2026-07-20T23:34:43Z&rscd=attachment;+filename=khoindvn.mobileconfig&rsct=application/octet-stream&skoid=96c2d410-5711-43a1-aedd-ab1947aa7ab0&sktid=398a6654-997b-47e9-b12b-9515b896b4de&skt=2026-07-20T22:34:15Z&ske=2026-07-20T23:34:43Z&sks=b&skv=2018-11-09&sig=nkXrl1o76OLo00hN9pogXEw+JUDbgVIA6g7ksHWIQIU=&jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmVsZWFzZS1hc3NldHMuZ2l0aHVidXNlcmNvbnRlbnQuY29tIiwia2V5Ijoia2V5MSIsImV4cCI6MTc4NDU4NzM5NCwibmJmIjoxNzg0NTg3MDk0LCJwYXRoIjoicmVsZWFzZWFzc2V0cHJvZHVjdGlvbi5ibG9iLmNvcmUud2luZG93cy5uZXQifQ.nGuiQsIocR9Etza0Poy0vmBwCaP8QVdBwu6EVXVLaFc&response-content-disposition=attachment;%20filename=khoindvn.mobileconfig&response-content-type=application/octet-stream"
 };
 
 /* DNS INSTALLATION STEPS */
@@ -174,19 +176,20 @@ actionType:
 "download" = URL is a direct IPA/APK file
 "link"     = normal webpage
 */
+
 const IOS_EXECUTORS = [
   {
     name:"Delta iOS",
     version:"v2.729.838",
-    image:"https://raw.githubusercontent.com/rrixh/install/refs/heads/main/esign.png",
+    image:"https://raw.githubusercontent.com/rrixh/install/refs/heads/main/imgs/delta.JPG",
     status:"green",
     actionType:"install",
-    url:"https://rrixh.pages.dev/plists/delta-ios.plist"
+    url:"https://github.com/rrixh/direkt-download/releases/download/v2.729.838/DELTA.v2.729.838.undetekted.official.ipa"
   },
   {
     name:"KRNL iOS",
     version:"v2.677.762",
-    image:"https://raw.githubusercontent.com/rrixh/install/refs/heads/main/esign.png",
+    image:"https://raw.githubusercontent.com/rrixh/install/refs/heads/main/imgs/krnl.PNG",
     status:"red",
     actionType:"download",
     url:"https://example.com/KRNL.ipa"
@@ -194,7 +197,7 @@ const IOS_EXECUTORS = [
   {
     name:"Codex iOS",
     version:"v2.676.715",
-    image:"https://raw.githubusercontent.com/rrixh/install/refs/heads/main/esign.png",
+    image:"https://raw.githubusercontent.com/rrixh/install/refs/heads/main/imgs/kodex.JPG",
     status:"red",
     actionType:"download",
     url:"https://example.com/Codex.ipa"
