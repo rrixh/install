@@ -1,147 +1,412 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>RRixh iOS</title>
-  <meta name="description" content="Kraxked, modded and hacked IPA and APK files with free VIP, Pro, Premium and mod menu features.">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <!-- PAGE BACKGROUND -->
-  <div class="glow glow-one"></div>
-  <div class="glow glow-two"></div>
+script.js
+/* =========================================================
+RRIXH IOS WEBSITE SETTINGS
+Edit text, images, links, app names, statuses and plist URLs here.
+========================================================= */
 
-  <main class="site-shell">
-    <!-- HEADER / PROFILE -->
-    <header class="section-card hero" id="top">
-      <!-- ANIMATED HEADER IMAGE: edit SITE_SETTINGS.headerImage in script.js -->
-      <div class="hero-image-stage">
-        <img id="headerImage" class="hero-image" src="" alt="RRixh iOS header image">
-      </div>
+const SITE_SETTINGS = {
+  pageTitle: "RRixh iOS",
+  pageDescription: "KRAXKED/MODDED/HACKED IPA & APK FILES WITH FREE VIP, PRO, PREMIUM, MOD MENU ETC.",
+  lastUpdated: "LAST UPDATED: EDIT THIS DATE & TIME",
 
-      <!-- PAGE NAME -->
-      <h1 id="pageTitle">RRixh iOS</h1>
+  // Replace with the direct raw GitHub URL for your remix of the 👺 emoji.
+  headerImage: "https://raw.githubusercontent.com/rrixh/install/refs/heads/main/imgs/rrixh.PNG",
 
-      <!-- PAGE DESCRIPTION -->
-      <p id="pageDescription" class="hero-description"></p>
+  // false = icons always show | true = Social Links dropdown
+  socialsDropdown: false
+};
 
-      <!-- LAST UPDATED TEXT -->
-      <p id="lastUpdated" class="last-updated"></p>
+/* SOCIAL LINKS
+iconType: "font" uses Font Awesome.
+iconType: "image" uses your own GitHub image URL.
+*/
 
-      <!-- SOCIAL LINKS -->
-      <section class="social-section" aria-label="Social links">
-        <button id="socialToggle" class="social-toggle" type="button" aria-expanded="false">
-          <span>Social Links</span>
-          <i class="fa-solid fa-chevron-down"></i>
-        </button>
-        <div id="socialLinks" class="social-links"></div>
-      </section>
-    </header>
+const SOCIAL_LINKS = [
+  { name:"Snapchat", iconType:"font", icon:"fa-brands fa-snapchat", url:"https://story.snapchat.com/s/clpped" },
+  { name:"Discord", iconType:"font", icon:"fa-brands fa-discord", url:"https://discordapp.com/users/1284685023630458963" },
+  { name:"Telegram", iconType:"font", icon:"fa-brands fa-telegram", url:"https://t.me/siipped" },
+  { name:"Cash App", iconType:"font", icon:"fa-solid fa-dollar-sign", url:"https://cash.app/$99fail" },
+  { name:"TikTok", iconType:"font", icon:"fa-brands fa-tiktok", url:"https://www.tiktok.com/@rrixh" },
+  { name:"Instagram", iconType:"font", icon:"fa-brands fa-instagram", url:"https://www.instagram.com/nugit" }
+];
 
-    <!-- DNS METHOD -->
-    <section class="section-card content-section" id="dns-method">
-      <div class="section-heading">
-        <p class="section-kicker">iOS SETUP</p>
-        <h2>DNS METHOD</h2>
-        <p id="dnsDescription" class="section-description"></p>
-      </div>
+/* DNS METHOD */
+const DNS_PROFILE = {
+  description: "DNS method is like a VPN that blocks Apple from blacklisting you and lets you use revoked/expired certificates.",
+  image: "https://raw.githubusercontent.com/rrixh/install/refs/heads/main/esign.png",
+  url: "https://release-assets.githubusercontent.com/github-production-release-asset/1224449257/fd3e744b-b96b-4ecf-a206-531e54013d60?sp=r&sv=2018-11-09&sr=b&spr=https&se=2026-07-20T23:34:43Z&rscd=attachment;+filename=khoindvn.mobileconfig&rsct=application/octet-stream&skoid=96c2d410-5711-43a1-aedd-ab1947aa7ab0&sktid=398a6654-997b-47e9-b12b-9515b896b4de&skt=2026-07-20T22:34:15Z&ske=2026-07-20T23:34:43Z&sks=b&skv=2018-11-09&sig=nkXrl1o76OLo00hN9pogXEw+JUDbgVIA6g7ksHWIQIU=&jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmVsZWFzZS1hc3NldHMuZ2l0aHVidXNlcmNvbnRlbnQuY29tIiwia2V5Ijoia2V5MSIsImV4cCI6MTc4NDU4NzM5NCwibmJmIjoxNzg0NTg3MDk0LCJwYXRoIjoicmVsZWFzZWFzc2V0cHJvZHVjdGlvbi5ibG9iLmNvcmUud2luZG93cy5uZXQifQ.nGuiQsIocR9Etza0Poy0vmBwCaP8QVdBwu6EVXVLaFc&response-content-disposition=attachment;%20filename=khoindvn.mobileconfig&response-content-type=application/octet-stream"
+};
 
-      <!-- DNS PROFILE INSTALL BUTTON -->
-      <a id="dnsProfileButton" class="wide-action-card" href="#" target="_blank" rel="noopener noreferrer">
-        <img id="dnsProfileImage" src="" alt="DNS profile icon">
-        <span class="wide-action-copy">
-          <span class="wide-action-title">
-            Install DNS Profile <strong class="required-text">(required)</strong>
-          </span>
-          <span class="wide-action-subtitle">Install this before trying an ESign app</span>
-        </span>
-        <i class="fa-solid fa-arrow-right"></i>
-      </a>
+/* DNS INSTALLATION STEPS */
+const DNS_STEPS = [
+  "Must install the DNS profile or errors will occur during ESign installation.",
+  "Install any ESign below until one of them works for you.",
+  "How to trust the app if you get the “Untrusted Developer Enterprise” message: Open Settings → General → scroll down → VPN & Device Management → Enterprise Apps → press “Trust” twice. If prompted with “Allow & Restart,” press it and restart your phone."
+];
 
-      <!-- ESIGN INSTALLATION STEPS -->
-      <div class="steps-panel">
-        <h3>ESign Installation for DNS method</h3>
-        <ol id="dnsSteps" class="dns-steps"></ol>
-      </div>
-    </section>
+/* ESIGN INSTALLATIONS */
+const ESIGN_SHARED_IMAGE = "https://raw.githubusercontent.com/rrixh/install/refs/heads/main/esign.png";
+const ESIGN_APPS = [
+  {
+    "certificate": "Moving Increasingly Interconnected Technology Co., Ltd",
+    "plist": "https://rrixh.pages.dev/plists/esign-moving.plist"
+  },
+  {
+    "certificate": "Certificate Name 02",
+    "plist": "https://rrixh.pages.dev/plists/esign-02.plist"
+  },
+  {
+    "certificate": "Certificate Name 03",
+    "plist": "https://rrixh.pages.dev/plists/esign-03.plist"
+  },
+  {
+    "certificate": "Certificate Name 04",
+    "plist": "https://rrixh.pages.dev/plists/esign-04.plist"
+  },
+  {
+    "certificate": "Certificate Name 05",
+    "plist": "https://rrixh.pages.dev/plists/esign-05.plist"
+  },
+  {
+    "certificate": "Certificate Name 06",
+    "plist": "https://rrixh.pages.dev/plists/esign-06.plist"
+  },
+  {
+    "certificate": "Certificate Name 07",
+    "plist": "https://rrixh.pages.dev/plists/esign-07.plist"
+  },
+  {
+    "certificate": "Certificate Name 08",
+    "plist": "https://rrixh.pages.dev/plists/esign-08.plist"
+  },
+  {
+    "certificate": "Certificate Name 09",
+    "plist": "https://rrixh.pages.dev/plists/esign-09.plist"
+  },
+  {
+    "certificate": "Certificate Name 10",
+    "plist": "https://rrixh.pages.dev/plists/esign-10.plist"
+  },
+  {
+    "certificate": "Certificate Name 11",
+    "plist": "https://rrixh.pages.dev/plists/esign-11.plist"
+  },
+  {
+    "certificate": "Certificate Name 12",
+    "plist": "https://rrixh.pages.dev/plists/esign-12.plist"
+  },
+  {
+    "certificate": "Certificate Name 13",
+    "plist": "https://rrixh.pages.dev/plists/esign-13.plist"
+  },
+  {
+    "certificate": "Certificate Name 14",
+    "plist": "https://rrixh.pages.dev/plists/esign-14.plist"
+  },
+  {
+    "certificate": "Certificate Name 15",
+    "plist": "https://rrixh.pages.dev/plists/esign-15.plist"
+  },
+  {
+    "certificate": "Certificate Name 16",
+    "plist": "https://rrixh.pages.dev/plists/esign-16.plist"
+  },
+  {
+    "certificate": "Certificate Name 17",
+    "plist": "https://rrixh.pages.dev/plists/esign-17.plist"
+  },
+  {
+    "certificate": "Certificate Name 18",
+    "plist": "https://rrixh.pages.dev/plists/esign-18.plist"
+  },
+  {
+    "certificate": "Certificate Name 19",
+    "plist": "https://rrixh.pages.dev/plists/esign-19.plist"
+  },
+  {
+    "certificate": "Certificate Name 20",
+    "plist": "https://rrixh.pages.dev/plists/esign-20.plist"
+  },
+  {
+    "certificate": "Certificate Name 21",
+    "plist": "https://rrixh.pages.dev/plists/esign-21.plist"
+  },
+  {
+    "certificate": "Certificate Name 22",
+    "plist": "https://rrixh.pages.dev/plists/esign-22.plist"
+  },
+  {
+    "certificate": "Certificate Name 23",
+    "plist": "https://rrixh.pages.dev/plists/esign-23.plist"
+  },
+  {
+    "certificate": "Certificate Name 24",
+    "plist": "https://rrixh.pages.dev/plists/esign-24.plist"
+  },
+  {
+    "certificate": "Certificate Name 25",
+    "plist": "https://rrixh.pages.dev/plists/esign-25.plist"
+  },
+  {
+    "certificate": "Certificate Name 26",
+    "plist": "https://rrixh.pages.dev/plists/esign-26.plist"
+  },
+  {
+    "certificate": "Certificate Name 27",
+    "plist": "https://rrixh.pages.dev/plists/esign-27.plist"
+  },
+  {
+    "certificate": "Certificate Name 28",
+    "plist": "https://rrixh.pages.dev/plists/esign-28.plist"
+  },
+  {
+    "certificate": "Certificate Name 29",
+    "plist": "https://rrixh.pages.dev/plists/esign-29.plist"
+  },
+  {
+    "certificate": "Certificate Name 30",
+    "plist": "https://rrixh.pages.dev/plists/esign-30.plist"
+  }
+];
 
-    <!-- ESIGN INSTALLATIONS -->
-    <section class="section-card content-section" id="esign-apps">
-      <div class="section-heading">
-        <p class="section-kicker">DIRECT INSTALL</p>
-        <h2>ESign Apps</h2>
-        <p class="section-description">Klick any ESign to install it.</p>
-        <p class="section-note">
-          The certificate you import in ESign should have the same name as the ESign you installed.
-        </p>
-      </div>
-      <!-- HORIZONTAL ESIGN CAROUSEL -->
-      <div id="esignList" class="horizontal-list" aria-label="ESign applications"></div>
-    </section>
+/* ROBLOX EXECUTORS
+status: "green", "yellow", or "red"
+actionType:
+"install"  = URL is a plist URL
+"download" = URL is a direct IPA/APK file
+"link"     = normal webpage
+*/
 
-    <!-- ROBLOX EXECUTORS -->
-    <section class="section-card content-section" id="roblox-executors">
-      <div class="section-heading">
-        <p class="section-kicker">ROBLOX TOOLS</p>
-        <h2>ROBLOX EXECUTORS</h2>
-        <p class="section-description">iOS &amp; ANDROID</p>
-      </div>
+const IOS_EXECUTORS = [
+  {
+    name:"Delta iOS",
+    version:"v2.729.838",
+    image:"https://raw.githubusercontent.com/rrixh/install/refs/heads/main/imgs/delta.JPG",
+    status:"green",
+    actionType:"download",
+    url:"https://github.com/rrixh/direkt-download/releases/download/v2.729.838/DELTA.v2.729.838.undetekted.official.ipa"
+  },
+  {
+    name:"KRNL iOS",
+    version:"v2.677.762",
+    image:"https://raw.githubusercontent.com/rrixh/install/refs/heads/main/imgs/krnl.PNG",
+    status:"red",
+    actionType:"download",
+    url:"https://example.com/KRNL.ipa"
+  },
+  {
+    name:"Codex iOS",
+    version:"v2.676.715",
+    image:"https://raw.githubusercontent.com/rrixh/install/refs/heads/main/imgs/kodex.JPG",
+    status:"red",
+    actionType:"download",
+    url:"https://example.com/Codex.ipa"
+  }
+];
 
-      <!-- STATUS LEGEND -->
-      <div class="status-legend">
-        <div><span class="status-dot status-green"></span><span>undetected &amp; working (safe)</span></div>
-        <div><span class="status-dot status-yellow"></span><span>detected &amp; working (spoofed/unsafe)</span></div>
-        <div><span class="status-dot status-red"></span><span>needs update</span></div>
-      </div>
+const ANDROID_EXECUTORS = [
+  {
+    name:"Delta APK",
+    version:"v2.677.762",
+    image:"https://raw.githubusercontent.com/rrixh/install/refs/heads/main/esign.png",
+    status:"red",
+    actionType:"download",
+    url:"https://example.com/Delta.apk"
+  },
+  {
+    name:"KRNL APK",
+    version:"v2.677.762",
+    image:"https://raw.githubusercontent.com/rrixh/install/refs/heads/main/esign.png",
+    status:"red",
+    actionType:"download",
+    url:"https://example.com/KRNL.apk"
+  },
+  {
+    name:"Ronix APK",
+    version:"v2.676.715",
+    image:"https://raw.githubusercontent.com/rrixh/install/refs/heads/main/esign.png",
+    status:"red",
+    actionType:"download",
+    url:"https://example.com/Ronix.apk"
+  }
+];
 
-      <!-- IOS EXECUTORS -->
-      <div class="library-block">
-        <div class="library-heading-row">
-          <div><p class="section-kicker">APPLE</p><h3>iOS Executors</h3></div>
-          <span class="swipe-hint">Swipe</span>
-        </div>
-        <div id="iosExecutors" class="horizontal-list compact-list"></div>
-      </div>
+/* IPA LIBRARY */
+const IPA_LIBRARY = [
+  {
+    name:"Kraxked Movies 100+",
+    version:"Latest",
+    image:"https://raw.githubusercontent.com/rrixh/install/refs/heads/main/esign.png",
+    actionType:"download",
+    url:"https://example.com/KraxkedMovies.ipa"
+  },
+  {
+    name:"Spotify Premium",
+    version:"Latest",
+    image:"https://raw.githubusercontent.com/rrixh/install/refs/heads/main/esign.png",
+    actionType:"download",
+    url:"https://example.com/SpotifyPremium.ipa"
+  },
+  {
+    name:"Unfold: Video & Reels Maker",
+    version:"Latest",
+    image:"https://raw.githubusercontent.com/rrixh/install/refs/heads/main/esign.png",
+    actionType:"download",
+    url:"https://example.com/Unfold.ipa"
+  }
+];
 
-      <!-- ANDROID EXECUTORS -->
-      <div class="library-block">
-        <div class="library-heading-row">
-          <div><p class="section-kicker">ANDROID</p><h3>Android Executors</h3></div>
-          <span class="swipe-hint">Swipe</span>
-        </div>
-        <div id="androidExecutors" class="horizontal-list compact-list"></div>
-      </div>
-    </section>
+/* APK LIBRARY */
+const APK_LIBRARY = [
+  {
+    name:"Example Premium APK",
+    version:"Latest",
+    image:"https://raw.githubusercontent.com/rrixh/install/refs/heads/main/esign.png",
+    actionType:"download",
+    url:"https://example.com/example-premium.apk"
+  },
+  {
+    name:"Example Mod APK",
+    version:"Latest",
+    image:"https://raw.githubusercontent.com/rrixh/install/refs/heads/main/esign.png",
+    actionType:"download",
+    url:"https://example.com/example-mod.apk"
+  }
+];
 
-    <!-- IPA LIBRARY -->
-    <section class="section-card content-section" id="ipa-library">
-      <div class="section-heading">
-        <p class="section-kicker">DOWNLOADS</p>
-        <h2>iPA LIBRARY</h2>
-        <p class="section-description">iOS ONLY (iPhone/iPad)</p>
-      </div>
-      <div id="ipaLibrary" class="horizontal-list"></div>
-    </section>
+/* =========================================================
+WEBSITE LOGIC
+You normally do not need to edit below this line.
+========================================================= */
 
-    <!-- APK LIBRARY -->
-    <section class="section-card content-section" id="apk-library">
-      <div class="section-heading">
-        <p class="section-kicker">DOWNLOADS</p>
-        <h2>APK LIBRARY</h2>
-        <p class="section-description">ANDROID ONLY (Phone/Tablet)</p>
-      </div>
-      <div id="apkLibrary" class="horizontal-list"></div>
-    </section>
+const $ = id => document.getElementById(id);
 
-    <!-- FOOTER -->
-    <footer class="site-footer">
-      <a href="#top">Back to top</a>
-      <p>RRixh iOS</p>
-    </footer>
-  </main>
+function buildInstallUrl(plistUrl){
+  return "itms-services://?action=download-manifest&url=" + encodeURIComponent(plistUrl);
+}
 
-  <script src="script.js"></script>
-</body>
-</html>
+function getActionUrl(item){
+  return item.actionType === "install" ? buildInstallUrl(item.url) : item.url;
+}
+
+function createSocialLink(item){
+  const link=document.createElement("a");
+  link.className="social-link";
+  link.href=item.url;
+  link.target="_blank";
+  link.rel="noopener noreferrer";
+  link.setAttribute("aria-label",item.name);
+  link.title=item.name;
+
+  if(item.iconType==="image"){
+    const img=document.createElement("img");
+    img.src=item.icon;
+    img.alt="";
+    link.appendChild(img);
+  }else{
+    const icon=document.createElement("i");
+    icon.className=item.icon;
+    link.appendChild(icon);
+  }
+  return link;
+}
+
+function createAppCard(item,options={}){
+  const link=document.createElement("a");
+  link.className="app-card"+(options.esign?" esign-card":"");
+  link.href=options.esign?buildInstallUrl(item.plist):getActionUrl(item);
+
+  if(!link.href.startsWith("itms-services://")){
+    link.target="_blank";
+    link.rel="noopener noreferrer";
+  }
+
+  const wrap=document.createElement("div");
+  wrap.className="app-card-image-wrap";
+
+  const img=document.createElement("img");
+  img.className="app-card-image";
+  img.src=options.esign?ESIGN_SHARED_IMAGE:item.image;
+  img.alt=options.esign?"ESign app icon":item.name+" icon";
+  wrap.appendChild(img);
+
+  const body=document.createElement("div");
+  body.className="app-card-body";
+
+  const titleRow=document.createElement("div");
+  titleRow.className="app-card-title-row";
+
+  if(!options.esign && item.status){
+    const dot=document.createElement("span");
+    dot.className="status-dot status-"+item.status;
+    titleRow.appendChild(dot);
+  }
+
+  const title=document.createElement("h4");
+  title.className="app-card-title";
+  title.textContent=options.esign?item.certificate:item.name;
+  titleRow.appendChild(title);
+  body.appendChild(titleRow);
+
+  if(!options.esign && item.version){
+    const sub=document.createElement("p");
+    sub.className="app-card-subtitle";
+    sub.textContent=item.version;
+    body.appendChild(sub);
+  }
+
+  link.appendChild(wrap);
+  link.appendChild(body);
+  return link;
+}
+
+function renderAppList(id,items,options={}){
+  const container=$(id);
+  container.innerHTML="";
+  items.forEach(item=>container.appendChild(createAppCard(item,options)));
+}
+
+function initHeader(){
+  $("pageTitle").textContent=SITE_SETTINGS.pageTitle;
+  $("pageDescription").textContent=SITE_SETTINGS.pageDescription;
+  $("lastUpdated").textContent=SITE_SETTINGS.lastUpdated;
+  $("headerImage").src=SITE_SETTINGS.headerImage;
+}
+
+function initSocials(){
+  const links=$("socialLinks");
+  SOCIAL_LINKS.forEach(item=>links.appendChild(createSocialLink(item)));
+
+  if(SITE_SETTINGS.socialsDropdown){
+    document.body.classList.add("social-dropdown-enabled");
+    $("socialToggle").addEventListener("click",()=>{
+      const open=links.classList.toggle("is-open");
+      $("socialToggle").setAttribute("aria-expanded",String(open));
+    });
+  }
+}
+
+function initDns(){
+  $("dnsDescription").textContent=DNS_PROFILE.description;
+  $("dnsProfileImage").src=DNS_PROFILE.image;
+  $("dnsProfileButton").href=DNS_PROFILE.url;
+
+  DNS_STEPS.forEach(step=>{
+    const li=document.createElement("li");
+    li.textContent=step;
+    $("dnsSteps").appendChild(li);
+  });
+}
+
+function initWebsite(){
+  initHeader();
+  initSocials();
+  initDns();
+  renderAppList("esignList",ESIGN_APPS,{esign:true});
+  renderAppList("iosExecutors",IOS_EXECUTORS);
+  renderAppList("androidExecutors",ANDROID_EXECUTORS);
+  renderAppList("ipaLibrary",IPA_LIBRARY);
+  renderAppList("apkLibrary",APK_LIBRARY);
+}
+
+document.addEventListener("DOMContentLoaded",initWebsite);
