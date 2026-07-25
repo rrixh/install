@@ -2,7 +2,6 @@
 
 /* =========================================================
 RRIXH IOS WEBSITE SETTINGS
-Edit text, images, links, app names, statuses and plist URLs here.
 ========================================================= */
 
 const SITE_SETTINGS = {
@@ -13,7 +12,7 @@ const SITE_SETTINGS = {
   headerImage: "https://raw.githubusercontent.com/rrixh/install/refs/heads/main/imgs/rrixh.PNG",
 
   // false = icons always show | true = Social Links dropdown
-  socialsDropdown: true
+  socialsDropdown: false
 };
 
 /* SOCIAL LINKS
