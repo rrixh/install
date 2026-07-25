@@ -8,7 +8,7 @@ Edit text, images, links, app names, statuses and plist URLs here.
 const SITE_SETTINGS = {
   pageTitle: "RRixh iOS",
   pageDescription: "KRAXKED/MODDED/HACKED IPA & APK FILES WITH FREE VIP, PRO, PREMIUM, MOD MENU ETC.",
-  lastUpdated: "LAST UPDATED: July 24, 2026 @7:37 PM (EST)",
+  lastUpdated: "LAST UPDATED: July 25, 2026 @12:32 AM (EST)",
 
   headerImage: "https://raw.githubusercontent.com/rrixh/install/refs/heads/main/imgs/rrixh.PNG",
 
@@ -240,25 +240,25 @@ const ANDROID_EXECUTORS = [
 /* IPA LIBRARY */
 const IPA_LIBRARY = [
   {
-    name:"Kraxked Movies 100+",
-    version:"Latest",
-    image:"https://raw.githubusercontent.com/rrixh/install/refs/heads/main/esign.png",
+    name:"Youtube (OLED)",
+    version:"v20.50.10",
+    image:"https://raw.githubusercontent.com/rrixh/install/refs/heads/main/imgs/oldyoutube.PNG",
     actionType:"download",
-    url:"https://example.com/KraxkedMovies.ipa"
+    url:"youtube+.OLED.v20.50.10.ipa"
   },
   {
     name:"Spotify Premium",
-    version:"Latest",
-    image:"https://raw.githubusercontent.com/rrixh/install/refs/heads/main/esign.png",
+    version:"v9.1.50",
+    image:"https://raw.githubusercontent.com/rrixh/install/refs/heads/main/imgs/spotify.JPG",
     actionType:"download",
-    url:"https://example.com/SpotifyPremium.ipa"
+    url:"https://github.com/rrixh/direkt-download/releases/download/1/Spotify.kraxked.v9.1.50.ipa"
   },
   {
-    name:"Unfold: Video & Reels Maker",
-    version:"Latest",
-    image:"https://raw.githubusercontent.com/rrixh/install/refs/heads/main/esign.png",
+    name:"Instagram (Regram kraxked)",
+    version:"v376.0.0",
+    image:"https://raw.githubusercontent.com/rrixh/install/refs/heads/main/imgs/instagram.PNG",
     actionType:"download",
-    url:"https://example.com/Unfold.ipa"
+    url:"https://github.com/rrixh/direkt-download/releases/download/1/regram.v376.0.0.-.fake.CodeX@com.burbn.instagram55.ipa"
   }
 ];
 
