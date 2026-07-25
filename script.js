@@ -1,4 +1,4 @@
-
+<!-- script.js index.html -->
 /* =========================================================
 RRIXH IOS WEBSITE SETTINGS
 Edit text, images, links, app names, statuses and plist URLs here.
@@ -183,7 +183,7 @@ const IOS_EXECUTORS = [
     version:"v2.729.838",
     image:"https://raw.githubusercontent.com/rrixh/install/refs/heads/main/imgs/delta.JPG",
     status:"green",
-    actionType:"install",
+    actionType:"download",
     url:"https://github.com/rrixh/direkt-download/releases/download/v2.729.838/DELTA.v2.729.838.undetekted.official.ipa"
   },
   {
