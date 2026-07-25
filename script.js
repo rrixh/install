@@ -1,4 +1,4 @@
-// script.js index.html 
+// script.js (website) RRixh iOS
 
 /* =========================================================
 RRIXH IOS WEBSITE SETTINGS
@@ -8,13 +8,12 @@ Edit text, images, links, app names, statuses and plist URLs here.
 const SITE_SETTINGS = {
   pageTitle: "RRixh iOS",
   pageDescription: "KRAXKED/MODDED/HACKED IPA & APK FILES WITH FREE VIP, PRO, PREMIUM, MOD MENU ETC.",
-  lastUpdated: "LAST UPDATED: EDIT THIS DATE & TIME",
+  lastUpdated: "LAST UPDATED: July 24, 2026 @7:37 PM (EST)",
 
-  // Replace with the direct raw GitHub URL for your remix of the 👺 emoji.
   headerImage: "https://raw.githubusercontent.com/rrixh/install/refs/heads/main/imgs/rrixh.PNG",
 
   // false = icons always show | true = Social Links dropdown
-  socialsDropdown: false
+  socialsDropdown: true
 };
 
 /* SOCIAL LINKS
@@ -23,12 +22,18 @@ iconType: "image" uses your own GitHub image URL.
 */
 
 const SOCIAL_LINKS = [
-  { name:"Snapchat", iconType:"font", icon:"fa-brands fa-snapchat", url:"https://story.snapchat.com/s/clpped" },
-  { name:"Discord", iconType:"font", icon:"fa-brands fa-discord", url:"https://discordapp.com/users/1284685023630458963" },
-  { name:"Telegram", iconType:"font", icon:"fa-brands fa-telegram", url:"https://t.me/siipped" },
-  { name:"Cash App", iconType:"font", icon:"fa-solid fa-dollar-sign", url:"https://cash.app/$99fail" },
-  { name:"TikTok", iconType:"font", icon:"fa-brands fa-tiktok", url:"https://www.tiktok.com/@rrixh" },
-  { name:"Instagram", iconType:"font", icon:"fa-brands fa-instagram", url:"https://www.instagram.com/nugit" }
+  { name:"Snapchat", iconType:"font", icon:"fa-brands fa-snapchat", 
+url:"https://story.snapchat.com/s/clpped" },
+  { name:"Discord", iconType:"font", icon:"fa-brands fa-discord", 
+url:"https://discordapp.com/users/1284685023630458963" },
+  { name:"Telegram", iconType:"font", icon:"fa-brands fa-telegram", 
+url:"https://t.me/sIipped" },
+  { name:"Cash App", iconType:"font", icon:"fa-solid fa-dollar-sign", 
+url:"https://cash.app/$99fail" },
+  { name:"TikTok", iconType:"font", icon:"fa-brands fa-tiktok", 
+url:"https://www.tiktok.com/@rrixh" },
+  { name:"Instagram", iconType:"font", icon:"fa-brands fa-instagram", 
+url:"https://www.instagram.com/nugit" }
 ];
 
 /* DNS METHOD */
@@ -40,132 +45,132 @@ const DNS_PROFILE = {
 
 /* DNS INSTALLATION STEPS */
 const DNS_STEPS = [
-  "Must install the DNS profile or errors will occur during ESign installation.",
+  "You must install the DNS profile or errors will occur during ESign installation.",
   "Install any ESign below until one of them works for you.",
-  "How to trust the app if you get the “Untrusted Developer Enterprise” message: Open Settings → General → scroll down → VPN & Device Management → Enterprise Apps → press “Trust” twice. If prompted with “Allow & Restart,” press it and restart your phone."
+  "How to trust the app if you get the “Untrusted Developer Enterprise” message: Open Settings → General → scroll down → VPN & Device Management → Enterprise Apps → press “Trust” twice. If prompted with “Allow & Restart”, press it and restart your phone."
 ];
 
 /* ESIGN INSTALLATIONS */
 const ESIGN_SHARED_IMAGE = "https://raw.githubusercontent.com/rrixh/install/refs/heads/main/esign.png";
 const ESIGN_APPS = [
   {
-    "certificate": "Moving Increasingly Interconnected Technology Co., Ltd",
+    "certificate": "✅ Moving Increasingly Interconnected Technology",
     "plist": "https://rrixh.pages.dev/plists/esign-moving.plist"
   },
   {
-    "certificate": "Certificate Name 02",
+    "certificate": "MOVING INCREASINGLY INTERCONNECTED TECHNOLOGY V1",
     "plist": "https://rrixh.pages.dev/plists/esign-02.plist"
   },
   {
-    "certificate": "Certificate Name 03",
+    "certificate": "VIETNAM AIRLINES",
     "plist": "https://rrixh.pages.dev/plists/esign-03.plist"
   },
   {
-    "certificate": "Certificate Name 04",
+    "certificate": "VIETNAM AIRLINES VN V1",
     "plist": "https://rrixh.pages.dev/plists/esign-04.plist"
   },
   {
-    "certificate": "Certificate Name 05",
+    "certificate": "VIETNAM AIRLINES VN V2",
     "plist": "https://rrixh.pages.dev/plists/esign-05.plist"
   },
   {
-    "certificate": "Certificate Name 06",
+    "certificate": "CHINA TELECOM",
     "plist": "https://rrixh.pages.dev/plists/esign-06.plist"
   },
   {
-    "certificate": "Certificate Name 07",
+    "certificate": "CHINA TELECOM 2",
     "plist": "https://rrixh.pages.dev/plists/esign-07.plist"
   },
   {
-    "certificate": "Certificate Name 08",
+    "certificate": "BEIJING XIBEI",
     "plist": "https://rrixh.pages.dev/plists/esign-08.plist"
   },
   {
-    "certificate": "Certificate Name 09",
+    "certificate": "LUOYANG POSTAL",
     "plist": "https://rrixh.pages.dev/plists/esign-09.plist"
   },
   {
-    "certificate": "Certificate Name 10",
+    "certificate": "QINGDAO RURAL",
     "plist": "https://rrixh.pages.dev/plists/esign-10.plist"
   },
   {
-    "certificate": "Certificate Name 11",
+    "certificate": "COMISSION ELECTIONS",
     "plist": "https://rrixh.pages.dev/plists/esign-11.plist"
   },
   {
-    "certificate": "Certificate Name 12",
+    "certificate": "NATIONAL OILWELL",
     "plist": "https://rrixh.pages.dev/plists/esign-12.plist"
   },
   {
-    "certificate": "Certificate Name 13",
+    "certificate": "BEIJING ZHIZHANGYI",
     "plist": "https://rrixh.pages.dev/plists/esign-13.plist"
   },
   {
-    "certificate": "Certificate Name 14",
+    "certificate": "ARAMCO",
     "plist": "https://rrixh.pages.dev/plists/esign-14.plist"
   },
   {
-    "certificate": "Certificate Name 15",
+    "certificate": "GLOBAL TAKEOFF",
     "plist": "https://rrixh.pages.dev/plists/esign-15.plist"
   },
   {
-    "certificate": "Certificate Name 16",
+    "certificate": "BOC",
     "plist": "https://rrixh.pages.dev/plists/esign-16.plist"
   },
   {
-    "certificate": "Certificate Name 17",
+    "certificate": "BOC V1",
     "plist": "https://rrixh.pages.dev/plists/esign-17.plist"
   },
   {
-    "certificate": "Certificate Name 18",
+    "certificate": "BOC V2",
     "plist": "https://rrixh.pages.dev/plists/esign-18.plist"
   },
   {
-    "certificate": "Certificate Name 19",
+    "certificate": "BOC V3",
     "plist": "https://rrixh.pages.dev/plists/esign-19.plist"
   },
   {
-    "certificate": "Certificate Name 20",
+    "certificate": "BOC V4",
     "plist": "https://rrixh.pages.dev/plists/esign-20.plist"
   },
   {
-    "certificate": "Certificate Name 21",
+    "certificate": "POWERCHINA",
     "plist": "https://rrixh.pages.dev/plists/esign-21.plist"
   },
   {
-    "certificate": "Certificate Name 22",
+    "certificate": "POWERCHINA V1",
     "plist": "https://rrixh.pages.dev/plists/esign-22.plist"
   },
   {
-    "certificate": "Certificate Name 23",
+    "certificate": "POWERCHINA V2",
     "plist": "https://rrixh.pages.dev/plists/esign-23.plist"
   },
   {
-    "certificate": "Certificate Name 24",
+    "certificate": "POWERCHINA V3",
     "plist": "https://rrixh.pages.dev/plists/esign-24.plist"
   },
   {
-    "certificate": "Certificate Name 25",
+    "certificate": "POWERCHINA V4",
     "plist": "https://rrixh.pages.dev/plists/esign-25.plist"
   },
   {
-    "certificate": "Certificate Name 26",
+    "certificate": "JIANGSU SIMCERE",
     "plist": "https://rrixh.pages.dev/plists/esign-26.plist"
   },
   {
-    "certificate": "Certificate Name 27",
+    "certificate": "VIETNAM RUBBER",
     "plist": "https://rrixh.pages.dev/plists/esign-27.plist"
   },
   {
-    "certificate": "Certificate Name 28",
+    "certificate": "NONE",
     "plist": "https://rrixh.pages.dev/plists/esign-28.plist"
   },
   {
-    "certificate": "Certificate Name 29",
+    "certificate": "NONE",
     "plist": "https://rrixh.pages.dev/plists/esign-29.plist"
   },
   {
-    "certificate": "Certificate Name 30",
+    "certificate": "NONE",
     "plist": "https://rrixh.pages.dev/plists/esign-30.plist"
   }
 ];
