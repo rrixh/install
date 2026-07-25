@@ -1,4 +1,5 @@
-<!-- script.js index.html -->
+// script.js index.html 
+
 /* =========================================================
 RRIXH IOS WEBSITE SETTINGS
 Edit text, images, links, app names, statuses and plist URLs here.
