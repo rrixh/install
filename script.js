@@ -178,6 +178,7 @@ const IPA_LIBRARY = [
 ];
 
 /* APK LIBRARY */
+/*
 const APK_LIBRARY = [
   {
     name:"Example Premium APK",
@@ -194,11 +195,10 @@ const APK_LIBRARY = [
     url:"https://example.com/example-mod.apk"
   }
 ];
+*/
 
 /* =========================================================
-CUSTOM CSS SYMBOL LIBRARY
-All symbols are drawn with HTML and CSS.
-No emoji, curly quote, or arrow characters are stored in this file.
+KUSTOM CSS SYMBOL LIBRARY
 ========================================================= */
 
 function injectCustomSymbolStyles(){
@@ -444,8 +444,7 @@ function closeInstallPopup(){
 }
 
 /* =========================================================
-WEBSITE LOGIC
-You normally do not need to edit below this line.
+WEBSITE LOGIK
 ========================================================= */
 
 const $ = id => document.getElementById(id);
