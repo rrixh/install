@@ -112,6 +112,7 @@ const ESIGN_APPS = [
 
   { "certificate": "NONE", "plist": "https://rrixh.pages.dev/plists/esign moving 1.plist" }
 */
+
 ];
 
 /* ROBLOX EXECUTORS
@@ -143,7 +144,7 @@ const IOS_EXECUTORS = [
     name:"Codex iOS",
     version:"needs update",
     image:"https://raw.githubusercontent.com/rrixh/install/refs/heads/main/imgs/kodex.JPG",
-    status:"red",
+    status:"yellow",
     actionType:"download",
     url:"https://rrixh.pages.dev"
   }
@@ -160,15 +161,15 @@ const ANDROID_EXECUTORS = [
   },
   {
     name:"KRNL APK",
-    version:"v2.677.762",
-    image:"https://raw.githubusercontent.com/rrixh/install/refs/heads/main/esign.png",
+    version:"DISCONTINUED",
+    image:"https://raw.githubusercontent.com/rrixh/install/refs/heads/main/imgs/krnl.PNG",
     status:"red",
     actionType:"download",
     url:"https://rrixh.pages.dev"
   },
   {
     name:"Ronix APK",
-    version:"v2.676.715",
+    version:"DISCONTINUED",
     image:"https://obj.wearedevs.net/images/software/ronin/ronin-061626.webp",
     status:"red",
     actionType:"download",
@@ -193,8 +194,8 @@ const IPA_LIBRARY = [
     url:"https://github.com/rrixh/direkt-download/releases/download/1/Spotify.kraxked.v9.1.50.ipa"
   },
   {
-    name:"Instagram (Regram kraxked)",
-    version:"v376.0.0",
+    name:"Instagram++",
+    version:"Regram cracked (v376.0.0)",
     image:"https://raw.githubusercontent.com/rrixh/install/refs/heads/main/imgs/instagram.PNG",
     actionType:"download",
     url:"https://github.com/rrixh/direkt-download/releases/download/1/regram.v376.0.0.-.fake.CodeX@com.burbn.instagram55.ipa"
