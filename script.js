@@ -21,18 +21,12 @@ iconType: "image" uses your own GitHub image URL.
 */
 
 const SOCIAL_LINKS = [
-  { name:"Snapchat", iconType:"font", icon:"fa-brands fa-snapchat", 
-url:"https://story.snapchat.com/s/clpped" },
-  { name:"Discord", iconType:"font", icon:"fa-brands fa-discord", 
-url:"https://discordapp.com/users/1284685023630458963" },
-  { name:"Telegram", iconType:"font", icon:"fa-brands fa-telegram", 
-url:"https://t.me/sIipped" },
-  { name:"Cash App", iconType:"font", icon:"fa-solid fa-dollar-sign", 
-url:"https://cash.app/$99fail" },
-  { name:"TikTok", iconType:"font", icon:"fa-brands fa-tiktok", 
-url:"https://www.tiktok.com/@rrixh" },
-  { name:"Instagram", iconType:"font", icon:"fa-brands fa-instagram", 
-url:"https://www.instagram.com/nugit" }
+  { name:"Snapchat", iconType:"font", icon:"fa-brands fa-snapchat", url:"https://story.snapchat.com/s/clpped" },
+  { name:"Discord", iconType:"font", icon:"fa-brands fa-discord", url:"https://discordapp.com/users/1284685023630458963" },
+  { name:"Telegram", iconType:"font", icon:"fa-brands fa-telegram", url:"https://t.me/sIipped" },
+  { name:"Cash App", iconType:"font", icon:"fa-solid fa-dollar-sign", url:"https://cash.app/$99fail" },
+  { name:"TikTok", iconType:"font", icon:"fa-brands fa-tiktok", url:"https://www.tiktok.com/@rrixh" },
+  { name:"Instagram", iconType:"font", icon:"fa-brands fa-instagram", url:"https://www.instagram.com/nugit" }
 ];
 
 /* DNS METHOD */
@@ -46,132 +40,42 @@ const DNS_PROFILE = {
 const DNS_STEPS = [
   "You must install the DNS profile or errors will occur during ESign installation.",
   "Install any ESign below until one of them works for you.",
-  "How to trust the app if you get the “Untrusted Developer Enterprise” message: Open Settings → General → scroll down → VPN & Device Management → Enterprise Apps → press “Trust” twice. If prompted with “Allow & Restart”, press it and restart your phone."
+  "How to trust the app if you get the âUntrusted Developer Enterpriseâ message: Open Settings â General â scroll down â VPN & Device Management â Enterprise Apps â press âTrustâ twice. If prompted with âAllow & Restartâ, press it and restart your phone."
 ];
 
 /* ESIGN INSTALLATIONS */
 const ESIGN_SHARED_IMAGE = "https://raw.githubusercontent.com/rrixh/install/refs/heads/main/esign.png";
 const ESIGN_APPS = [
-  {
-    "certificate": "✅ Moving Increasingly Interconnected Technology",
-    "plist": "https://rrixh.pages.dev/plists/esign-moving.plist"
-  },
-  {
-    "certificate": "MOVING INCREASINGLY INTERCONNECTED TECHNOLOGY V1",
-    "plist": "https://rrixh.pages.dev/plists/esign-02.plist"
-  },
-  {
-    "certificate": "VIETNAM AIRLINES",
-    "plist": "https://rrixh.pages.dev/plists/esign-03.plist"
-  },
-  {
-    "certificate": "VIETNAM AIRLINES VN V1",
-    "plist": "https://rrixh.pages.dev/plists/esign-04.plist"
-  },
-  {
-    "certificate": "VIETNAM AIRLINES VN V2",
-    "plist": "https://rrixh.pages.dev/plists/esign-05.plist"
-  },
-  {
-    "certificate": "CHINA TELECOM",
-    "plist": "https://rrixh.pages.dev/plists/esign-06.plist"
-  },
-  {
-    "certificate": "CHINA TELECOM 2",
-    "plist": "https://rrixh.pages.dev/plists/esign-07.plist"
-  },
-  {
-    "certificate": "BEIJING XIBEI",
-    "plist": "https://rrixh.pages.dev/plists/esign-08.plist"
-  },
-  {
-    "certificate": "LUOYANG POSTAL",
-    "plist": "https://rrixh.pages.dev/plists/esign-09.plist"
-  },
-  {
-    "certificate": "QINGDAO RURAL",
-    "plist": "https://rrixh.pages.dev/plists/esign-10.plist"
-  },
-  {
-    "certificate": "COMISSION ELECTIONS",
-    "plist": "https://rrixh.pages.dev/plists/esign-11.plist"
-  },
-  {
-    "certificate": "NATIONAL OILWELL",
-    "plist": "https://rrixh.pages.dev/plists/esign-12.plist"
-  },
-  {
-    "certificate": "BEIJING ZHIZHANGYI",
-    "plist": "https://rrixh.pages.dev/plists/esign-13.plist"
-  },
-  {
-    "certificate": "ARAMCO",
-    "plist": "https://rrixh.pages.dev/plists/esign-14.plist"
-  },
-  {
-    "certificate": "GLOBAL TAKEOFF",
-    "plist": "https://rrixh.pages.dev/plists/esign-15.plist"
-  },
-  {
-    "certificate": "BOC",
-    "plist": "https://rrixh.pages.dev/plists/esign-16.plist"
-  },
-  {
-    "certificate": "BOC V1",
-    "plist": "https://rrixh.pages.dev/plists/esign-17.plist"
-  },
-  {
-    "certificate": "BOC V2",
-    "plist": "https://rrixh.pages.dev/plists/esign-18.plist"
-  },
-  {
-    "certificate": "BOC V3",
-    "plist": "https://rrixh.pages.dev/plists/esign-19.plist"
-  },
-  {
-    "certificate": "BOC V4",
-    "plist": "https://rrixh.pages.dev/plists/esign-20.plist"
-  },
-  {
-    "certificate": "POWERCHINA",
-    "plist": "https://rrixh.pages.dev/plists/esign-21.plist"
-  },
-  {
-    "certificate": "POWERCHINA V1",
-    "plist": "https://rrixh.pages.dev/plists/esign-22.plist"
-  },
-  {
-    "certificate": "POWERCHINA V2",
-    "plist": "https://rrixh.pages.dev/plists/esign-23.plist"
-  },
-  {
-    "certificate": "POWERCHINA V3",
-    "plist": "https://rrixh.pages.dev/plists/esign-24.plist"
-  },
-  {
-    "certificate": "POWERCHINA V4",
-    "plist": "https://rrixh.pages.dev/plists/esign-25.plist"
-  },
-  {
-    "certificate": "JIANGSU SIMCERE",
-    "plist": "https://rrixh.pages.dev/plists/esign-26.plist"
-  },
-  {
-    "certificate": "VIETNAM RUBBER",
-    "plist": "https://rrixh.pages.dev/plists/esign-27.plist"
-  },
-  {
-    "certificate": "NONE",
-    "plist": "https://rrixh.pages.dev/plists/esign-28.plist"
-  },
-  {
-    "certificate": "NONE",
-    "plist": "https://rrixh.pages.dev/plists/esign-29.plist"
-  },
-  {
-    "certificate": "NONE",
-    "plist": "https://rrixh.pages.dev/plists/esign-30.plist"
-  }
+  { "certificate": "â Moving Increasingly Interconnected Technology", "plist": "https://rrixh.pages.dev/plists/esign-moving.plist" },
+  { "certificate": "MOVING INCREASINGLY INTERCONNECTED TECHNOLOGY V1", "plist": "https://rrixh.pages.dev/plists/esign-02.plist" },
+  { "certificate": "VIETNAM AIRLINES", "plist": "https://rrixh.pages.dev/plists/esign-03.plist" },
+  { "certificate": "VIETNAM AIRLINES VN V1", "plist": "https://rrixh.pages.dev/plists/esign-04.plist" },
+  { "certificate": "VIETNAM AIRLINES VN V2", "plist": "https://rrixh.pages.dev/plists/esign-05.plist" },
+  { "certificate": "CHINA TELECOM", "plist": "https://rrixh.pages.dev/plists/esign-06.plist" },
+  { "certificate": "CHINA TELECOM 2", "plist": "https://rrixh.pages.dev/plists/esign-07.plist" },
+  { "certificate": "BEIJING XIBEI", "plist": "https://rrixh.pages.dev/plists/esign-08.plist" },
+  { "certificate": "LUOYANG POSTAL", "plist": "https://rrixh.pages.dev/plists/esign-09.plist" },
+  { "certificate": "QINGDAO RURAL", "plist": "https://rrixh.pages.dev/plists/esign-10.plist" },
+  { "certificate": "COMISSION ELECTIONS", "plist": "https://rrixh.pages.dev/plists/esign-11.plist" },
+  { "certificate": "NATIONAL OILWELL", "plist": "https://rrixh.pages.dev/plists/esign-12.plist" },
+  { "certificate": "BEIJING ZHIZHANGYI", "plist": "https://rrixh.pages.dev/plists/esign-13.plist" },
+  { "certificate": "ARAMCO", "plist": "https://rrixh.pages.dev/plists/esign-14.plist" },
+  { "certificate": "GLOBAL TAKEOFF", "plist": "https://rrixh.pages.dev/plists/esign-15.plist" },
+  { "certificate": "BOC", "plist": "https://rrixh.pages.dev/plists/esign-16.plist" },
+  { "certificate": "BOC V1", "plist": "https://rrixh.pages.dev/plists/esign-17.plist" },
+  { "certificate": "BOC V2", "plist": "https://rrixh.pages.dev/plists/esign-18.plist" },
+  { "certificate": "BOC V3", "plist": "https://rrixh.pages.dev/plists/esign-19.plist" },
+  { "certificate": "BOC V4", "plist": "https://rrixh.pages.dev/plists/esign-20.plist" },
+  { "certificate": "POWERCHINA", "plist": "https://rrixh.pages.dev/plists/esign-21.plist" },
+  { "certificate": "POWERCHINA V1", "plist": "https://rrixh.pages.dev/plists/esign-22.plist" },
+  { "certificate": "POWERCHINA V2", "plist": "https://rrixh.pages.dev/plists/esign-23.plist" },
+  { "certificate": "POWERCHINA V3", "plist": "https://rrixh.pages.dev/plists/esign-24.plist" },
+  { "certificate": "POWERCHINA V4", "plist": "https://rrixh.pages.dev/plists/esign-25.plist" },
+  { "certificate": "JIANGSU SIMCERE", "plist": "https://rrixh.pages.dev/plists/esign-26.plist" },
+  { "certificate": "VIETNAM RUBBER", "plist": "https://rrixh.pages.dev/plists/esign-27.plist" },
+  { "certificate": "NONE", "plist": "https://rrixh.pages.dev/plists/esign-28.plist" },
+  { "certificate": "NONE", "plist": "https://rrixh.pages.dev/plists/esign-29.plist" },
+  { "certificate": "NONE", "plist": "https://rrixh.pages.dev/plists/esign-30.plist" }
 ];
 
 /* ROBLOX EXECUTORS
@@ -280,6 +184,202 @@ const APK_LIBRARY = [
 ];
 
 /* =========================================================
+CUSTOM ESIGN INSTALL POPUP
+========================================================= */
+
+let pendingESignPlist = "";
+
+function injectInstallPopupStyles(){
+  const style=document.createElement("style");
+  style.textContent=`
+    body.rr-popup-open{overflow:hidden;}
+
+    .rr-install-overlay{
+      position:fixed;
+      inset:0;
+      z-index:999999;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:22px;
+      background:rgba(0,0,0,.64);
+      -webkit-backdrop-filter:blur(16px) saturate(135%);
+      backdrop-filter:blur(16px) saturate(135%);
+      opacity:0;
+      visibility:hidden;
+      transition:opacity .22s ease,visibility .22s ease;
+    }
+
+    .rr-install-overlay.is-open{opacity:1;visibility:visible;}
+
+    .rr-install-modal{
+      width:min(100%,390px);
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.16);
+      border-radius:28px;
+      background:linear-gradient(145deg,rgba(34,34,38,.96),rgba(12,12,14,.96));
+      box-shadow:0 28px 80px rgba(0,0,0,.62),inset 0 1px 0 rgba(255,255,255,.08);
+      color:#fff;
+      text-align:center;
+      transform:translateY(18px) scale(.96);
+      transition:transform .26s cubic-bezier(.2,.8,.2,1);
+    }
+
+    .rr-install-overlay.is-open .rr-install-modal{transform:translateY(0) scale(1);}
+    .rr-install-content{padding:28px 24px 22px;}
+
+    .rr-install-icon{
+      width:92px;
+      height:92px;
+      display:block;
+      margin:0 auto 18px;
+      border-radius:23px;
+      object-fit:cover;
+      box-shadow:0 12px 34px rgba(0,119,255,.32);
+    }
+
+    .rr-install-eyebrow{
+      margin:0 0 8px;
+      color:#9a9aa2;
+      font:700 12px/1.2 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+    }
+
+    .rr-install-title{
+      margin:0;
+      color:#fff;
+      font:800 29px/1.1 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      letter-spacing:-.025em;
+    }
+
+    .rr-install-message{
+      margin:14px auto 0;
+      max-width:310px;
+      color:#c8c8ce;
+      font:500 15px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    }
+
+    .rr-install-certificate{
+      margin:18px 0 0;
+      padding:13px 14px;
+      border:1px solid rgba(58,255,92,.24);
+      border-radius:16px;
+      background:rgba(46,255,83,.075);
+      color:#4dff67;
+      font:800 14px/1.35 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      overflow-wrap:anywhere;
+    }
+
+    .rr-install-actions{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      border-top:1px solid rgba(255,255,255,.12);
+    }
+
+    .rr-install-button{
+      min-height:58px;
+      border:0;
+      border-radius:0;
+      background:transparent;
+      font:700 17px/1 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      cursor:pointer;
+      -webkit-tap-highlight-color:transparent;
+    }
+
+    .rr-install-cancel{color:#c7c7cc;border-right:1px solid rgba(255,255,255,.12);}
+    .rr-install-continue{color:#0a84ff;}
+    .rr-install-button:active{background:rgba(255,255,255,.08);}
+
+    @media (max-width:420px){
+      .rr-install-overlay{align-items:flex-end;padding:14px;}
+      .rr-install-modal{width:100%;border-radius:26px;}
+    }
+
+    @media (prefers-reduced-motion:reduce){
+      .rr-install-overlay,.rr-install-modal{transition:none;}
+    }
+  `;
+  document.head.appendChild(style);
+}
+
+function createInstallPopup(){
+  injectInstallPopupStyles();
+
+  const overlay=document.createElement("div");
+  overlay.id="rrInstallOverlay";
+  overlay.className="rr-install-overlay";
+  overlay.setAttribute("aria-hidden","true");
+
+  overlay.innerHTML=`
+    <div class="rr-install-modal" role="dialog" aria-modal="true" aria-labelledby="rrInstallTitle">
+      <div class="rr-install-content">
+        <img id="rrInstallIcon" class="rr-install-icon" src="${ESIGN_SHARED_IMAGE}" alt="ESign icon">
+        <p class="rr-install-eyebrow">Direct Install</p>
+        <h2 id="rrInstallTitle" class="rr-install-title">Install ESign?</h2>
+        <p class="rr-install-message">You are about to open Appleâs installation confirmation for this ESign certificate.</p>
+        <p id="rrInstallCertificate" class="rr-install-certificate"></p>
+      </div>
+
+      <div class="rr-install-actions">
+        <button id="rrInstallCancel" class="rr-install-button rr-install-cancel" type="button">Cancel</button>
+        <button id="rrInstallContinue" class="rr-install-button rr-install-continue" type="button">Continue</button>
+      </div>
+    </div>
+  `;
+
+  document.body.appendChild(overlay);
+
+  document.getElementById("rrInstallCancel").addEventListener("click",closeInstallPopup);
+
+  document.getElementById("rrInstallContinue").addEventListener("click",()=>{
+    const plist=pendingESignPlist;
+    closeInstallPopup();
+
+    if(plist){
+      window.location.href=buildInstallUrl(plist);
+    }
+  });
+
+  overlay.addEventListener("click",event=>{
+    if(event.target===overlay){
+      closeInstallPopup();
+    }
+  });
+
+  document.addEventListener("keydown",event=>{
+    if(event.key==="Escape" && overlay.classList.contains("is-open")){
+      closeInstallPopup();
+    }
+  });
+}
+
+function openInstallPopup(item){
+  pendingESignPlist=item.plist;
+  document.getElementById("rrInstallCertificate").textContent=item.certificate;
+  document.getElementById("rrInstallOverlay").classList.add("is-open");
+  document.getElementById("rrInstallOverlay").setAttribute("aria-hidden","false");
+  document.body.classList.add("rr-popup-open");
+
+  setTimeout(()=>{
+    document.getElementById("rrInstallContinue").focus();
+  },50);
+}
+
+function closeInstallPopup(){
+  const overlay=document.getElementById("rrInstallOverlay");
+
+  if(!overlay){
+    return;
+  }
+
+  overlay.classList.remove("is-open");
+  overlay.setAttribute("aria-hidden","true");
+  document.body.classList.remove("rr-popup-open");
+  pendingESignPlist="";
+}
+
+/* =========================================================
 WEBSITE LOGIC
 You normally do not need to edit below this line.
 ========================================================= */
@@ -319,11 +419,20 @@ function createSocialLink(item){
 function createAppCard(item,options={}){
   const link=document.createElement("a");
   link.className="app-card"+(options.esign?" esign-card":"");
-  link.href=options.esign?buildInstallUrl(item.plist):getActionUrl(item);
 
-  if(!link.href.startsWith("itms-services://")){
-    link.target="_blank";
-    link.rel="noopener noreferrer";
+  if(options.esign){
+    link.href="#";
+    link.addEventListener("click",event=>{
+      event.preventDefault();
+      openInstallPopup(item);
+    });
+  }else{
+    link.href=getActionUrl(item);
+
+    if(!link.href.startsWith("itms-services://")){
+      link.target="_blank";
+      link.rel="noopener noreferrer";
+    }
   }
 
   const wrap=document.createElement("div");
@@ -407,6 +516,7 @@ function initWebsite(){
   initHeader();
   initSocials();
   initDns();
+  createInstallPopup();
   renderAppList("esignList",ESIGN_APPS,{esign:true});
   renderAppList("iosExecutors",IOS_EXECUTORS);
   renderAppList("androidExecutors",ANDROID_EXECUTORS);
