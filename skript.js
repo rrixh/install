@@ -127,11 +127,19 @@ actionType:
 const IOS_EXECUTORS = [
   {
     name:"Delta iOS",
-    version:"v2.729.838",
+    version:"v2.729.838 (.ipa download)",
     image:"https://raw.githubusercontent.com/rrixh/install/refs/heads/main/imgs/delta.JPG",
     status:"green",
     actionType:"download",
     url:"https://github.com/rrixh/direkt-download/releases/download/v2.729.838/DELTA.v2.729.838.undetekted.official.ipa"
+  },
+{
+    name:"Delta iOS (DNS)",
+    version:"v2.729.838 (Moving Increasingly Interconnected Technology)",
+    image:"https://raw.githubusercontent.com/rrixh/install/refs/heads/main/imgs/delta.JPG",
+    status:"green",
+    actionType:"install",
+    url:"https://rrixh.pages.dev/plists/delta/v2.729.838.plist"
   },
   {
     name:"KRNL iOS",
