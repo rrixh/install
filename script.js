@@ -1,4 +1,4 @@
-// script.js (website) RRixh iOS
+// script.js (website) RRixh iOS (v2)
 
 /* =========================================================
 RRIXH IOS WEBSITE SETTINGS
@@ -40,13 +40,13 @@ const DNS_PROFILE = {
 const DNS_STEPS = [
   "You must install the DNS profile or errors will occur during ESign installation.",
   "Install any ESign below until one of them works for you.",
-  "How to trust the app if you get the âUntrusted Developer Enterpriseâ message: Open Settings â General â scroll down â VPN & Device Management â Enterprise Apps â press âTrustâ twice. If prompted with âAllow & Restartâ, press it and restart your phone."
+  "How to trust the app if you get the Untrusted Developer Enterpriseâ message: Open Settings > General > scroll down > VPN & Device Management â Enterprise Apps â press 'Trust'  twice. If prompted with “Allow & Restart”, press it and restart your phone."
 ];
 
 /* ESIGN INSTALLATIONS */
 const ESIGN_SHARED_IMAGE = "https://raw.githubusercontent.com/rrixh/install/refs/heads/main/esign.png";
 const ESIGN_APPS = [
-  { "certificate": "â Moving Increasingly Interconnected Technology", "plist": "https://rrixh.pages.dev/plists/esign-moving.plist" },
+  { "certificate": "MOVING INCREASINGLY INTERCONNECTED TECHNOLOGY", "plist": "https://rrixh.pages.dev/plists/esign-moving.plist" },
   { "certificate": "MOVING INCREASINGLY INTERCONNECTED TECHNOLOGY V1", "plist": "https://rrixh.pages.dev/plists/esign-02.plist" },
   { "certificate": "VIETNAM AIRLINES", "plist": "https://rrixh.pages.dev/plists/esign-03.plist" },
   { "certificate": "VIETNAM AIRLINES VN V1", "plist": "https://rrixh.pages.dev/plists/esign-04.plist" },
@@ -317,13 +317,13 @@ function createInstallPopup(){
         <img id="rrInstallIcon" class="rr-install-icon" src="${ESIGN_SHARED_IMAGE}" alt="ESign icon">
         <p class="rr-install-eyebrow">Direct Install</p>
         <h2 id="rrInstallTitle" class="rr-install-title">Install ESign?</h2>
-        <p class="rr-install-message">You are about to open Appleâs installation confirmation for this ESign certificate.</p>
+        <p class="rr-install-message">This ESign is signed with the following certificate:</p>
         <p id="rrInstallCertificate" class="rr-install-certificate"></p>
       </div>
 
       <div class="rr-install-actions">
-        <button id="rrInstallCancel" class="rr-install-button rr-install-cancel" type="button">Cancel</button>
-        <button id="rrInstallContinue" class="rr-install-button rr-install-continue" type="button">Continue</button>
+        <button id="rrInstallCancel" class="rr-install-button rr-install-cancel" type="button">Kancel</button>
+        <button id="rrInstallContinue" class="rr-install-button rr-install-continue" type="button">Kontinue</button>
       </div>
     </div>
   `;
