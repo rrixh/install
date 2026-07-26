@@ -7,7 +7,7 @@ RRIXH IOS WEBSITE SETTINGS
 const SITE_SETTINGS = {
   pageTitle: "RRixh iOS",
   pageDescription: "KRAXKED/MODDED/HACKED IPA & APK FILES WITH FREE VIP, PRO, PREMIUM, MOD MENU ETC.",
-  lastUpdated: "LAST UPDATED: July 25, 2026 @12:32 AM (EST)",
+  lastUpdated: "LAST UPDATED: July 26, 2026 @12:59 AM (EST)",
 
   headerImage: "https://raw.githubusercontent.com/rrixh/install/refs/heads/main/imgs/rrixh.PNG",
 
@@ -144,7 +144,7 @@ const IOS_EXECUTORS = [
     name:"Codex iOS",
     version:"needs update",
     image:"https://raw.githubusercontent.com/rrixh/install/refs/heads/main/imgs/kodex.JPG",
-    status:"yellow",
+    status:"red",
     actionType:"download",
     url:"https://rrixh.pages.dev"
   }
@@ -153,7 +153,7 @@ const IOS_EXECUTORS = [
 const ANDROID_EXECUTORS = [
   {
     name:"Delta APK",
-    version:"v2.677.762",
+    version:"v2.729.840",
     image:"https://raw.githubusercontent.com/rrixh/install/refs/heads/main/imgs/delta.JPG",
     status:"green",
     actionType:"download",
