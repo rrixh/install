@@ -1,4 +1,4 @@
-// skript.js (website) RRixh iOS (v3 ASCII-safe)
+// skript.js (website) RRixh iOS
 
 /* =========================================================
 RRIXH IOS WEBSITE SETTINGS
@@ -57,37 +57,71 @@ verified:true adds the custom CSS checkmark. No emoji is used.
 */
 
 const ESIGN_SHARED_IMAGE = "https://raw.githubusercontent.com/rrixh/install/refs/heads/main/esign.png";
+
 const ESIGN_APPS = [
+
   { "certificate": "MOVING INCREASINGLY INTERCONNECTED TECHNOLOGY", "plist": "https://rrixh.pages.dev/plists/esign-moving.plist", "verified": true },
-  { "certificate": "MOVING INCREASINGLY INTERCONNECTED TECHNOLOGY V1", "plist": "https://rrixh.pages.dev/plists/esign-02.plist" },
-  { "certificate": "VIETNAM AIRLINES", "plist": "https://rrixh.pages.dev/plists/esign-03.plist" },
-  { "certificate": "VIETNAM AIRLINES VN V1", "plist": "https://rrixh.pages.dev/plists/esign-04.plist" },
-  { "certificate": "VIETNAM AIRLINES VN V2", "plist": "https://rrixh.pages.dev/plists/esign-05.plist" },
-  { "certificate": "CHINA TELECOM", "plist": "https://rrixh.pages.dev/plists/esign-06.plist" },
-  { "certificate": "CHINA TELECOM 2", "plist": "https://rrixh.pages.dev/plists/esign-07.plist" },
-  { "certificate": "BEIJING XIBEI", "plist": "https://rrixh.pages.dev/plists/esign-08.plist" },
-  { "certificate": "LUOYANG POSTAL", "plist": "https://rrixh.pages.dev/plists/esign-09.plist" },
-  { "certificate": "QINGDAO RURAL", "plist": "https://rrixh.pages.dev/plists/esign-10.plist" },
-  { "certificate": "COMISSION ELECTIONS", "plist": "https://rrixh.pages.dev/plists/esign-11.plist" },
-  { "certificate": "NATIONAL OILWELL", "plist": "https://rrixh.pages.dev/plists/esign-12.plist" },
-  { "certificate": "BEIJING ZHIZHANGYI", "plist": "https://rrixh.pages.dev/plists/esign-13.plist" },
-  { "certificate": "ARAMCO", "plist": "https://rrixh.pages.dev/plists/esign-14.plist" },
-  { "certificate": "GLOBAL TAKEOFF", "plist": "https://rrixh.pages.dev/plists/esign-15.plist" },
-  { "certificate": "BOC", "plist": "https://rrixh.pages.dev/plists/esign-16.plist" },
-  { "certificate": "BOC V1", "plist": "https://rrixh.pages.dev/plists/esign-17.plist" },
-  { "certificate": "BOC V2", "plist": "https://rrixh.pages.dev/plists/esign-18.plist" },
-  { "certificate": "BOC V3", "plist": "https://rrixh.pages.dev/plists/esign-19.plist" },
-  { "certificate": "BOC V4", "plist": "https://rrixh.pages.dev/plists/esign-20.plist" },
-  { "certificate": "POWERCHINA", "plist": "https://rrixh.pages.dev/plists/esign-21.plist" },
-  { "certificate": "POWERCHINA V1", "plist": "https://rrixh.pages.dev/plists/esign-22.plist" },
-  { "certificate": "POWERCHINA V2", "plist": "https://rrixh.pages.dev/plists/esign-23.plist" },
-  { "certificate": "POWERCHINA V3", "plist": "https://rrixh.pages.dev/plists/esign-24.plist" },
-  { "certificate": "POWERCHINA V4", "plist": "https://rrixh.pages.dev/plists/esign-25.plist" },
-  { "certificate": "JIANGSU SIMCERE", "plist": "https://rrixh.pages.dev/plists/esign-26.plist" },
-  { "certificate": "VIETNAM RUBBER", "plist": "https://rrixh.pages.dev/plists/esign-27.plist" },
-  { "certificate": "NONE", "plist": "https://rrixh.pages.dev/plists/esign-28.plist" },
-  { "certificate": "NONE", "plist": "https://rrixh.pages.dev/plists/esign-29.plist" },
-  { "certificate": "NONE", "plist": "https://rrixh.pages.dev/plists/esign-30.plist" }
+
+  { "certificate": "MOVING INCREASINGLY INTERCONNECTED TECHNOLOGY V1", "plist": "https://rrixh.pages.dev/plists/esign moving 1.plist" },
+
+  { "certificate": "VIETNAM AIRLINES", "plist": "https://rrixh.pages.dev/plists/vietnam airlines.plist" },
+
+  { "certificate": "VIETNAM AIRLINES VN V1", "plist": "https://rrixh.pages.dev/plists/vietnam airlines VN V1.plist" },
+
+  { "certificate": "VIETNAM AIRLINES VN V2", "plist": "https://rrixh.pages.dev/plists/VIETNAM AIRLINES VN V2.plist" },
+
+  { "certificate": "CHINA TELECOM", "plist": "https://rrixh.pages.dev/plists/esign china telecom.plist" },
+
+  { "certificate": "CHINA TELECOM 2", "plist": "https://rrixh.pages.dev/plists/esign china telecom V1.plist" },
+
+  { "certificate": "BEIJING XIBEI", "plist": "https://rrixh.pages.dev/plists/beijing xibei.plist" },
+
+  { "certificate": "LUOYANG POSTAL", "plist": "https://rrixh.pages.dev/plists/luoyang postal.plist" },
+
+  { "certificate": "QINGDAO RURAL", "plist": "https://rrixh.pages.dev/plists/qingdao rural.plist" },
+
+  { "certificate": "COMISSION ELECTIONS", "plist": "https://rrixh.pages.dev/plists/comission elections.plist" },
+
+  { "certificate": "NATIONAL OILWELL", 
+"plist": "https://rrixh.pages.dev/plists/national oilwell.plist" },
+
+  { "certificate": "BEIJING ZHIZHANGYI", "plist": "https://rrixh.pages.dev/plists/beijing zhizhangyi.plist" },
+
+  { "certificate": "ARAMCO", "plist": "https://rrixh.pages.dev/plists/aramco.plist" },
+
+  { "certificate": "GLOBAL TAKEOFF", "plist": "https://rrixh.pages.dev/plists/GLOBAL TAKEOFF V2.plist" },
+
+  { "certificate": "BOC", "plist": "https://rrixh.pages.dev/plists/boc.plist" },
+
+  { "certificate": "BOC V1", "plist": "https://rrixh.pages.dev/plists/boc1.plist" },
+
+  { "certificate": "BOC V2", "plist": "https://rrixh.pages.dev/plists/boc2.plist" },
+
+  { "certificate": "BOC V3", "plist": "https://rrixh.pages.dev/plists/boc3.plist" },
+
+  { "certificate": "BOC V4", "plist": "https://rrixh.pages.dev/plists/boc4.plist" },
+
+  { "certificate": "POWERCHINA", "plist": "https://rrixh.pages.dev/plists/powerchina.plist" },
+
+  { "certificate": "POWERCHINA V1", "plist": "https://rrixh.pages.dev/plists/powerchina1.plist" },
+
+  { "certificate": "POWERCHINA V2", "plist": "https://rrixh.pages.dev/plists/powerchina2.plist" },
+
+  { "certificate": "POWERCHINA V3", "plist": "https://rrixh.pages.dev/plists/powerchina3.plist" },
+
+  { "certificate": "POWERCHINA V4", "plist": "https://rrixh.pages.dev/plists/powerchina4.plist" },
+
+  { "certificate": "JIANGSU SIMCERE", "plist": "https://rrixh.pages.dev/plists/jiangsu simcere.plist" },
+
+  { "certificate": "VIETNAM RUBBER", "plist": "https://rrixh.pages.dev/plists/vietnam rubber.plist" },
+
+/*
+  { "certificate": "NONE", "plist": "https://rrixh.pages.dev/plists/jiangsu simcere1.plist" },
+
+  { "certificate": "NONE", "plist": "https://rrixh.pages.dev/plists/esign-moving.plist" },
+
+  { "certificate": "NONE", "plist": "https://rrixh.pages.dev/plists/esign moving 1.plist" }
+*/
 ];
 
 /* ROBLOX EXECUTORS
@@ -251,6 +285,12 @@ function injectCustomSymbolStyles(){
     .rr-symbol-single-right::before{left:1px;transform:rotate(180deg) skewX(-10deg);}
 
     .app-card-title{display:flex;align-items:flex-start;}
+
+.empty-section{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:42px 24px;margin-top:10px;border:1px solid rgba(255,255,255,.08);border-radius:22px;background:rgba(255,255,255,.03);}
+.empty-icon{width:68px;height:68px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;border-radius:18px;background:rgba(255,255,255,.05);font-size:30px;color:#8c8c8c;}
+.empty-section h3{margin:0 0 8px;font-size:20px;font-weight:700;}
+.empty-section p{margin:0;max-width:280px;color:#9f9f9f;line-height:1.5;}
+
   `;
   document.head.appendChild(style);
 }
@@ -542,9 +582,53 @@ function createAppCard(item,options={}){
   return link;
 }
 
+
+function renderEmptySection(id,title,message){
+  const container=$(id);
+  container.innerHTML=`
+    <div class="empty-section">
+      <div class="empty-icon"><i class="fa-solid fa-box-open"></i></div>
+      <h3>${title}</h3>
+      <p>${message}</p>
+    </div>
+  `;
+}
+
 function renderAppList(id,items,options={}){
   const container=$(id);
   container.innerHTML="";
+
+  if(!Array.isArray(items)||items.length===0){
+    let title="Nothing Here Yet";
+    let message="Check back later for future updates.";
+
+    switch(id){
+      case "esignList":
+        title="No ESign Certificates";
+        message="No certificates are available right now.";
+        break;
+      case "iosExecutors":
+        title="No iOS Executors";
+        message="New executors will be added soon.";
+        break;
+      case "androidExecutors":
+        title="No Android Executors";
+        message="New executors will be added soon.";
+        break;
+      case "ipaLibrary":
+        title="No IPAs Available";
+        message="The IPA library is currently empty.";
+        break;
+      case "apkLibrary":
+        title="No APKs Available";
+        message="The APK library is currently empty.";
+        break;
+    }
+
+    renderEmptySection(id,title,message);
+    return;
+  }
+
   items.forEach(item=>container.appendChild(createAppCard(item,options)));
 }
 
@@ -590,7 +674,7 @@ function initWebsite(){
   renderAppList("iosExecutors",IOS_EXECUTORS);
   renderAppList("androidExecutors",ANDROID_EXECUTORS);
   renderAppList("ipaLibrary",IPA_LIBRARY);
-  renderAppList("apkLibrary",APK_LIBRARY);
+  renderAppList("apkLibrary",typeof APK_LIBRARY!=="undefined"?APK_LIBRARY:[]);
 }
 
 document.addEventListener("DOMContentLoaded",initWebsite);
