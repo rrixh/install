@@ -32,19 +32,9 @@ const SOCIAL_LINKS = [
 /* DNS METHOD */
 const DNS_PROFILE = {
   description: "DNS method is like a VPN that blocks Apple from blacklisting you and lets you use revoked/expired certificates.",
-  image: "https://raw.githubusercontent.com/rrixh/install/refs/heads/main/esign.png",
+  image: "https://raw.githubusercontent.com/rrixh/install/refs/heads/main/imgs/dns%20logo.png",
   url: "https://release-assets.githubusercontent.com/github-production-release-asset/1224449257/fd3e744b-b96b-4ecf-a206-531e54013d60?sp=r&sv=2018-11-09&sr=b&spr=https&se=2026-07-20T23:34:43Z&rscd=attachment;+filename=khoindvn.mobileconfig&rsct=application/octet-stream&skoid=96c2d410-5711-43a1-aedd-ab1947aa7ab0&sktid=398a6654-997b-47e9-b12b-9515b896b4de&skt=2026-07-20T22:34:15Z&ske=2026-07-20T23:34:43Z&sks=b&skv=2018-11-09&sig=nkXrl1o76OLo00hN9pogXEw+JUDbgVIA6g7ksHWIQIU=&jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmVsZWFzZS1hc3NldHMuZ2l0aHVidXNlcmNvbnRlbnQuY29tIiwia2V5Ijoia2V5MSIsImV4cCI6MTc4NDU4NzM5NCwibmJmIjoxNzg0NTg3MDk0LCJwYXRoIjoicmVsZWFzZWFzc2V0cHJvZHVjdGlvbi5ibG9iLmNvcmUud2luZG93cy5uZXQifQ.nGuiQsIocR9Etza0Poy0vmBwCaP8QVdBwu6EVXVLaFc&response-content-disposition=attachment;%20filename=khoindvn.mobileconfig&response-content-type=application/octet-stream"
 };
-
-/* DNS INSTALLATION STEPS
-Use these plain ASCII tokens where custom symbols should appear:
-[[QL]] = custom left double quote
-[[QR]] = custom right double quote
-[[SL]] = custom left single quote
-[[SR]] = custom right single quote
-[[AR]] = custom right arrow
-[[AL]] = custom left arrow
-*/
 
 const DNS_STEPS = [
   "You must install the DNS profile or errors will occur during ESign installation.",
@@ -64,7 +54,7 @@ const ESIGN_APPS = [
 
   { "certificate": "MOVING INCREASINGLY INTERCONNECTED TECHNOLOGY V1", "plist": "https://rrixh.pages.dev/plists/esign moving 1.plist" },
 
-  { "certificate": "VIETNAM AIRLINES", "plist": "https://rrixh.pages.dev/plists/vietnam airlines.plist" },
+  { "certificate": "VIETNAM AIRLINES", "plist": "https://rrixh.pages.dev/plists/vietnam%20airlines.plist", "verified": true },
 
   { "certificate": "VIETNAM AIRLINES VN V1", "plist": "https://rrixh.pages.dev/plists/vietnam airlines VN V1.plist" },
 
@@ -91,7 +81,7 @@ const ESIGN_APPS = [
 
   { "certificate": "GLOBAL TAKEOFF", "plist": "https://rrixh.pages.dev/plists/GLOBAL TAKEOFF V2.plist" },
 
-  { "certificate": "BOC", "plist": "https://rrixh.pages.dev/plists/boc.plist" },
+  { "certificate": "BOC", "plist": "https://rrixh.pages.dev/plists/boc.plist", "verified": true},
 
   { "certificate": "BOC V1", "plist": "https://rrixh.pages.dev/plists/boc1.plist" },
 
@@ -143,19 +133,19 @@ const IOS_EXECUTORS = [
   },
   {
     name:"KRNL iOS",
-    version:"v2.677.762",
+    version:"DISCONTINUED",
     image:"https://raw.githubusercontent.com/rrixh/install/refs/heads/main/imgs/krnl.PNG",
     status:"red",
     actionType:"download",
-    url:"https://example.com/KRNL.ipa"
+    url:"https://rrixh.pages.dev"
   },
   {
     name:"Codex iOS",
-    version:"v2.676.715",
+    version:"needs update",
     image:"https://raw.githubusercontent.com/rrixh/install/refs/heads/main/imgs/kodex.JPG",
     status:"red",
     actionType:"download",
-    url:"https://example.com/Codex.ipa"
+    url:"https://rrixh.pages.dev"
   }
 ];
 
@@ -163,10 +153,10 @@ const ANDROID_EXECUTORS = [
   {
     name:"Delta APK",
     version:"v2.677.762",
-    image:"https://raw.githubusercontent.com/rrixh/install/refs/heads/main/esign.png",
-    status:"red",
+    image:"https://raw.githubusercontent.com/rrixh/install/refs/heads/main/imgs/delta.JPG",
+    status:"green",
     actionType:"download",
-    url:"https://example.com/Delta.apk"
+    url:"https://github.com/rrixh/install/releases/download/v2.729.840/Delta.v2.729.840.apk"
   },
   {
     name:"KRNL APK",
@@ -174,15 +164,15 @@ const ANDROID_EXECUTORS = [
     image:"https://raw.githubusercontent.com/rrixh/install/refs/heads/main/esign.png",
     status:"red",
     actionType:"download",
-    url:"https://example.com/KRNL.apk"
+    url:"https://rrixh.pages.dev"
   },
   {
     name:"Ronix APK",
     version:"v2.676.715",
-    image:"https://raw.githubusercontent.com/rrixh/install/refs/heads/main/esign.png",
+    image:"https://obj.wearedevs.net/images/software/ronin/ronin-061626.webp",
     status:"red",
     actionType:"download",
-    url:"https://example.com/Ronix.apk"
+    url:"https://rrixh.pages.dev"
   }
 ];
 
@@ -212,6 +202,7 @@ const IPA_LIBRARY = [
 ];
 
 /* APK LIBRARY */
+
 /*
 const APK_LIBRARY = [
   {
@@ -285,12 +276,6 @@ function injectCustomSymbolStyles(){
     .rr-symbol-single-right::before{left:1px;transform:rotate(180deg) skewX(-10deg);}
 
     .app-card-title{display:flex;align-items:flex-start;}
-
-.empty-section{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:42px 24px;margin-top:10px;border:1px solid rgba(255,255,255,.08);border-radius:22px;background:rgba(255,255,255,.03);}
-.empty-icon{width:68px;height:68px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;border-radius:18px;background:rgba(255,255,255,.05);font-size:30px;color:#8c8c8c;}
-.empty-section h3{margin:0 0 8px;font-size:20px;font-weight:700;}
-.empty-section p{margin:0;max-width:280px;color:#9f9f9f;line-height:1.5;}
-
   `;
   document.head.appendChild(style);
 }
@@ -582,53 +567,9 @@ function createAppCard(item,options={}){
   return link;
 }
 
-
-function renderEmptySection(id,title,message){
-  const container=$(id);
-  container.innerHTML=`
-    <div class="empty-section">
-      <div class="empty-icon"><i class="fa-solid fa-box-open"></i></div>
-      <h3>${title}</h3>
-      <p>${message}</p>
-    </div>
-  `;
-}
-
 function renderAppList(id,items,options={}){
   const container=$(id);
   container.innerHTML="";
-
-  if(!Array.isArray(items)||items.length===0){
-    let title="Nothing Here Yet";
-    let message="Check back later for future updates.";
-
-    switch(id){
-      case "esignList":
-        title="No ESign Certificates";
-        message="No certificates are available right now.";
-        break;
-      case "iosExecutors":
-        title="No iOS Executors";
-        message="New executors will be added soon.";
-        break;
-      case "androidExecutors":
-        title="No Android Executors";
-        message="New executors will be added soon.";
-        break;
-      case "ipaLibrary":
-        title="No IPAs Available";
-        message="The IPA library is currently empty.";
-        break;
-      case "apkLibrary":
-        title="No APKs Available";
-        message="The APK library is currently empty.";
-        break;
-    }
-
-    renderEmptySection(id,title,message);
-    return;
-  }
-
   items.forEach(item=>container.appendChild(createAppCard(item,options)));
 }
 
@@ -674,7 +615,7 @@ function initWebsite(){
   renderAppList("iosExecutors",IOS_EXECUTORS);
   renderAppList("androidExecutors",ANDROID_EXECUTORS);
   renderAppList("ipaLibrary",IPA_LIBRARY);
-  renderAppList("apkLibrary",typeof APK_LIBRARY!=="undefined"?APK_LIBRARY:[]);
+  renderAppList("apkLibrary",APK_LIBRARY);
 }
 
 document.addEventListener("DOMContentLoaded",initWebsite);
