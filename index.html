@@ -12,13 +12,21 @@
 </head>
 <body>
   <!-- PAGE BACKGROUND -->
+  <div class="video-background" aria-hidden="true">
+    <video id="backgroundVideo" autoplay muted loop playsinline preload="metadata">
+      <source src="sparkle-overlay.mp4" type="video/mp4">
+    </video>
+    <div class="video-background-overlay"></div>
+    <div class="video-background-vignette"></div>
+  </div>
+
   <div class="glow glow-one"></div>
   <div class="glow glow-two"></div>
 
   <main class="site-shell">
     <!-- HEADER / PROFILE -->
-    <header class="section-card hero" id="top">
-      <!-- ANIMATED HEADER IMAGE: edit SITE_SETTINGS.headerImage in script.js -->
+    <header class="section-card hero reveal-section" id="top">
+      <!-- ANIMATED HEADER IMAGE: edit SITE_SETTINGS.headerImage in skript.js -->
       <div class="hero-image-stage">
         <img id="headerImage" class="hero-image" src="" alt="RRixh iOS header image">
       </div>
@@ -43,7 +51,7 @@
     </header>
 
     <!-- DNS METHOD -->
-    <section class="section-card content-section" id="dns-method">
+    <section class="section-card content-section reveal-section" id="dns-method">
       <div class="section-heading">
         <p class="section-kicker">iOS SETUP</p>
         <h2>DNS METHOD</h2>
@@ -70,7 +78,7 @@
     </section>
 
     <!-- ESIGN INSTALLATIONS -->
-    <section class="section-card content-section" id="esign-apps">
+    <section class="section-card content-section reveal-section" id="esign-apps">
       <div class="section-heading">
         <p class="section-kicker">DIRECT INSTALL</p>
         <h2>ESign Apps</h2>
@@ -84,7 +92,7 @@
     </section>
 
     <!-- ROBLOX EXECUTORS -->
-    <section class="section-card content-section" id="roblox-executors">
+    <section class="section-card content-section reveal-section" id="roblox-executors">
       <div class="section-heading">
         <p class="section-kicker">ROBLOX TOOLS</p>
         <h2>ROBLOX EXECUTORS</h2>
@@ -118,7 +126,7 @@
     </section>
 
     <!-- IPA LIBRARY -->
-    <section class="section-card content-section" id="ipa-library">
+    <section class="section-card content-section reveal-section" id="ipa-library">
       <div class="section-heading">
         <p class="section-kicker">DOWNLOADS</p>
         <h2>iPA LIBRARY</h2>
@@ -128,7 +136,7 @@
     </section>
 
     <!-- APK LIBRARY -->
-    <section class="section-card content-section" id="apk-library">
+    <section class="section-card content-section reveal-section" id="apk-library">
       <div class="section-heading">
         <p class="section-kicker">DOWNLOADS</p>
         <h2>APK LIBRARY</h2>
