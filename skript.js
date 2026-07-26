@@ -135,7 +135,7 @@ const IOS_EXECUTORS = [
   },
 {
     name:"Delta iOS (DNS)",
-    version:"v2.729.838 (Moving Increasingly Interconnected Technology)",
+    version:"v2.729.838 (Signed with VIETNAM AIRLINES JSC Co., Ltd)",
     image:"https://raw.githubusercontent.com/rrixh/install/refs/heads/main/imgs/delta.JPG",
     status:"green",
     actionType:"install",
