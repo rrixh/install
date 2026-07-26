@@ -54,7 +54,7 @@ const ESIGN_APPS = [
 
   { "certificate": "MOVING INCREASINGLY INTERCONNECTED TECHNOLOGY V1", "plist": "https://rrixh.pages.dev/plists/esign moving 1.plist" },
 
-  { "certificate": "VIETNAM AIRLINES", "plist": "https://rrixh.pages.dev/plists/vietnam%20airlines.plist", "verified": true },
+  { "certificate": "VIETNAM AIRLINES", "plist": "https://rrixh.pages.dev/plists/%20vietnam%20airlines.plist", "verified": true },
 
   { "certificate": "VIETNAM AIRLINES VN V1", "plist": "https://rrixh.pages.dev/plists/vietnam airlines VN V1.plist" },
 
