@@ -1,4 +1,4 @@
-// script.js (website) RRixh iOS (v3 ASCII-safe)
+// skript.js (website) RRixh iOS (v3 ASCII-safe)
 
 /* =========================================================
 RRIXH IOS WEBSITE SETTINGS
