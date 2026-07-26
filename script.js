@@ -1,4 +1,4 @@
-// script.js (website) RRixh iOS (v2)
+// script.js (website) RRixh iOS (v3 ASCII-safe)
 
 /* =========================================================
 RRIXH IOS WEBSITE SETTINGS
@@ -36,17 +36,29 @@ const DNS_PROFILE = {
   url: "https://release-assets.githubusercontent.com/github-production-release-asset/1224449257/fd3e744b-b96b-4ecf-a206-531e54013d60?sp=r&sv=2018-11-09&sr=b&spr=https&se=2026-07-20T23:34:43Z&rscd=attachment;+filename=khoindvn.mobileconfig&rsct=application/octet-stream&skoid=96c2d410-5711-43a1-aedd-ab1947aa7ab0&sktid=398a6654-997b-47e9-b12b-9515b896b4de&skt=2026-07-20T22:34:15Z&ske=2026-07-20T23:34:43Z&sks=b&skv=2018-11-09&sig=nkXrl1o76OLo00hN9pogXEw+JUDbgVIA6g7ksHWIQIU=&jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmVsZWFzZS1hc3NldHMuZ2l0aHVidXNlcmNvbnRlbnQuY29tIiwia2V5Ijoia2V5MSIsImV4cCI6MTc4NDU4NzM5NCwibmJmIjoxNzg0NTg3MDk0LCJwYXRoIjoicmVsZWFzZWFzc2V0cHJvZHVjdGlvbi5ibG9iLmNvcmUud2luZG93cy5uZXQifQ.nGuiQsIocR9Etza0Poy0vmBwCaP8QVdBwu6EVXVLaFc&response-content-disposition=attachment;%20filename=khoindvn.mobileconfig&response-content-type=application/octet-stream"
 };
 
-/* DNS INSTALLATION STEPS */
+/* DNS INSTALLATION STEPS
+Use these plain ASCII tokens where custom symbols should appear:
+[[QL]] = custom left double quote
+[[QR]] = custom right double quote
+[[SL]] = custom left single quote
+[[SR]] = custom right single quote
+[[AR]] = custom right arrow
+[[AL]] = custom left arrow
+*/
+
 const DNS_STEPS = [
   "You must install the DNS profile or errors will occur during ESign installation.",
   "Install any ESign below until one of them works for you.",
-  "How to trust the app if you get the Untrusted Developer Enterpriseâ message: Open Settings > General > scroll down > VPN & Device Management â Enterprise Apps â press 'Trust'  twice. If prompted with “Allow & Restart”, press it and restart your phone."
+  "How to trust the app if you get the [[QL]]Untrusted Developer Enterprise[[QR]] message: Open Settings [[AR]] General [[AR]] scroll down [[AR]] VPN & Device Management [[AR]] Enterprise Apps [[AR]] press [[SL]]Trust[[SR]] twice. If prompted with [[QL]]Allow & Restart[[QR]], press it and restart your phone."
 ];
 
-/* ESIGN INSTALLATIONS */
+/* ESIGN INSTALLATIONS
+verified:true adds the custom CSS checkmark. No emoji is used.
+*/
+
 const ESIGN_SHARED_IMAGE = "https://raw.githubusercontent.com/rrixh/install/refs/heads/main/esign.png";
 const ESIGN_APPS = [
-  { "certificate": "MOVING INCREASINGLY INTERCONNECTED TECHNOLOGY", "plist": "https://rrixh.pages.dev/plists/esign-moving.plist" },
+  { "certificate": "MOVING INCREASINGLY INTERCONNECTED TECHNOLOGY", "plist": "https://rrixh.pages.dev/plists/esign-moving.plist", "verified": true },
   { "certificate": "MOVING INCREASINGLY INTERCONNECTED TECHNOLOGY V1", "plist": "https://rrixh.pages.dev/plists/esign-02.plist" },
   { "certificate": "VIETNAM AIRLINES", "plist": "https://rrixh.pages.dev/plists/esign-03.plist" },
   { "certificate": "VIETNAM AIRLINES VN V1", "plist": "https://rrixh.pages.dev/plists/esign-04.plist" },
@@ -143,15 +155,15 @@ const ANDROID_EXECUTORS = [
 /* IPA LIBRARY */
 const IPA_LIBRARY = [
   {
-    name:"Youtube (OLED)",
+    name:"Youtube+ (OLED)",
     version:"v20.50.10",
     image:"https://raw.githubusercontent.com/rrixh/install/refs/heads/main/imgs/oldyoutube.PNG",
     actionType:"download",
-    url:"youtube+.OLED.v20.50.10.ipa"
+    url:"https://github.com/rrixh/direkt-download/releases/download/1/youtube+.OLED.v20.50.10.ipa"
   },
   {
     name:"Spotify Premium",
-    version:"v9.1.50",
+    version:"Eevee Spotify (v9.1.50)",
     image:"https://raw.githubusercontent.com/rrixh/install/refs/heads/main/imgs/spotify.JPG",
     actionType:"download",
     url:"https://github.com/rrixh/direkt-download/releases/download/1/Spotify.kraxked.v9.1.50.ipa"
@@ -184,6 +196,95 @@ const APK_LIBRARY = [
 ];
 
 /* =========================================================
+CUSTOM CSS SYMBOL LIBRARY
+All symbols are drawn with HTML and CSS.
+No emoji, curly quote, or arrow characters are stored in this file.
+========================================================= */
+
+function injectCustomSymbolStyles(){
+  const style=document.createElement("style");
+  style.textContent=`
+    .rr-symbol{display:inline-block;position:relative;flex:0 0 auto;vertical-align:middle;box-sizing:border-box;}
+
+    .rr-symbol-check{
+      width:19px;height:19px;margin-right:7px;border-radius:6px;
+      background:linear-gradient(145deg,#45e96a,#18b93f);
+      box-shadow:0 3px 9px rgba(30,210,74,.3);
+    }
+
+    .rr-symbol-check::after{
+      content:"";position:absolute;left:5px;top:4px;width:8px;height:4px;
+      border-left:2.5px solid #fff;border-bottom:2.5px solid #fff;
+      transform:rotate(-45deg);
+    }
+
+    .rr-symbol-arrow-right,.rr-symbol-arrow-left{width:13px;height:10px;margin:0 7px;}
+
+    .rr-symbol-arrow-right::before,.rr-symbol-arrow-left::before{
+      content:"";position:absolute;left:1px;top:4px;width:10px;height:2px;
+      border-radius:2px;background:currentColor;
+    }
+
+    .rr-symbol-arrow-right::after,.rr-symbol-arrow-left::after{
+      content:"";position:absolute;top:1px;width:6px;height:6px;
+      border-top:2px solid currentColor;border-right:2px solid currentColor;
+    }
+
+    .rr-symbol-arrow-right::after{right:0;transform:rotate(45deg);}
+    .rr-symbol-arrow-left::after{left:0;transform:rotate(-135deg);}
+
+    .rr-symbol-quote-left,.rr-symbol-quote-right{width:14px;height:14px;margin:0 3px;}
+    .rr-symbol-single-left,.rr-symbol-single-right{width:7px;height:14px;margin:0 2px;}
+
+    .rr-symbol-quote-left::before,.rr-symbol-quote-left::after,
+    .rr-symbol-quote-right::before,.rr-symbol-quote-right::after,
+    .rr-symbol-single-left::before,.rr-symbol-single-right::before{
+      content:"";position:absolute;top:2px;width:5px;height:8px;
+      border-radius:4px 4px 4px 1px;background:currentColor;
+    }
+
+    .rr-symbol-quote-left::before{left:0;transform:skewX(-10deg);}
+    .rr-symbol-quote-left::after{right:1px;transform:skewX(-10deg);}
+    .rr-symbol-quote-right::before{left:0;transform:rotate(180deg) skewX(-10deg);}
+    .rr-symbol-quote-right::after{right:1px;transform:rotate(180deg) skewX(-10deg);}
+    .rr-symbol-single-left::before{left:1px;transform:skewX(-10deg);}
+    .rr-symbol-single-right::before{left:1px;transform:rotate(180deg) skewX(-10deg);}
+
+    .app-card-title{display:flex;align-items:flex-start;}
+  `;
+  document.head.appendChild(style);
+}
+
+function createCustomSymbol(type){
+  const symbol=document.createElement("span");
+  symbol.className="rr-symbol rr-symbol-"+type;
+  symbol.setAttribute("aria-hidden","true");
+  return symbol;
+}
+
+function appendTextWithCustomSymbols(container,text){
+  const tokenPattern=/(\[\[(?:QL|QR|SL|SR|AR|AL)\]\])/g;
+  const parts=text.split(tokenPattern);
+
+  const tokenTypes={
+    "[[QL]]":"quote-left",
+    "[[QR]]":"quote-right",
+    "[[SL]]":"single-left",
+    "[[SR]]":"single-right",
+    "[[AR]]":"arrow-right",
+    "[[AL]]":"arrow-left"
+  };
+
+  parts.forEach(part=>{
+    if(tokenTypes[part]){
+      container.appendChild(createCustomSymbol(tokenTypes[part]));
+    }else if(part){
+      container.appendChild(document.createTextNode(part));
+    }
+  });
+}
+
+/* =========================================================
 CUSTOM ESIGN INSTALL POPUP
 ========================================================= */
 
@@ -195,33 +296,20 @@ function injectInstallPopupStyles(){
     body.rr-popup-open{overflow:hidden;}
 
     .rr-install-overlay{
-      position:fixed;
-      inset:0;
-      z-index:999999;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      padding:22px;
-      background:rgba(0,0,0,.64);
+      position:fixed;inset:0;z-index:999999;display:flex;align-items:center;
+      justify-content:center;padding:22px;background:rgba(0,0,0,.64);
       -webkit-backdrop-filter:blur(16px) saturate(135%);
-      backdrop-filter:blur(16px) saturate(135%);
-      opacity:0;
-      visibility:hidden;
+      backdrop-filter:blur(16px) saturate(135%);opacity:0;visibility:hidden;
       transition:opacity .22s ease,visibility .22s ease;
     }
 
     .rr-install-overlay.is-open{opacity:1;visibility:visible;}
 
     .rr-install-modal{
-      width:min(100%,390px);
-      overflow:hidden;
-      border:1px solid rgba(255,255,255,.16);
-      border-radius:28px;
-      background:linear-gradient(145deg,rgba(34,34,38,.96),rgba(12,12,14,.96));
+      width:min(100%,390px);overflow:hidden;border:1px solid rgba(255,255,255,.16);
+      border-radius:28px;background:linear-gradient(145deg,rgba(34,34,38,.96),rgba(12,12,14,.96));
       box-shadow:0 28px 80px rgba(0,0,0,.62),inset 0 1px 0 rgba(255,255,255,.08);
-      color:#fff;
-      text-align:center;
-      transform:translateY(18px) scale(.96);
+      color:#fff;text-align:center;transform:translateY(18px) scale(.96);
       transition:transform .26s cubic-bezier(.2,.8,.2,1);
     }
 
@@ -229,62 +317,38 @@ function injectInstallPopupStyles(){
     .rr-install-content{padding:28px 24px 22px;}
 
     .rr-install-icon{
-      width:92px;
-      height:92px;
-      display:block;
-      margin:0 auto 18px;
-      border-radius:23px;
-      object-fit:cover;
-      box-shadow:0 12px 34px rgba(0,119,255,.32);
+      width:92px;height:92px;display:block;margin:0 auto 18px;border-radius:23px;
+      object-fit:cover;box-shadow:0 12px 34px rgba(0,119,255,.32);
     }
 
     .rr-install-eyebrow{
-      margin:0 0 8px;
-      color:#9a9aa2;
-      font:700 12px/1.2 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-      letter-spacing:.18em;
-      text-transform:uppercase;
+      margin:0 0 8px;color:#9a9aa2;font:700 12px/1.2 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      letter-spacing:.18em;text-transform:uppercase;
     }
 
     .rr-install-title{
-      margin:0;
-      color:#fff;
-      font:800 29px/1.1 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      margin:0;color:#fff;font:800 29px/1.1 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
       letter-spacing:-.025em;
     }
 
     .rr-install-message{
-      margin:14px auto 0;
-      max-width:310px;
-      color:#c8c8ce;
+      margin:14px auto 0;max-width:310px;color:#c8c8ce;
       font:500 15px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
     }
 
     .rr-install-certificate{
-      margin:18px 0 0;
-      padding:13px 14px;
-      border:1px solid rgba(58,255,92,.24);
-      border-radius:16px;
-      background:rgba(46,255,83,.075);
-      color:#4dff67;
+      margin:18px 0 0;padding:13px 14px;border:1px solid rgba(58,255,92,.24);
+      border-radius:16px;background:rgba(46,255,83,.075);color:#4dff67;
       font:800 14px/1.35 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
       overflow-wrap:anywhere;
     }
 
-    .rr-install-actions{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      border-top:1px solid rgba(255,255,255,.12);
-    }
+    .rr-install-actions{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid rgba(255,255,255,.12);}
 
     .rr-install-button{
-      min-height:58px;
-      border:0;
-      border-radius:0;
-      background:transparent;
+      min-height:58px;border:0;border-radius:0;background:transparent;
       font:700 17px/1 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-      cursor:pointer;
-      -webkit-tap-highlight-color:transparent;
+      cursor:pointer;-webkit-tap-highlight-color:transparent;
     }
 
     .rr-install-cancel{color:#c7c7cc;border-right:1px solid rgba(255,255,255,.12);}
@@ -458,7 +522,12 @@ function createAppCard(item,options={}){
 
   const title=document.createElement("h4");
   title.className="app-card-title";
-  title.textContent=options.esign?item.certificate:item.name;
+
+  if(options.esign && item.verified){
+    title.appendChild(createCustomSymbol("check"));
+  }
+
+  title.appendChild(document.createTextNode(options.esign?item.certificate:item.name));
   titleRow.appendChild(title);
   body.appendChild(titleRow);
 
@@ -507,12 +576,13 @@ function initDns(){
 
   DNS_STEPS.forEach(step=>{
     const li=document.createElement("li");
-    li.textContent=step;
+    appendTextWithCustomSymbols(li,step);
     $("dnsSteps").appendChild(li);
   });
 }
 
 function initWebsite(){
+  injectCustomSymbolStyles();
   initHeader();
   initSocials();
   initDns();
