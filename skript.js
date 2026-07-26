@@ -10,6 +10,7 @@ const SITE_SETTINGS = {
   lastUpdated: "LAST UPDATED: July 26, 2026 @12:59 AM (EST)",
 
   headerImage: "https://raw.githubusercontent.com/rrixh/install/refs/heads/main/imgs/rrixh.PNG",
+  backgroundVideo: "sparkle-overlay.mp4",
 
   // false = icons always show | true = Social Links dropdown
   socialsDropdown: false
@@ -568,9 +569,62 @@ function createAppCard(item,options={}){
   return link;
 }
 
+function renderEmptySection(id,title,message){
+  const container=$(id);
+
+  if(!container){
+    return;
+  }
+
+  container.innerHTML=`
+    <div class="empty-section">
+      <div class="empty-icon"><i class="fa-solid fa-box-open"></i></div>
+      <h3>${title}</h3>
+      <p>${message}</p>
+    </div>
+  `;
+}
+
 function renderAppList(id,items,options={}){
   const container=$(id);
+
+  if(!container){
+    return;
+  }
+
   container.innerHTML="";
+
+  if(!Array.isArray(items)||items.length===0){
+    let title="Nothing Here Yet";
+    let message="Check back later for future updates.";
+
+    switch(id){
+      case "esignList":
+        title="No ESign Certificates";
+        message="No certificates are available right now.";
+        break;
+      case "iosExecutors":
+        title="No iOS Executors";
+        message="New executors will be added soon.";
+        break;
+      case "androidExecutors":
+        title="No Android Executors";
+        message="New executors will be added soon.";
+        break;
+      case "ipaLibrary":
+        title="No IPAs Available";
+        message="The IPA library is currently empty.";
+        break;
+      case "apkLibrary":
+        title="No APKs Available";
+        message="The APK library is currently empty.";
+        break;
+    }
+
+    renderEmptySection(id,title,message);
+    return;
+  }
+
   items.forEach(item=>container.appendChild(createAppCard(item,options)));
 }
 
@@ -578,7 +632,21 @@ function initHeader(){
   $("pageTitle").textContent=SITE_SETTINGS.pageTitle;
   $("pageDescription").textContent=SITE_SETTINGS.pageDescription;
   $("lastUpdated").textContent=SITE_SETTINGS.lastUpdated;
-  $("headerImage").src=SITE_SETTINGS.headerImage;
+
+  const headerImage=$("headerImage");
+
+  if(headerImage){
+    const showHeaderImage=()=>{
+      headerImage.classList.add("is-loaded");
+    };
+
+    headerImage.addEventListener("load",showHeaderImage,{once:true});
+    headerImage.src=SITE_SETTINGS.headerImage;
+
+    if(headerImage.complete){
+      showHeaderImage();
+    }
+  }
 }
 
 function initSocials(){
@@ -606,17 +674,110 @@ function initDns(){
   });
 }
 
+
+function initBackgroundVideo(){
+  const video=$("backgroundVideo");
+
+  if(!video){
+    return;
+  }
+
+  if(SITE_SETTINGS.backgroundVideo){
+    const source=video.querySelector("source");
+
+    if(source && source.getAttribute("src")!==SITE_SETTINGS.backgroundVideo){
+      source.src=SITE_SETTINGS.backgroundVideo;
+      video.load();
+    }
+  }
+
+  video.muted=true;
+  video.defaultMuted=true;
+  video.playsInline=true;
+
+  const tryPlay=()=>{
+    const playPromise=video.play();
+
+    if(playPromise && typeof playPromise.catch==="function"){
+      playPromise.catch(()=>{});
+    }
+  };
+
+  tryPlay();
+  document.addEventListener("touchstart",tryPlay,{once:true,passive:true});
+  document.addEventListener("visibilitychange",()=>{
+    if(!document.hidden){
+      tryPlay();
+    }
+  });
+}
+
+function initRevealAnimations(){
+  const sections=document.querySelectorAll(".reveal-section");
+
+  if(!sections.length){
+    return;
+  }
+
+  if(!("IntersectionObserver" in window)){
+    sections.forEach(section=>section.classList.add("is-visible"));
+    return;
+  }
+
+  const observer=new IntersectionObserver(entries=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        entry.target.classList.add("is-visible");
+        observer.unobserve(entry.target);
+      }
+    });
+  },{
+    threshold:.08,
+    rootMargin:"0px 0px -6% 0px"
+  });
+
+  sections.forEach(section=>observer.observe(section));
+}
+
+function initBackgroundParallax(){
+  const video=$("backgroundVideo");
+
+  if(!video||window.matchMedia("(prefers-reduced-motion: reduce)").matches){
+    return;
+  }
+
+  let ticking=false;
+
+  const update=()=>{
+    const offset=Math.min(window.scrollY*.035,24);
+    video.style.transform="translate3d(0,"+offset+"px,0) scale(1.06)";
+    ticking=false;
+  };
+
+  window.addEventListener("scroll",()=>{
+    if(!ticking){
+      window.requestAnimationFrame(update);
+      ticking=true;
+    }
+  },{passive:true});
+
+  update();
+}
+
 function initWebsite(){
   injectCustomSymbolStyles();
+  initBackgroundVideo();
   initHeader();
   initSocials();
   initDns();
   createInstallPopup();
+  initRevealAnimations();
+  initBackgroundParallax();
   renderAppList("esignList",ESIGN_APPS,{esign:true});
   renderAppList("iosExecutors",IOS_EXECUTORS);
   renderAppList("androidExecutors",ANDROID_EXECUTORS);
   renderAppList("ipaLibrary",IPA_LIBRARY);
-  renderAppList("apkLibrary",APK_LIBRARY);
+  renderAppList("apkLibrary",typeof APK_LIBRARY!=="undefined"?APK_LIBRARY:[]);
 }
 
 document.addEventListener("DOMContentLoaded",initWebsite);
