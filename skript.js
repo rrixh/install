@@ -139,7 +139,7 @@ version:"v2.729.838 (VIETNAM AIRLINES) MUST HAVE DNS PROFILE INSTALLED!",
 image:"https://raw.githubusercontent.com/rrixh/install/refs/heads/main/imgs/delta.JPG",
 status:"green",
 actionType:"install",
-url:"https://github.com/rrixh/install/releases/download/v2.729.838dns/DELTA.V2.739.838.-.signed.by.Vietnam.Airlines.JSC.ipa"
+url:"https://rrixh.pages.dev/plists/delta/v2.729.838.plist"
 },
 
 /*
