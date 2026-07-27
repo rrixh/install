@@ -133,6 +133,14 @@ const IOS_EXECUTORS = [
     actionType:"download",
     url:"https://github.com/rrixh/direkt-download/releases/download/v2.729.838/DELTA.v2.729.838.undetekted.official.ipa"
   },
+{
+name:"Delta iOS (DNS DIRECT INSTALL)",
+version:"v2.729.838 (VIETNAM AIRLINES) MUST HAVE DNS PROFILE INSTALLED!",
+image:"https://raw.githubusercontent.com/rrixh/install/refs/heads/main/imgs/delta.JPG",
+status:"green",
+actionType:"install",
+url:"https://ipa.ipasign.cc/download_ipa/031e5ab62b41"
+},
   {
     name:"KRNL iOS",
     version:"DISCONTINUED",
