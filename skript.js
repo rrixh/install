@@ -139,8 +139,10 @@ version:"v2.729.838 (VIETNAM AIRLINES) MUST HAVE DNS PROFILE INSTALLED!",
 image:"https://raw.githubusercontent.com/rrixh/install/refs/heads/main/imgs/delta.JPG",
 status:"green",
 actionType:"install",
-url:"https://ipa.ipasign.cc/download_ipa/031e5ab62b41"
+url:"https://github.com/rrixh/install/releases/download/v2.729.838dns/DELTA.V2.739.838.-.signed.by.Vietnam.Airlines.JSC.ipa"
 },
+
+/*
   {
     name:"KRNL iOS",
     version:"DISCONTINUED",
@@ -157,6 +159,7 @@ url:"https://ipa.ipasign.cc/download_ipa/031e5ab62b41"
     actionType:"download",
     url:"https://rrixh.pages.dev"
   }
+*/
 ];
 
 const ANDROID_EXECUTORS = [
