@@ -11,13 +11,13 @@
                     <key>kind</key>
                  <string>software-package</string>
                     <key>url</key>
-        <string>https://github.com/rrixh/install/releases/download/v2.729.838dns/DELTA.V2.729.838.signed.with.Vietnam.Airlines.-.DNS.cert.ipa</string>
+        <string>https://github.com/rrixh/install/releases/download/v2.729.838dns/DELTA.V2.739.838.-.signed.by.Vietnam.Airlines.JSC.ipa</string>
                 </dict>
             </array>
             <key>metadata</key>
             <dict>
                 <key>bundle-identifier</key>
-             <string>deltatest</string>
+             <string>com.lula.delta</string>
                 <key>bundle-version</key>
                 <string>2.729.838</string>
                 <key>kind</key>
