@@ -34,7 +34,7 @@ const SOCIAL_LINKS = [
 const DNS_PROFILE = {
   description: "DNS method is like a VPN that blocks Apple from blacklisting you and lets you use revoked/expired certificates.",
   image: "https://raw.githubusercontent.com/rrixh/install/refs/heads/main/imgs/dns%20logo.png",
-  url: "https://release-assets.githubusercontent.com/github-production-release-asset/1224449257/fd3e744b-b96b-4ecf-a206-531e54013d60?sp=r&sv=2018-11-09&sr=b&spr=https&se=2026-07-20T23:34:43Z&rscd=attachment;+filename=khoindvn.mobileconfig&rsct=application/octet-stream&skoid=96c2d410-5711-43a1-aedd-ab1947aa7ab0&sktid=398a6654-997b-47e9-b12b-9515b896b4de&skt=2026-07-20T22:34:15Z&ske=2026-07-20T23:34:43Z&sks=b&skv=2018-11-09&sig=nkXrl1o76OLo00hN9pogXEw+JUDbgVIA6g7ksHWIQIU=&jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmVsZWFzZS1hc3NldHMuZ2l0aHVidXNlcmNvbnRlbnQuY29tIiwia2V5Ijoia2V5MSIsImV4cCI6MTc4NDU4NzM5NCwibmJmIjoxNzg0NTg3MDk0LCJwYXRoIjoicmVsZWFzZWFzc2V0cHJvZHVjdGlvbi5ibG9iLmNvcmUud2luZG93cy5uZXQifQ.nGuiQsIocR9Etza0Poy0vmBwCaP8QVdBwu6EVXVLaFc&response-content-disposition=attachment;%20filename=khoindvn.mobileconfig&response-content-type=application/octet-stream"
+  url: "https://github.com/rrixh/install/releases/download/dns/rrixhios.mobileconfig"
 };
 
 const DNS_STEPS = [
