@@ -7,7 +7,7 @@ RRIXH IOS WEBSITE SETTINGS
 const SITE_SETTINGS = {
   pageTitle: "RRixh iOS",
   pageDescription: "KRAXKED/MODDED/HACKED IPA & APK FILES WITH FREE VIP, PRO, PREMIUM, MOD MENU ETC.",
-  lastUpdated: "LAST UPDATED: July 26, 2026 @12:59 AM (EST)",
+  lastUpdated: "LAST UPDATED: August 1, 2026 @3:00 PM (EST)",
 
   headerImage: "https://raw.githubusercontent.com/rrixh/install/refs/heads/main/imgs/rrixh.PNG",
   backgroundVideo: "sparkle-overlay.mp4",
@@ -165,11 +165,11 @@ url:"https://rrixh.pages.dev/plists/delta/v2.729.838.plist"
 const ANDROID_EXECUTORS = [
   {
     name:"Delta APK",
-    version:"v2.729.840",
+    version:"v2.731.944 (02)",
     image:"https://raw.githubusercontent.com/rrixh/install/refs/heads/main/imgs/delta.JPG",
     status:"green",
     actionType:"download",
-    url:"https://github.com/rrixh/install/releases/download/v2.729.840/Delta.v2.729.840.apk"
+    url:"https://delta.filenetwork.vip/file/Delta-2.731.944-02.apk"
   },
   {
     name:"KRNL APK",
