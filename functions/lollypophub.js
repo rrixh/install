@@ -1,12 +1,9 @@
-// lollypophub worker.js page
-
-// loadstring(game:HttpGet("rrixh.pages.dev/lollypophub"))();
-
 const LOLLYPOPHUB =
-  "https://raw.githubusercontent.com/rrixh/lulaslollipopmobile/main/lollypophubmobilev2-source";
+  "https://raw.githubusercontent.com/rrixh/lollypophubv5.8test/refs/heads/main/lulaslollipop";
 
-const IMAGE_URL =
-  "https://raw.githubusercontent.com/rrixh/install/refs/heads/main/imgs/Lollipop-Emoji.png";
+const IMG =
+  "https://raw.githubusercontent.com/rrixh/install/refs/heads/main/imgs/lhkredits.PNG";
+
 
 export async function onRequestGet(context) {
   const request = context.request;
@@ -57,7 +54,7 @@ export async function onRequestGet(context) {
 </head>
 
 <body>
-  <img src="${IMAGE_URL}" alt="Lollypop Hub">
+  <img src="${IMG}" alt="Lollypop Hub">
 </body>
 </html>`;
 
@@ -69,7 +66,7 @@ export async function onRequestGet(context) {
     });
   }
 
-  const luaResponse = await fetch(LOLLYPOPHUB);
+const luaResponse = await fetch(LOLLYPOPHUB);
 
   if (!luaResponse.ok) {
     return new Response(
