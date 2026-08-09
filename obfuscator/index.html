@@ -1,1358 +1,415 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <meta name="theme-color" content="#080b12">
-  <title>RRixh Luau Obfuskator v1.1</title>
-  <style>
-    :root {
-      color-scheme: dark;
-      --bg: #070910;
-      --panel: #101521;
-      --panel-2: #161d2c;
-      --line: #273149;
-      --text: #f3f6ff;
-      --muted: #98a4ba;
-      --accent: #b95cff;
-      --accent-2: #7158ff;
-      --danger: #ff5678;
-      --good: #48d597;
-      --shadow: 0 18px 60px rgba(0,0,0,.36);
-      --radius: 18px;
-    }
-
-    * { box-sizing: border-box; }
-
-    html { min-height: 100%; background: var(--bg); }
-
-    body {
-      min-height: 100vh;
-      margin: 0;
-      background:
-        radial-gradient(circle at 10% 0%, rgba(185,92,255,.17), transparent 34rem),
-        radial-gradient(circle at 100% 20%, rgba(74,91,255,.13), transparent 32rem),
-        var(--bg);
-      color: var(--text);
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
-      -webkit-tap-highlight-color: transparent;
-    }
-
-    button, select, textarea, input { font: inherit; }
-
-    .shell {
-      width: min(1500px, 100%);
-      margin: 0 auto;
-      padding: max(20px, env(safe-area-inset-top)) 14px max(26px, env(safe-area-inset-bottom));
-    }
-
-    .hero {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      margin-bottom: 16px;
-      padding: 8px 4px;
-    }
-
-    .hero h1 {
-      margin: 0;
-      font-size: clamp(1.65rem, 6vw, 2.5rem);
-      letter-spacing: -.04em;
-      line-height: 1;
-    }
-
-    .hero p {
-      margin: 9px 0 0;
-      color: var(--muted);
-      font-size: .93rem;
-    }
-
-    .local-badge {
-      flex: 0 0 auto;
-      border: 1px solid rgba(72,213,151,.35);
-      background: rgba(72,213,151,.08);
-      color: #8cf0bd;
-      border-radius: 999px;
-      padding: 8px 11px;
-      font-size: .75rem;
-      font-weight: 750;
-      letter-spacing: .02em;
-    }
-
-    .topbar, .advanced, .editor-card {
-      border: 1px solid var(--line);
-      background: rgba(16,21,33,.92);
-      box-shadow: var(--shadow);
-      border-radius: var(--radius);
-    }
-
-    .topbar {
-      display: grid;
-      grid-template-columns: minmax(170px, 1fr) auto;
-      gap: 12px;
-      padding: 14px;
-      margin-bottom: 14px;
-    }
-
-    .field label, .section-label {
-      display: block;
-      margin: 0 0 7px;
-      color: var(--muted);
-      font-size: .75rem;
-      font-weight: 800;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-    }
-
-    select, .seed-input {
-      width: 100%;
-      min-height: 46px;
-      border: 1px solid var(--line);
-      background: var(--panel-2);
-      color: var(--text);
-      border-radius: 12px;
-      padding: 0 12px;
-      outline: none;
-    }
-
-    select:focus, textarea:focus, .seed-input:focus {
-      border-color: var(--accent);
-      box-shadow: 0 0 0 3px rgba(185,92,255,.14);
-    }
-
-    .primary {
-      min-height: 46px;
-      align-self: end;
-      border: 0;
-      border-radius: 12px;
-      padding: 0 20px;
-      background: linear-gradient(135deg, var(--accent), var(--accent-2));
-      color: white;
-      font-weight: 900;
-      cursor: pointer;
-      box-shadow: 0 10px 28px rgba(128,78,255,.28);
-    }
-
-    .primary:active, button:active { transform: translateY(1px); }
-
-    .advanced {
-      margin-bottom: 14px;
-      overflow: hidden;
-    }
-
-    details > summary {
-      list-style: none;
-      cursor: pointer;
-      padding: 15px;
-      font-weight: 850;
-      user-select: none;
-    }
-
-    details > summary::-webkit-details-marker { display: none; }
-
-    details > summary::after {
-      content: "+";
-      float: right;
-      color: var(--muted);
-      font-size: 1.2rem;
-    }
-
-    details[open] > summary::after { content: "-"; }
-
-    .advanced-body {
-      border-top: 1px solid var(--line);
-      padding: 14px;
-    }
-
-    .toggles {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 10px;
-    }
-
-    .toggle {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      min-height: 48px;
-      padding: 10px 11px;
-      border: 1px solid var(--line);
-      border-radius: 12px;
-      background: var(--panel-2);
-      color: var(--text);
-      font-size: .84rem;
-      font-weight: 720;
-    }
-
-    .toggle input {
-      appearance: none;
-      width: 39px;
-      height: 23px;
-      border-radius: 999px;
-      background: #30394c;
-      position: relative;
-      flex: 0 0 auto;
-      transition: .18s ease;
-    }
-
-    .toggle input::after {
-      content: "";
-      position: absolute;
-      width: 17px;
-      height: 17px;
-      border-radius: 50%;
-      background: white;
-      top: 3px;
-      left: 3px;
-      transition: .18s ease;
-    }
-
-    .toggle input:checked { background: linear-gradient(135deg, var(--accent), var(--accent-2)); }
-    .toggle input:checked::after { transform: translateX(16px); }
-
-    .advanced-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-      margin-top: 10px;
-    }
-
-    .hint {
-      margin: 12px 0 0;
-      color: var(--muted);
-      font-size: .78rem;
-      line-height: 1.5;
-    }
-
-    .editors {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 14px;
-    }
-
-    .editor-card { overflow: hidden; }
-
-    .editor-head {
-      min-height: 52px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      padding: 10px 12px;
-      border-bottom: 1px solid var(--line);
-    }
-
-    .editor-title { font-weight: 880; }
-
-    .stats {
-      color: var(--muted);
-      font-size: .72rem;
-      white-space: nowrap;
-    }
-
-    textarea {
-      display: block;
-      width: 100%;
-      min-height: 430px;
-      resize: vertical;
-      border: 0;
-      outline: none;
-      background: #090d16;
-      color: #eef3ff;
-      padding: 15px;
-      font: 13px/1.55 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
-      tab-size: 4;
-      white-space: pre;
-      overflow: auto;
-      caret-color: #d58cff;
-    }
-
-    .actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      padding: 11px;
-      border-top: 1px solid var(--line);
-      background: var(--panel);
-    }
-
-    .btn, .file-btn {
-      min-height: 40px;
-      border: 1px solid var(--line);
-      border-radius: 10px;
-      background: var(--panel-2);
-      color: var(--text);
-      padding: 0 12px;
-      font-size: .82rem;
-      font-weight: 800;
-      cursor: pointer;
-    }
-
-    .btn.danger { color: #ff91a8; border-color: rgba(255,86,120,.32); }
-    .btn.good { color: #8cf0bd; border-color: rgba(72,213,151,.3); }
-
-    .file-btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .file-btn input { display: none; }
-
-    .status {
-      min-height: 22px;
-      margin: 10px 3px 0;
-      color: var(--muted);
-      font-size: .8rem;
-    }
-
-    .status.good { color: var(--good); }
-    .status.bad { color: var(--danger); }
-
-    footer {
-      padding: 18px 4px 2px;
-      color: var(--muted);
-      text-align: center;
-      font-size: .75rem;
-    }
-
-    @media (max-width: 900px) {
-      .toggles { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-      .editors { grid-template-columns: 1fr; }
-      textarea { min-height: 360px; }
-    }
-
-    @media (max-width: 560px) {
-      .shell { padding-left: 10px; padding-right: 10px; }
-      .hero { align-items: flex-start; }
-      .local-badge { display: none; }
-      .topbar { grid-template-columns: 1fr; }
-      .primary { width: 100%; }
-      .toggles { grid-template-columns: 1fr 1fr; gap: 8px; }
-      .toggle { font-size: .77rem; padding: 9px; }
-      .advanced-row { grid-template-columns: 1fr; }
-      textarea { min-height: 330px; font-size: 12px; }
-      .actions > * { flex: 1 1 auto; }
-    }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#080b12">
+<title>RRixh Luau Obfuskator v2.0</title>
+<style>
+:root{
+  color-scheme:dark;
+  --bg:#070910;--panel:#101521;--panel2:#161d2c;--line:#273149;
+  --text:#f3f6ff;--muted:#98a4ba;--accent:#b95cff;--accent2:#7158ff;
+  --danger:#ff5678;--good:#48d597;--shadow:0 18px 60px rgba(0,0,0,.36);
+  --radius:18px;
+}
+*{box-sizing:border-box}
+html{min-height:100%;background:var(--bg)}
+body{
+  min-height:100vh;margin:0;color:var(--text);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+  -webkit-tap-highlight-color:transparent;
+  background:
+    radial-gradient(circle at 10% 0%,rgba(185,92,255,.17),transparent 34rem),
+    radial-gradient(circle at 100% 20%,rgba(74,91,255,.13),transparent 32rem),
+    var(--bg);
+}
+button,select,textarea,input{font:inherit}
+button,.file-btn,.toggle,summary{touch-action:manipulation}
+.shell{width:min(1180px,100%);margin:0 auto;padding:max(18px,env(safe-area-inset-top)) 12px max(28px,env(safe-area-inset-bottom))}
+.hero{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:8px 4px 14px}
+.hero h1{margin:0;font-size:clamp(1.55rem,6vw,2.35rem);letter-spacing:-.04em;line-height:1}
+.hero p{margin:9px 0 0;color:var(--muted);font-size:.91rem}
+.local-badge{border:1px solid rgba(72,213,151,.35);background:rgba(72,213,151,.08);color:#8cf0bd;border-radius:999px;padding:8px 11px;font-size:.72rem;font-weight:800}
+.card,.advanced,.editor-card{border:1px solid var(--line);background:rgba(16,21,33,.93);box-shadow:var(--shadow);border-radius:var(--radius)}
+.topbar{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:13px;margin-bottom:12px}
+.field label,.section-label{display:block;margin:0 0 7px;color:var(--muted);font-size:.73rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+select,.seed-input{width:100%;min-height:46px;border:1px solid var(--line);background:var(--panel2);color:var(--text);border-radius:12px;padding:0 12px;outline:none}
+select:focus,textarea:focus,.seed-input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(185,92,255,.14)}
+.advanced{margin-bottom:12px;overflow:hidden}
+details>summary{list-style:none;cursor:pointer;padding:15px;font-weight:850;user-select:none}
+details>summary::-webkit-details-marker{display:none}
+details>summary::after{content:"+";float:right;color:var(--muted);font-size:1.2rem;transition:transform .2s ease}
+details[open]>summary::after{content:"-"}
+.advanced-body{border-top:1px solid var(--line);padding:13px}
+.toggles{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px}
+.toggle{
+  display:flex;align-items:center;justify-content:space-between;gap:9px;min-height:50px;
+  padding:10px;border:1px solid var(--line);border-radius:12px;background:var(--panel2);
+  color:var(--text);font-size:.8rem;font-weight:740;transition:transform .13s ease,border-color .16s ease,background .16s ease,box-shadow .16s ease;
+}
+.toggle:active{transform:scale(.975)}
+.toggle:has(input:checked){border-color:rgba(185,92,255,.55);background:rgba(185,92,255,.08);box-shadow:inset 0 0 0 1px rgba(185,92,255,.08)}
+.toggle input{appearance:none;width:40px;height:24px;border-radius:999px;background:#30394c;position:relative;flex:0 0 auto;transition:.18s ease;cursor:pointer}
+.toggle input::after{content:"";position:absolute;width:18px;height:18px;border-radius:50%;background:white;top:3px;left:3px;transition:.18s cubic-bezier(.2,.8,.2,1)}
+.toggle input:checked{background:linear-gradient(135deg,var(--accent),var(--accent2));box-shadow:0 0 18px rgba(185,92,255,.22)}
+.toggle input:checked::after{transform:translateX(16px)}
+.advanced-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
+.hint{margin:11px 0 0;color:var(--muted);font-size:.77rem;line-height:1.5}
+.editors{display:grid;grid-template-columns:1fr;gap:12px}
+.editor-card{overflow:hidden}
+.editor-head{min-height:52px;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 12px;border-bottom:1px solid var(--line)}
+.editor-title{font-weight:880}.stats{color:var(--muted);font-size:.71rem;white-space:nowrap}
+textarea{
+  display:block;width:100%;min-height:360px;resize:vertical;border:0;outline:none;background:#090d16;color:#eef3ff;
+  padding:14px;font:12.5px/1.55 ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono",monospace;
+  tab-size:4;white-space:pre;overflow:auto;caret-color:#d58cff;
+}
+#output{min-height:300px}
+.actions{
+  display:flex;align-items:center;justify-content:flex-end;flex-wrap:wrap;gap:8px;padding:10px;border-top:1px solid var(--line);background:var(--panel)
+}
+.actions .push-right{margin-left:auto}
+.btn,.file-btn,.primary{
+  position:relative;overflow:hidden;min-height:42px;border-radius:11px;padding:0 13px;font-size:.81rem;font-weight:850;cursor:pointer;
+  transition:transform .12s ease,filter .15s ease,box-shadow .15s ease,border-color .15s ease;
+  user-select:none;
+}
+.btn,.file-btn{border:1px solid var(--line);background:var(--panel2);color:var(--text)}
+.primary{border:0;background:linear-gradient(135deg,var(--accent),var(--accent2));color:white;box-shadow:0 10px 28px rgba(128,78,255,.28);padding:0 18px}
+.btn:hover,.file-btn:hover,.primary:hover{filter:brightness(1.08)}
+.btn:active,.file-btn:active,.primary:active,.pressed{transform:translateY(2px) scale(.965)!important;filter:brightness(1.18)}
+.primary.busy{pointer-events:none;animation:pulseButton .75s ease-in-out infinite alternate}
+@keyframes pulseButton{from{box-shadow:0 8px 20px rgba(128,78,255,.25)}to{box-shadow:0 10px 34px rgba(185,92,255,.55)}}
+.ripple{position:absolute;border-radius:999px;background:rgba(255,255,255,.28);transform:scale(0);animation:ripple .46s ease-out;pointer-events:none}
+@keyframes ripple{to{transform:scale(4);opacity:0}}
+.btn.danger{color:#ff91a8;border-color:rgba(255,86,120,.32)}
+.btn.good{color:#8cf0bd;border-color:rgba(72,213,151,.3)}
+.file-btn{display:inline-flex;align-items:center;justify-content:center}.file-btn input{display:none}
+.status{min-height:23px;margin:10px 3px 0;color:var(--muted);font-size:.79rem}.status.good{color:var(--good)}.status.bad{color:var(--danger)}
+footer{padding:18px 4px 2px;color:var(--muted);text-align:center;font-size:.74rem}
+@media(max-width:800px){.toggles{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:560px){
+  .shell{padding-left:9px;padding-right:9px}.hero{align-items:flex-start}.local-badge{display:none}
+  .topbar,.advanced-row{grid-template-columns:1fr}.toggles{grid-template-columns:1fr 1fr;gap:7px}
+  .toggle{font-size:.74rem;padding:9px;min-height:48px}
+  textarea{min-height:315px;font-size:12px}
+  .actions{display:grid;grid-template-columns:1fr 1fr;justify-content:stretch}
+  .actions>*{width:100%}.actions .push-right{margin-left:0}
+  #obfuscateBtn{grid-column:2}
+}
+</style>
 </head>
 <body>
-  <main class="shell">
-    <header class="hero">
-      <div>
-        <h1>RRixh Luau Obfuskator v1.1</h1>
-        <p>Lua/Luau transformations directly in your browser.</p>
-      </div>
-      <div class="local-badge">LOCAL PROCESSING</div>
-    </header>
+<main class="shell">
+<header class="hero">
+  <div><h1>RRixh Luau Obfuskator v2.0</h1><p>Lua/Luau transformations directly in your browser.</p></div>
+  <div class="local-badge">LOCAL PROCESSING</div>
+</header>
 
-    <section class="topbar">
-      <div class="field">
-        <label for="mode">Obfuskation Mode</label>
-        <select id="mode">
-          <option value="lite">Lite - Basic transformation</option>
-          <option value="dense" selected>Dense - Layered transformation</option>
-          <option value="phantom">Phantom - Advanced transformation</option>
-          <option value="eclipse">Eklipse - Maximum transformation</option>
-          <option value="custom">Kustom - Manual kontrol</option>
-          <option value="beautify">Beautify Only</option>
-          <option value="minify">Minify Only</option>
-        </select>
-      </div>
-      <button class="primary" id="obfuscateBtn">Obfuskate</button>
-    </section>
+<section class="card topbar">
+  <div class="field">
+    <label for="mode">Obfuskation Mode</label>
+    <select id="mode">
+      <option value="lite">Lite - Basic transformation</option>
+      <option value="dense">Dense - Layered transformation</option>
+      <option value="phantom">Phantom - Advanced transformation</option>
+      <option value="eclipse" selected>Eklipse - Maximum transformation</option>
+      <option value="custom">Kustom - Manual defaults</option>
+      <option value="beautify">Beautify Only</option>
+      <option value="minify">Minify Only</option>
+    </select>
+  </div>
+  <div class="field">
+    <label for="nameStyle">Generated Name Style</label>
+    <select id="nameStyle">
+      <option value="numbered">Numbered - v1029</option>
+      <option value="mixed" selected>Mixed - lI0O</option>
+      <option value="hex">Hex - _0xA18F</option>
+    </select>
+  </div>
+</section>
 
-    <section class="advanced">
-      <details id="advancedDetails">
-        <summary>Advanced Method Settings</summary>
-        <div class="advanced-body">
-          <div class="toggles" id="toggles">
-            <label class="toggle">Rename Lokals <input type="checkbox" data-opt="renameLocals"></label>
-            <label class="toggle">Alias Globals <input type="checkbox" data-opt="aliasGlobals"></label>
-            <label class="toggle">Strings <input type="checkbox" data-opt="strings"></label>
-            <label class="toggle">Literals <input type="checkbox" data-opt="literals"></label>
-            <label class="toggle">MBA <input type="checkbox" data-opt="mba"></label>
-            <label class="toggle">Table Indirection <input type="checkbox" data-opt="tableIndirection"></label>
-            <label class="toggle">Junk If <input type="checkbox" data-opt="junkIf"></label>
-            <label class="toggle">Reverse If <input type="checkbox" data-opt="reverseIf"></label>
-            <label class="toggle">CFF <input type="checkbox" data-opt="cff"></label>
-            <label class="toggle">Swizzle <input type="checkbox" data-opt="swizzle"></label>
-            <label class="toggle">Demo VM <input type="checkbox" data-opt="demoVm"></label>
-            <label class="toggle">Add bit32 <input type="checkbox" data-opt="addBit32"></label>
-            <label class="toggle">Remove LPH Makros <input type="checkbox" data-opt="removeLph"></label>
-            <label class="toggle">Minify <input type="checkbox" data-opt="minify"></label>
-            <label class="toggle">Beautify <input type="checkbox" data-opt="beautify"></label>
-            <label class="toggle">Header <input type="checkbox" data-opt="header"></label>
-          </div>
+<section class="advanced">
+<details id="advancedDetails" open>
+<summary>Advanced Method Settings</summary>
+<div class="advanced-body">
+  <div class="toggles">
+    <label class="toggle">Rename Lokals <input type="checkbox" data-opt="renameLocals"></label>
+    <label class="toggle">Alias Globals <input type="checkbox" data-opt="aliasGlobals"></label>
+    <label class="toggle">Strings <input type="checkbox" data-opt="strings"></label>
+    <label class="toggle">Literals <input type="checkbox" data-opt="literals"></label>
+    <label class="toggle">MBA <input type="checkbox" data-opt="mba"></label>
+    <label class="toggle">Table Indirection <input type="checkbox" data-opt="tableIndirection"></label>
+    <label class="toggle">Junk If <input type="checkbox" data-opt="junkIf"></label>
+    <label class="toggle">Reverse If <input type="checkbox" data-opt="reverseIf"></label>
+    <label class="toggle">CFF <input type="checkbox" data-opt="cff"></label>
+    <label class="toggle">Swizzle <input type="checkbox" data-opt="swizzle"></label>
+    <label class="toggle">VM Layer <input type="checkbox" data-opt="demoVm"></label>
+    <label class="toggle">Add bit32 <input type="checkbox" data-opt="addBit32"></label>
+    <label class="toggle">Remove LPH Makros <input type="checkbox" data-opt="removeLph"></label>
+    <label class="toggle">Minify <input type="checkbox" data-opt="minify"></label>
+    <label class="toggle">Beautify <input type="checkbox" data-opt="beautify"></label>
+    <label class="toggle">Header <input type="checkbox" data-opt="header"></label>
+  </div>
+  <div class="advanced-row">
+    <div class="field"><label for="seed">Random Seed (optional)</label><input class="seed-input" id="seed" inputmode="numeric" placeholder="Random every run"></div>
+    <div class="field"><label for="vmJunk">VM Junk Density</label>
+      <select id="vmJunk"><option value="low">Low</option><option value="medium" selected>Medium</option><option value="high">High</option></select>
+    </div>
+  </div>
+  <p class="hint">Presets now only choose starting settings. Every method stays editable in every mode. VM Layer uses randomized opcodes, mixed byte transforms, junk instructions, shuffled handlers, and a flattened dispatcher before executing the reconstructed source.</p>
+</div>
+</details>
+</section>
 
-          <div class="advanced-row">
-            <div class="field">
-              <label for="nameStyle">Generated Name Style</label>
-              <select id="nameStyle">
-                <option value="numbered">Numbered - v1029</option>
-                <option value="mixed">Mixed - lI0O</option>
-                <option value="hex">Hex - _0xA18F</option>
-              </select>
-            </div>
-            <div class="field">
-              <label for="seed">Random Seed (optional)</label>
-              <input class="seed-input" id="seed" inputmode="numeric" placeholder="Random every run">
-            </div>
-          </div>
-
-          <p class="hint">
-            CFF, Reverse If, and Demo VM are disabled in every preset because they kan change kode behavior without a full Luau parser. They remain available only in Kustom mode for testing.
-          </p>
-        </div>
-      </details>
-    </section>
-
-    <section class="editors">
-      <article class="editor-card">
-        <div class="editor-head">
-          <div class="editor-title">Input</div>
-          <div class="stats" id="inputStats">0 lines | 0 chars</div>
-        </div>
-        <textarea id="input" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" placeholder="Paste your Lua/Luau kode here...">local plr = game.Players.LocalPlayer
+<section class="editors">
+<article class="editor-card">
+  <div class="editor-head"><div class="editor-title">Input</div><div class="stats" id="inputStats">0 lines | 0 chars</div></div>
+  <textarea id="input" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" placeholder="Paste your Lua/Luau kode here...">local plr = game.Players.LocalPlayer
 print(plr.Name)</textarea>
-        <div class="actions">
-          <label class="file-btn">Upload File<input id="fileInput" type="file" accept=".lua,.luau,.txt,text/plain"></label>
-          <button class="btn" id="pasteBtn">Paste</button>
-          <button class="btn danger" id="clearInputBtn">Klear Input</button>
-        </div>
-      </article>
+  <div class="actions">
+    <label class="file-btn">Upload File<input id="fileInput" type="file" accept=".lua,.luau,.txt,text/plain"></label>
+    <button class="btn danger" id="clearInputBtn">Klear Input</button>
+    <button class="btn push-right" id="pasteBtn">Paste</button>
+    <button class="primary" id="obfuscateBtn">Obfuskate</button>
+  </div>
+</article>
 
-      <article class="editor-card">
-        <div class="editor-head">
-          <div class="editor-title">Output</div>
-          <div class="stats" id="outputStats">0 lines | 0 chars</div>
-        </div>
-        <textarea id="output" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" readonly placeholder="Your obfuskated output will appear here..."></textarea>
-        <div class="actions">
-          <button class="btn good" id="copyBtn">Kopy Output</button>
-          <button class="btn" id="downloadBtn">Download .lua</button>
-          <button class="btn" id="undoBtn">Undo</button>
-          <button class="btn" id="undoAllBtn">Undo All</button>
-          <button class="btn danger" id="resetBtn">Reset</button>
-        </div>
-      </article>
-    </section>
+<article class="editor-card">
+  <div class="editor-head"><div class="editor-title">Output</div><div class="stats" id="outputStats">0 lines | 0 chars</div></div>
+  <textarea id="output" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" readonly placeholder="Your obfuskated output will appear here..."></textarea>
+  <div class="actions">
+    <button class="btn good" id="copyBtn">Kopy Output</button>
+    <button class="btn" id="downloadBtn">Download .lua</button>
+    <button class="btn" id="undoBtn">Undo</button>
+    <button class="btn" id="undoAllBtn">Undo All</button>
+    <button class="btn danger" id="resetBtn">Reset</button>
+  </div>
+</article>
+</section>
+<div class="status" id="status" role="status" aria-live="polite"></div>
+<footer>RRixh Luau Obfuskator v2.0 | Runs locally in your browser</footer>
+</main>
 
-    <div class="status" id="status" role="status" aria-live="polite"></div>
-    <footer>RRixh Luau Obfuskator v1.1 | Runs locally in your browser</footer>
-  </main>
+<script>
+"use strict";
+const $=s=>document.querySelector(s), $$=s=>Array.from(document.querySelectorAll(s));
+const input=$("#input"),output=$("#output"),mode=$("#mode"),statusBox=$("#status"),seedInput=$("#seed"),nameStyle=$("#nameStyle"),vmJunk=$("#vmJunk");
+const DEFAULT_INPUT="local plr = game.Players.LocalPlayer\nprint(plr.Name)";
+let history=[],originalBeforeRun="";
 
-  <script>
-  "use strict";
+const PRESETS={
+lite:{renameLocals:true,aliasGlobals:true,strings:false,literals:false,mba:false,tableIndirection:false,junkIf:false,reverseIf:false,cff:false,swizzle:false,demoVm:false,addBit32:false,removeLph:false,minify:true,beautify:false,header:true},
+dense:{renameLocals:true,aliasGlobals:true,strings:true,literals:true,mba:false,tableIndirection:false,junkIf:true,reverseIf:false,cff:false,swizzle:false,demoVm:false,addBit32:false,removeLph:false,minify:true,beautify:false,header:true},
+phantom:{renameLocals:true,aliasGlobals:true,strings:true,literals:true,mba:true,tableIndirection:true,junkIf:true,reverseIf:true,cff:true,swizzle:true,demoVm:false,addBit32:true,removeLph:false,minify:true,beautify:false,header:true},
+eclipse:{renameLocals:true,aliasGlobals:true,strings:true,literals:true,mba:true,tableIndirection:true,junkIf:true,reverseIf:true,cff:true,swizzle:true,demoVm:true,addBit32:true,removeLph:false,minify:true,beautify:false,header:true},
+custom:{renameLocals:true,aliasGlobals:true,strings:true,literals:false,mba:false,tableIndirection:false,junkIf:false,reverseIf:false,cff:false,swizzle:false,demoVm:false,addBit32:false,removeLph:false,minify:true,beautify:false,header:true},
+beautify:{renameLocals:false,aliasGlobals:false,strings:false,literals:false,mba:false,tableIndirection:false,junkIf:false,reverseIf:false,cff:false,swizzle:false,demoVm:false,addBit32:false,removeLph:false,minify:false,beautify:true,header:false},
+minify:{renameLocals:false,aliasGlobals:false,strings:false,literals:false,mba:false,tableIndirection:false,junkIf:false,reverseIf:false,cff:false,swizzle:false,demoVm:false,addBit32:false,removeLph:false,minify:true,beautify:false,header:false}
+};
 
-  const $ = (selector) => document.querySelector(selector);
-  const $$ = (selector) => Array.from(document.querySelectorAll(selector));
+function setStatus(m,k=""){statusBox.textContent=m;statusBox.className="status"+(k?" "+k:"")}
+function updateStats(){
+  const s=t=>(t?t.split("\n").length:0)+" lines | "+t.length.toLocaleString()+" chars";
+  $("#inputStats").textContent=s(input.value);$("#outputStats").textContent=s(output.value);
+}
+function applyPreset(key){
+  const p=PRESETS[key]||PRESETS.eclipse;
+  $$("[data-opt]").forEach(b=>{b.checked=!!p[b.dataset.opt];b.disabled=false});
+}
+function getOptions(){
+  const o={};$$("[data-opt]").forEach(b=>o[b.dataset.opt]=b.checked);
+  if(o.minify)o.beautify=false;
+  if(o.beautify)o.minify=false;
+  if(o.mba||o.demoVm)o.addBit32=true;
+  return o;
+}
+mode.addEventListener("change",()=>applyPreset(mode.value));
+$$("[data-opt]").forEach(box=>box.addEventListener("change",()=>{
+  if(box.dataset.opt==="minify"&&box.checked)$('[data-opt="beautify"]').checked=false;
+  if(box.dataset.opt==="beautify"&&box.checked)$('[data-opt="minify"]').checked=false;
+  if((box.dataset.opt==="mba"||box.dataset.opt==="demoVm")&&box.checked)$('[data-opt="addBit32"]').checked=true;
+}));
 
-  const input = $("#input");
-  const output = $("#output");
-  const mode = $("#mode");
-  const statusBox = $("#status");
-  const seedInput = $("#seed");
-  const nameStyle = $("#nameStyle");
-  const advancedDetails = $("#advancedDetails");
+function hashSeed(v){let h=2166136261>>>0;const s=String(v||Date.now()+Math.random());for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619)}return h>>>0}
+function makeRng(v){let state=hashSeed(v);return()=>{state+=0x6D2B79F5;let t=state;t=Math.imul(t^(t>>>15),t|1);t^=t+Math.imul(t^(t>>>7),t|61);return((t^(t>>>14))>>>0)/4294967296}}
+function randInt(r,min,max){return Math.floor(r()*(max-min+1))+min}
+function shuffle(a,r){const c=a.slice();for(let i=c.length-1;i>0;i--){const j=randInt(r,0,i);[c[i],c[j]]=[c[j],c[i]]}return c}
+function generatedName(r,used){let n;do{if(nameStyle.value==="mixed"){const c="lI0O";n="_";for(let i=0;i<randInt(r,8,14);i++)n+=c[randInt(r,0,c.length-1)]}else if(nameStyle.value==="hex")n="_0x"+randInt(r,0x1000,0xFFFFFF).toString(16).toUpperCase();else n="v"+randInt(r,7,999999)}while(used.has(n));used.add(n);return n}
 
-  const DEFAULT_INPUT = "local plr = game.Players.LocalPlayer\nprint(plr.Name)";
-  let history = [];
-  let originalBeforeRun = "";
-
-  const PRESETS = {
-    lite: {
-      renameLocals: true, aliasGlobals: true, strings: false, literals: false,
-      mba: false, tableIndirection: false, junkIf: false, reverseIf: false,
-      cff: false, swizzle: false, demoVm: false, addBit32: false,
-      removeLph: false, minify: true, beautify: false, header: true
-    },
-    dense: {
-      renameLocals: true, aliasGlobals: true, strings: true, literals: true,
-      mba: false, tableIndirection: false, junkIf: false, reverseIf: false,
-      cff: false, swizzle: false, demoVm: false, addBit32: false,
-      removeLph: false, minify: true, beautify: false, header: true
-    },
-    phantom: {
-      renameLocals: true, aliasGlobals: true, strings: true, literals: true,
-      mba: true, tableIndirection: false, junkIf: true, reverseIf: false,
-      cff: false, swizzle: false, demoVm: false, addBit32: true,
-      removeLph: false, minify: true, beautify: false, header: true
-    },
-    eclipse: {
-      renameLocals: true, aliasGlobals: true, strings: true, literals: true,
-      mba: true, tableIndirection: true, junkIf: true, reverseIf: false,
-      cff: false, swizzle: true, demoVm: false, addBit32: true,
-      removeLph: false, minify: true, beautify: false, header: true
-    },
-    custom: {
-      renameLocals: true, aliasGlobals: true, strings: false, literals: false,
-      mba: false, tableIndirection: false, junkIf: false, reverseIf: false,
-      cff: false, swizzle: false, demoVm: false, addBit32: false,
-      removeLph: false, minify: true, beautify: false, header: true
-    },
-    beautify: {
-      renameLocals: false, aliasGlobals: false, strings: false, literals: false,
-      mba: false, tableIndirection: false, junkIf: false, reverseIf: false,
-      cff: false, swizzle: false, demoVm: false, addBit32: false,
-      removeLph: false, minify: false, beautify: true, header: false
-    },
-    minify: {
-      renameLocals: false, aliasGlobals: false, strings: false, literals: false,
-      mba: false, tableIndirection: false, junkIf: false, reverseIf: false,
-      cff: false, swizzle: false, demoVm: false, addBit32: false,
-      removeLph: false, minify: true, beautify: false, header: false
-    }
-  };
-
-  function setStatus(message, kind = "") {
-    statusBox.textContent = message;
-    statusBox.className = "status" + (kind ? " " + kind : "");
+const KEYWORDS=new Set(["and","break","continue","do","else","elseif","end","export","false","for","function","if","in","local","nil","not","or","repeat","return","then","true","type","until","while"]);
+function readLongBracket(s,start){if(s[start]!=="[")return null;let i=start+1;while(s[i]==="=")i++;if(s[i]!=="[")return null;const eq=s.slice(start+1,i),close="]"+eq+"]",end=s.indexOf(close,i+1);return end===-1?s.length:end+close.length}
+function tokenize(source){
+  const t=[];let i=0;const push=(type,value)=>t.push({type,value});
+  while(i<source.length){
+    const c=source[i];
+    if(/\s/.test(c)){const s=i++;while(i<source.length&&/\s/.test(source[i]))i++;push("space",source.slice(s,i));continue}
+    if(c==="-"&&source[i+1]==="-"){const le=readLongBracket(source,i+2);if(le!==null){push("comment",source.slice(i,le));i=le}else{const s=i;i+=2;while(i<source.length&&source[i]!=="\n")i++;push("comment",source.slice(s,i))}continue}
+    if(c==="'"||c==='"'){const q=c,s=i++;while(i<source.length){if(source[i]==="\\"){i+=2;continue}if(source[i]===q){i++;break}i++}push("string",source.slice(s,i));continue}
+    const le=readLongBracket(source,i);if(le!==null){push("string",source.slice(i,le));i=le;continue}
+    if(/[A-Za-z_]/.test(c)){const s=i++;while(i<source.length&&/[A-Za-z0-9_]/.test(source[i]))i++;const v=source.slice(s,i);push(KEYWORDS.has(v)?"keyword":"identifier",v);continue}
+    if(/\d/.test(c)||(c==="."&&/\d/.test(source[i+1]||""))){const s=i;i++;while(i<source.length&&/[0-9A-Fa-f_xXbBpPeE.+-]/.test(source[i])){if(/[+\-]/.test(source[i])&&!/[eEpP]/.test(source[i-1]||""))break;i++}push("number",source.slice(s,i));continue}
+    const three=source.slice(i,i+3),two=source.slice(i,i+2);
+    if(["...","..="].includes(three)){push("symbol",three);i+=3;continue}
+    if(["==","~=","<=",">=","::","..","+=","-=","*=","/=","%=","^=","//","->"].includes(two)){push("symbol",two);i+=2;continue}
+    push("symbol",c);i++;
+  }return t
+}
+function significant(t){return t.filter(x=>x.type!=="space"&&x.type!=="comment")}
+function previousSignificant(t,i){for(let j=i-1;j>=0;j--)if(t[j].type!=="space"&&t[j].type!=="comment")return t[j];return null}
+function nextSignificantIndex(t,i){for(let j=i+1;j<t.length;j++)if(t[j].type!=="space"&&t[j].type!=="comment")return j;return-1}
+function tokenNeedsSpace(a,b){if(!a||!b)return false;const l=["identifier","keyword","number"].includes(a.type),r=["identifier","keyword","number"].includes(b.type);return(l&&r)||(a.value==="-"&&b.value==="-")||(a.value==="."&&b.value===".")||(a.type==="number"&&b.value===".")}
+function shouldInsertSemicolon(prev,next){
+  if(!prev||!next)return false;
+  const noEnd=new Set(["then","do","else","elseif","repeat","function","local","return","and","or","not","in",",","=","==","~=","<",">","<=",">=","+","-","*","/","//","%","^","..","(","[","{",".",":","::"]);
+  const noStart=new Set([")","]","}",",",".",":",";","=","==","~=","<",">","<=",">=","+","-","*","/","//","%","^","..","and","or","then","do","in"]);
+  if(noEnd.has(prev.value)||noStart.has(next.value))return false;
+  const prevEnds=["identifier","number","string"].includes(prev.type)||[")","]","}","end","until","true","false","nil","break","continue"].includes(prev.value);
+  const nextStarts=next.type==="identifier"||["local","function","if","for","while","repeat","return","break","continue","type","export"].includes(next.value);
+  return prevEnds&&nextStarts;
+}
+function tokensToMinified(tokens){
+  const clean=[];let pendingBreak=false;
+  for(const token of tokens){
+    if(token.type==="space"){if(/[\\r\\n]/.test(token.value))pendingBreak=true;continue}
+    if(token.type==="comment")continue;
+    clean.push({...token,lineBreakBefore:pendingBreak});pendingBreak=false;
   }
-
-  function updateStats() {
-    const stat = (text) => {
-      const lines = text ? text.split("\n").length : 0;
-      return lines + " lines | " + text.length.toLocaleString() + " chars";
-    };
-    $("#inputStats").textContent = stat(input.value);
-    $("#outputStats").textContent = stat(output.value);
+  let out="";
+  for(let i=0;i<clean.length;i++){
+    const p=clean[i-1],c=clean[i];
+    if(c.lineBreakBefore&&shouldInsertSemicolon(p,c)&&!out.endsWith(";"))out+=";";
+    else if(tokenNeedsSpace(p,c))out+=" ";
+    out+=c.value;
   }
-
-  function applyPreset(key) {
-    const preset = PRESETS[key] || PRESETS.dense;
-    $$('[data-opt]').forEach((box) => {
-      box.checked = Boolean(preset[box.dataset.opt]);
-      box.disabled = key !== "custom";
-    });
-    if (key === "custom") advancedDetails.open = true;
+  return out
+}
+function beautifyLua(source){
+  const t=tokenize(source);let out="",indent=0,line=true;
+  const write=s=>{if(line){out+="    ".repeat(Math.max(0,indent));line=false}out+=s};
+  const nl=()=>{out=out.replace(/[ \t]+$/g,"");if(!out.endsWith("\n"))out+="\n";line=true};
+  for(let i=0;i<t.length;i++){const x=t[i],v=x.value;if(x.type==="space"){if(/[\r\n]/.test(v)&&!line)nl();continue}if(x.type==="comment"){write(v);nl();continue}
+    if(v==="end"||v==="until"||v==="else"||v==="elseif")indent=Math.max(0,indent-1);
+    if(!line&&tokenNeedsSpace(t[i-1],x))write(" ");write(v);
+    if(v==="then"||v==="do"||v==="repeat"||v==="else"){nl();indent++}
+    else if(v==="end"||v==="until"){nl()}
+    else if(v===";"){nl()}
+  }return out.trim()+"\n"
+}
+function removeLphMacros(source){
+  let out=source;["LPH_NO_VIRTUALIZE","LPH_JIT","LPH_JIT_MAX"].forEach(n=>out=out.replace(new RegExp("\\b"+n+"\\s*(?=\\()","g"),""));
+  out=out.replace(/\bLPH_ENCSTR\s*\(\s*((?:"(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*'))\s*\)/g,"$1");
+  out=out.replace(/\bLPH_ENCNUM\s*\(\s*([^()]+?)\s*\)/g,"$1");
+  return out.replace(/^\s*(?:LPH_OBFUSCATED|LPH_CRASH)\s*\(.*?\)\s*;?\s*$/gm,"")
+}
+function renameLocals(source,r,used){
+  const t=tokenize(source),map=new Map(),decl=new Set();
+  const declare=i=>{const x=t[i];if(!x||x.type!=="identifier"||decl.has(i))return;decl.add(i);if(!map.has(x.value))map.set(x.value,generatedName(r,used))};
+  for(let i=0;i<t.length;i++){const x=t[i];if(x.type!=="keyword")continue;
+    if(x.value==="local"){let j=nextSignificantIndex(t,i);if(j<0)continue;if(t[j].value==="function")j=nextSignificantIndex(t,j);while(j>=0&&t[j]){if(t[j].type==="identifier")declare(j);const n=nextSignificantIndex(t,j);if(n<0||t[n].value!==",")break;j=nextSignificantIndex(t,n)}}
+    if(x.value==="for"){let j=nextSignificantIndex(t,i);while(j>=0&&t[j]){if(t[j].type==="identifier")declare(j);const n=nextSignificantIndex(t,j);if(n<0||t[n].value!==",")break;j=nextSignificantIndex(t,n)}}
+    if(x.value==="function"){let j=nextSignificantIndex(t,i);while(j>=0&&t[j]&&t[j].value!=="(")j=nextSignificantIndex(t,j);if(j>=0){j=nextSignificantIndex(t,j);while(j>=0&&t[j]&&t[j].value!==")"){if(t[j].type==="identifier")declare(j);j=nextSignificantIndex(t,j)}}}
   }
+  for(let i=0;i<t.length;i++){const x=t[i];if(x.type!=="identifier"||!map.has(x.value))continue;const p=previousSignificant(t,i),ni=nextSignificantIndex(t,i),nx=ni>=0?t[ni]:null;if(p&&(p.value==="."||p.value===":"))continue;if(nx&&nx.value==="="&&p&&(p.value==="{"||p.value===","))continue;x.value=map.get(x.value)}
+  return t.map(x=>x.value).join("")
+}
+function decodeLuaString(lit){if(!lit||(lit[0]!=='"'&&lit[0]!=="'"))return null;const q=lit[0];let out="";for(let i=1;i<lit.length-1;i++){let c=lit[i];if(c!=="\\"){out+=c;continue}i++;c=lit[i];const m={a:"\x07",b:"\b",f:"\f",n:"\n",r:"\r",t:"\t",v:"\v","\\":"\\",'"':'"',"'":"'"};if(Object.prototype.hasOwnProperty.call(m,c)){out+=m[c];continue}if(/\d/.test(c)){let d=c;while(d.length<3&&/\d/.test(lit[i+1]||""))d+=lit[++i];out+=String.fromCharCode(Number(d)&255);continue}out+=c}return out}
+function encodeStrings(source,r,used,useBit32){
+  const t=tokenize(source),dec=generatedName(r,used);let changed=false;
+  t.forEach(x=>{if(x.type!=="string")return;const d=decodeLuaString(x.value);if(d===null)return;const k=randInt(r,7,249),raw=Array.from(new TextEncoder().encode(d)),bytes=useBit32?raw.map(b=>(b^k)&255):raw.map(b=>(b+k)%256);x.value=dec+"({"+bytes.join(",")+"},"+k+")";changed=true});
+  if(!changed)return source;
+  const a=generatedName(r,used),k=generatedName(r,used),o=generatedName(r,used),i=generatedName(r,used);
+  const exp=useBit32?"bit32.bxor("+a+"["+i+"],"+k+")":"("+a+"["+i+"]-"+k+")%256";
+  return "local function "+dec+"("+a+","+k+")local "+o+"={};for "+i+"=1,#"+a+" do "+o+"["+i+"]=string.char("+exp+")end;return table.concat("+o+")end;"+t.map(x=>x.value).join("")
+}
+function transformNumbers(source,r,useMba){
+  const t=tokenize(source);t.forEach(x=>{if(x.type!=="number")return;const raw=x.value.replace(/_/g,"");if(!/^\d+$/.test(raw))return;const n=Number(raw);if(!Number.isSafeInteger(n)||n<0||n>2147483647)return;
+    if(useMba){const k=randInt(r,1,0x7fffffff),e=(n^k)>>>0;x.value="bit32.bxor("+e+","+k+")"}else{const a=randInt(r,1,Math.max(2,Math.min(50000,n+200)));x.value=r()>.5?"("+(n+a)+"-"+a+")":"("+Math.max(0,n-a)+"+"+Math.min(a,n)+")"}
+  });return t.map(x=>x.value).join("")
+}
+const GLOBAL_CANDIDATES=new Set(["print","warn","error","assert","pairs","ipairs","next","select","type","typeof","tostring","tonumber","pcall","xpcall","rawget","rawset","rawequal","setmetatable","getmetatable","unpack","require","game","workspace","script","task","wait","spawn","delay","tick","time","elapsedTime","settings","UserSettings","string","table","math","bit32","coroutine","utf8","os","debug","shared"]);
+function collectGlobals(source){const t=tokenize(source),f=[],seen=new Set();for(let i=0;i<t.length;i++){const x=t[i];if(x.type!=="identifier"||!GLOBAL_CANDIDATES.has(x.value)||seen.has(x.value))continue;const p=previousSignificant(t,i);if(p&&(p.value==="."||p.value===":"||p.value==="local"))continue;seen.add(x.value);f.push(x.value)}return f}
+function aliasGlobals(source,r,used){const g=collectGlobals(source);if(!g.length)return source;const t=tokenize(source),m=new Map();g.forEach(x=>m.set(x,generatedName(r,used)));t.forEach((x,i)=>{if(x.type!=="identifier"||!m.has(x.value))return;const p=previousSignificant(t,i);if(p&&(p.value==="."||p.value===":"))return;x.value=m.get(x.value)});return"local "+g.map(x=>m.get(x)).join(",")+"="+g.join(",")+";"+t.map(x=>x.value).join("")}
+function tableIndirection(source,r,used,sw){let g=collectGlobals(source);if(!g.length)return source;if(sw)g=shuffle(g,r);const tn=generatedName(r,used),occ=new Set(),e=g.map(name=>({name,index:randInt(r,20,999)}));e.forEach(x=>{while(occ.has(x.index))x.index=randInt(r,20,999);occ.add(x.index)});const look=new Map(e.map(x=>[x.name,tn+"["+x.index+"]"])),t=tokenize(source);t.forEach((x,i)=>{if(x.type!=="identifier"||!look.has(x.value))return;const p=previousSignificant(t,i);if(p&&(p.value==="."||p.value===":"))return;x.value=look.get(x.value)});return"local "+tn+"={"+e.map(x=>"["+x.index+"]="+x.name).join(",")+"};"+t.map(x=>x.value).join("")}
+function addJunkIf(source,r,used,reversed){const a=randInt(r,20,300),b=randInt(r,2,20),j=generatedName(r,used);return reversed?"if not(("+a+"+"+b+")=="+(a+b)+")then error()else local "+j+"="+(a^b)+" end;"+source:"if ("+a+"*"+b+")=="+(a*b)+" then local "+j+"="+(a+b)+" end;"+source}
+function wrapCff(source,r,used){const s=generatedName(r,used),a=randInt(r,10000,900000),b=randInt(r,10000,900000),c=randInt(r,10000,900000);return"local "+s+"="+a+";while "+s+" do if "+s+"=="+a+" then "+s+"="+b+" elseif "+s+"=="+b+" then "+s+"="+c+";"+source+" elseif "+s+"=="+c+" then break else "+s+"="+a+" end end"}
 
-  function getOptions() {
-    const opts = {};
-    $$('[data-opt]').forEach((box) => { opts[box.dataset.opt] = box.checked; });
-    if (opts.minify) opts.beautify = false;
-    if (opts.beautify) opts.minify = false;
-    if (opts.mba) opts.addBit32 = true;
-    return opts;
+function makeDemoVm(source,r,used,useBit32){
+  const names={d:generatedName(r,used),pc:generatedName(r,used),op:generatedName(r,used),out:generatedName(r,used),state:generatedName(r,used),junk:generatedName(r,used),fn:generatedName(r,used),x:generatedName(r,used),k:generatedName(r,used)};
+  const opcodes=shuffle([randInt(r,20,240),randInt(r,241,480),randInt(r,481,720),randInt(r,721,960),randInt(r,961,1200)],r);
+  const [ADD,XOR,REV,JUNK,HALT]=opcodes;
+  const k1=randInt(r,17,239),k2=randInt(r,3,251),bytes=Array.from(new TextEncoder().encode(source)),stream=[];
+  const density=vmJunk.value==="high"?.48:vmJunk.value==="low"?.10:.25;
+  for(let i=0;i<bytes.length;i++){
+    if(r()<density){stream.push(JUNK,randInt(r,0,255),randInt(r,0,255))}
+    const kind=randInt(r,0,2),b=bytes[i];
+    if(kind===0)stream.push(ADD,(b+k1+(i%17))%256);
+    else if(kind===1)stream.push(XOR,(b^k2^(i%31))&255);
+    else stream.push(REV,(255-b+k1+(i%13))%256);
   }
-
-  mode.addEventListener("change", () => applyPreset(mode.value));
-
-  $$('[data-opt]').forEach((box) => {
-    box.addEventListener("change", () => {
-      if (box.dataset.opt === "minify" && box.checked) {
-        $('[data-opt="beautify"]').checked = false;
-      }
-      if (box.dataset.opt === "beautify" && box.checked) {
-        $('[data-opt="minify"]').checked = false;
-      }
-      if (box.dataset.opt === "mba" && box.checked) {
-        $('[data-opt="addBit32"]').checked = true;
-      }
-    });
-  });
-
-  function hashSeed(value) {
-    let h = 2166136261 >>> 0;
-    const str = String(value || Date.now() + Math.random());
-    for (let i = 0; i < str.length; i++) {
-      h ^= str.charCodeAt(i);
-      h = Math.imul(h, 16777619);
-    }
-    return h >>> 0;
-  }
-
-  function makeRng(seedValue) {
-    let state = hashSeed(seedValue);
-    return function rng() {
-      state += 0x6D2B79F5;
-      let t = state;
-      t = Math.imul(t ^ (t >>> 15), t | 1);
-      t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
-      return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
-    };
-  }
-
-  function randInt(rng, min, max) {
-    return Math.floor(rng() * (max - min + 1)) + min;
-  }
-
-  function shuffle(array, rng) {
-    const copy = array.slice();
-    for (let i = copy.length - 1; i > 0; i--) {
-      const j = randInt(rng, 0, i);
-      [copy[i], copy[j]] = [copy[j], copy[i]];
-    }
-    return copy;
-  }
-
-  function generatedName(rng, used) {
-    let name;
-    do {
-      if (nameStyle.value === "mixed") {
-        const chars = "lI0O";
-        name = "_";
-        for (let i = 0; i < randInt(rng, 7, 12); i++) name += chars[randInt(rng, 0, chars.length - 1)];
-      } else if (nameStyle.value === "hex") {
-        name = "_0x" + randInt(rng, 0x1000, 0xFFFFF).toString(16).toUpperCase();
-      } else {
-        name = "v" + randInt(rng, 7, 99999);
-      }
-    } while (used.has(name));
-    used.add(name);
-    return name;
-  }
-
-  const KEYWORDS = new Set([
-    "and","break","continue","do","else","elseif","end","export","false","for",
-    "function","if","in","local","nil","not","or","repeat","return","then","true",
-    "type","until","while"
-  ]);
-
-  function readLongBracket(source, start) {
-    if (source[start] !== "[") return null;
-    let i = start + 1;
-    while (source[i] === "=") i++;
-    if (source[i] !== "[") return null;
-    const equals = source.slice(start + 1, i);
-    const close = "]" + equals + "]";
-    const end = source.indexOf(close, i + 1);
-    return end === -1 ? source.length : end + close.length;
-  }
-
-  function tokenize(source) {
-    const tokens = [];
-    let i = 0;
-    const push = (type, value) => tokens.push({ type, value });
-
-    while (i < source.length) {
-      const c = source[i];
-
-      if (/\s/.test(c)) {
-        const start = i++;
-        while (i < source.length && /\s/.test(source[i])) i++;
-        push("space", source.slice(start, i));
-        continue;
-      }
-
-      if (c === "-" && source[i + 1] === "-") {
-        const longEnd = readLongBracket(source, i + 2);
-        if (longEnd !== null) {
-          push("comment", source.slice(i, longEnd));
-          i = longEnd;
-        } else {
-          const start = i;
-          i += 2;
-          while (i < source.length && source[i] !== "\n") i++;
-          push("comment", source.slice(start, i));
-        }
-        continue;
-      }
-
-      if (c === "'" || c === '"') {
-        const quote = c;
-        const start = i++;
-        while (i < source.length) {
-          if (source[i] === "\\") { i += 2; continue; }
-          if (source[i] === quote) { i++; break; }
-          i++;
-        }
-        push("string", source.slice(start, i));
-        continue;
-      }
-
-      const longEnd = readLongBracket(source, i);
-      if (longEnd !== null) {
-        push("string", source.slice(i, longEnd));
-        i = longEnd;
-        continue;
-      }
-
-      if (/[A-Za-z_]/.test(c)) {
-        const start = i++;
-        while (i < source.length && /[A-Za-z0-9_]/.test(source[i])) i++;
-        const value = source.slice(start, i);
-        push(KEYWORDS.has(value) ? "keyword" : "identifier", value);
-        continue;
-      }
-
-      if (/\d/.test(c) || (c === "." && /\d/.test(source[i + 1] || ""))) {
-        const start = i;
-        if (source.slice(i, i + 2).toLowerCase() === "0x") {
-          i += 2;
-          while (i < source.length && /[0-9a-fA-F_]/.test(source[i])) i++;
-          if (source[i] === ".") {
-            i++;
-            while (i < source.length && /[0-9a-fA-F_]/.test(source[i])) i++;
-          }
-          if ((source[i] || "").toLowerCase() === "p") {
-            i++;
-            if (source[i] === "+" || source[i] === "-") i++;
-            while (i < source.length && /[0-9_]/.test(source[i])) i++;
-          }
-        } else if (source.slice(i, i + 2).toLowerCase() === "0b") {
-          i += 2;
-          while (i < source.length && /[01_]/.test(source[i])) i++;
-        } else {
-          i++;
-          while (i < source.length && /[0-9_]/.test(source[i])) i++;
-          if (source[i] === "." && source[i + 1] !== ".") {
-            i++;
-            while (i < source.length && /[0-9_]/.test(source[i])) i++;
-          }
-          if ((source[i] || "").toLowerCase() === "e") {
-            i++;
-            if (source[i] === "+" || source[i] === "-") i++;
-            while (i < source.length && /[0-9_]/.test(source[i])) i++;
-          }
-        }
-        push("number", source.slice(start, i));
-        continue;
-      }
-
-      const three = source.slice(i, i + 3);
-      const two = source.slice(i, i + 2);
-      if (["...","..="].includes(three)) {
-        push("symbol", three); i += 3; continue;
-      }
-      if (["==","~=","<=",">=","::","..","+=","-=","*=","/=","%=","^=","//=","->"].includes(two)) {
-        push("symbol", two); i += 2; continue;
-      }
-      push("symbol", c);
-      i++;
-    }
-    return tokens;
-  }
-
-  function significant(tokens) {
-    return tokens.filter((t) => t.type !== "space" && t.type !== "comment");
-  }
-
-  function tokenNeedsSpace(a, b) {
-    if (!a || !b) return false;
-    const leftWord = a.type === "identifier" || a.type === "keyword" || a.type === "number";
-    const rightWord = b.type === "identifier" || b.type === "keyword" || b.type === "number";
-    if (leftWord && rightWord) return true;
-    if (a.value === "-" && b.value === "-") return true;
-    if (a.value === "." && b.value === ".") return true;
-    if (a.type === "number" && b.value === ".") return true;
-    if (a.value === "]" && b.value === "[") return true;
-    return false;
-  }
-
-  function compactWithLineBreaks(tokens, keepComments) {
-    const clean = [];
-    let pendingBreak = false;
-    for (const token of tokens) {
-      if (token.type === "space") {
-        if (/\r|\n/.test(token.value)) pendingBreak = true;
-        continue;
-      }
-      if (token.type === "comment" && !keepComments) continue;
-      clean.push({ ...token, lineBreakBefore: pendingBreak });
-      pendingBreak = false;
-    }
-    return clean;
-  }
-
-  function shouldInsertSemicolon(prev, next) {
-    if (!prev || !next) return false;
-    const noEnd = new Set(["then","do","else","elseif","repeat","function","local","return","and","or","not","in",",","=","==","~=","<",">","<=",">=","+","-","*","/","//","%","^","..","(","[","{",".",":","::"]);
-    const noStart = new Set([")","]","}",",",".",":",";","=","==","~=","<",">","<=",">=","+","-","*","/","//","%","^","..","and","or","then","do","in"]);
-    if (noEnd.has(prev.value) || noStart.has(next.value)) return false;
-    const prevEndsValue = ["identifier","number","string"].includes(prev.type) || [")","]","}","end","until","true","false","nil","break","continue"].includes(prev.value);
-    const nextStartsStatement = next.type === "identifier" || ["local","function","if","for","while","repeat","return","break","continue","type","export"].includes(next.value);
-    return prevEndsValue && nextStartsStatement;
-  }
-
-  function tokensToMinified(tokens) {
-    const clean = compactWithLineBreaks(tokens, false);
-    let out = "";
-    for (let i = 0; i < clean.length; i++) {
-      const prev = clean[i - 1];
-      const current = clean[i];
-      if (current.lineBreakBefore && shouldInsertSemicolon(prev, current) && !out.endsWith(";")) {
-        out += ";";
-      } else if (tokenNeedsSpace(prev, current)) {
-        out += " ";
-      }
-      out += current.value;
-    }
-    return out;
-  }
-
-  function beautifyLua(source) {
-    const tokens = compactWithLineBreaks(tokenize(source), true);
-    let out = "";
-    let indent = 0;
-    let lineStart = true;
-    let parenDepth = 0;
-    let waitingFunctionParen = false;
-    let functionHeaderDepth = null;
-    let pendingFunctionBody = false;
-
-    const write = (text) => {
-      if (lineStart) {
-        out += "    ".repeat(Math.max(0, indent));
-        lineStart = false;
-      }
-      out += text;
-    };
-
-    const newline = () => {
-      out = out.replace(/[ \t]+$/g, "");
-      if (!out.endsWith("\n")) out += "\n";
-      lineStart = true;
-    };
-
-    for (let i = 0; i < tokens.length; i++) {
-      const t = tokens[i];
-      const prev = tokens[i - 1];
-      const next = tokens[i + 1];
-      const v = t.value;
-
-      if (t.lineBreakBefore && !lineStart) {
-        newline();
-        if (pendingFunctionBody) {
-          indent++;
-          pendingFunctionBody = false;
-        }
-      }
-
-      if (pendingFunctionBody && ["local","return","if","for","while","repeat","break","continue"].includes(v) && lineStart) {
-        indent++;
-        pendingFunctionBody = false;
-      }
-
-      if (t.type === "comment") {
-        write(v);
-        newline();
-        continue;
-      }
-
-      if (["end","until","else","elseif"].includes(v)) {
-        if (!lineStart) newline();
-        indent = Math.max(0, indent - 1);
-      }
-
-      if (v === ";") {
-        newline();
-        if (pendingFunctionBody) {
-          indent++;
-          pendingFunctionBody = false;
-        }
-        continue;
-      }
-
-      if (v === ",") {
-        write(", ");
-        continue;
-      }
-
-      if (v === "(" || v === "[" || v === "{") {
-        if (tokenNeedsSpace(prev, t)) write(" ");
-        write(v);
-        parenDepth++;
-        if (v === "(" && waitingFunctionParen) {
-          functionHeaderDepth = parenDepth;
-          waitingFunctionParen = false;
-        }
-        continue;
-      }
-
-      if (v === ")" || v === "]" || v === "}") {
-        write(v);
-        const closesFunctionHeader = v === ")" && functionHeaderDepth === parenDepth;
-        parenDepth = Math.max(0, parenDepth - 1);
-        if (closesFunctionHeader) {
-          functionHeaderDepth = null;
-          if (next && next.value !== ":" && next.value !== "->") {
-            newline();
-            indent++;
-          } else {
-            pendingFunctionBody = true;
-          }
-        }
-        continue;
-      }
-
-      if (v === "." || v === ":") { write(v); continue; }
-
-      const binary = new Set(["=","==","~=","<",">","<=",">=","+","-","*","/","//","%","^","..","+=","-=","*=","/=","%=","^=","and","or","in"]);
-      if (binary.has(v)) {
-        out = out.replace(/[ \t]+$/g, "");
-        write(" " + v + " ");
-        continue;
-      }
-
-      if (!lineStart && tokenNeedsSpace(prev, t)) write(" ");
-      write(v);
-
-      if (v === "function") waitingFunctionParen = true;
-
-      if (v === "then" || v === "do" || v === "repeat" || v === "else") {
-        newline();
-        indent++;
-      } else if (v === "elseif") {
-        write(" ");
-      } else if (v === "end" || v === "until") {
-        if (parenDepth === 0 && next) newline();
-      } else if (v === "return" && parenDepth === 0) {
-        write(" ");
-      }
-    }
-
-    return out.trim() + "\n";
-  }
-
-  function removeLphMacros(source) {
-    let out = source;
-    const wrappers = ["LPH_NO_VIRTUALIZE","LPH_JIT","LPH_JIT_MAX"];
-    wrappers.forEach((name) => {
-      out = out.replace(new RegExp("\\b" + name + "\\s*(?=\\()", "g"), "");
-    });
-    out = out.replace(/\bLPH_ENCSTR\s*\(\s*((?:"(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*'))\s*\)/g, "$1");
-    out = out.replace(/\bLPH_ENCNUM\s*\(\s*([^()]+?)\s*\)/g, "$1");
-    out = out.replace(/^\s*(?:LPH_OBFUSCATED|LPH_CRASH)\s*\(.*?\)\s*;?\s*$/gm, "");
-    return out;
-  }
-
-  function previousSignificant(tokens, index) {
-    for (let i = index - 1; i >= 0; i--) {
-      if (tokens[i].type !== "space" && tokens[i].type !== "comment") return tokens[i];
-    }
-    return null;
-  }
-
-  function nextSignificantIndex(tokens, index) {
-    for (let i = index + 1; i < tokens.length; i++) {
-      if (tokens[i].type !== "space" && tokens[i].type !== "comment") return i;
-    }
-    return -1;
-  }
-
-  function renameLocals(source, rng, used) {
-    const tokens = tokenize(source);
-    const mappings = new Map();
-    const declarations = new Set();
-
-    function declare(index) {
-      const token = tokens[index];
-      if (!token || token.type !== "identifier" || declarations.has(index)) return;
-      declarations.add(index);
-      if (!mappings.has(token.value)) mappings.set(token.value, generatedName(rng, used));
-    }
-
-    for (let i = 0; i < tokens.length; i++) {
-      const t = tokens[i];
-      if (t.type !== "keyword") continue;
-
-      if (t.value === "local") {
-        let j = nextSignificantIndex(tokens, i);
-        if (j < 0) continue;
-        if (tokens[j].value === "function") j = nextSignificantIndex(tokens, j);
-        while (j >= 0 && tokens[j]) {
-          if (tokens[j].type === "identifier") declare(j);
-          const n = nextSignificantIndex(tokens, j);
-          if (n < 0 || tokens[n].value !== ",") break;
-          j = nextSignificantIndex(tokens, n);
-        }
-      }
-
-      if (t.value === "for") {
-        let j = nextSignificantIndex(tokens, i);
-        while (j >= 0 && tokens[j]) {
-          if (tokens[j].type === "identifier") declare(j);
-          const n = nextSignificantIndex(tokens, j);
-          if (n < 0 || (tokens[n].value !== ",")) break;
-          j = nextSignificantIndex(tokens, n);
-        }
-      }
-
-      if (t.value === "function") {
-        let j = nextSignificantIndex(tokens, i);
-        while (j >= 0 && tokens[j] && tokens[j].value !== "(") j = nextSignificantIndex(tokens, j);
-        if (j >= 0) {
-          j = nextSignificantIndex(tokens, j);
-          while (j >= 0 && tokens[j] && tokens[j].value !== ")") {
-            if (tokens[j].type === "identifier") declare(j);
-            j = nextSignificantIndex(tokens, j);
-          }
-        }
-      }
-    }
-
-    for (let i = 0; i < tokens.length; i++) {
-      const t = tokens[i];
-      if (t.type !== "identifier" || !mappings.has(t.value)) continue;
-      const prev = previousSignificant(tokens, i);
-      const nextIndex = nextSignificantIndex(tokens, i);
-      const next = nextIndex >= 0 ? tokens[nextIndex] : null;
-
-      if (prev && (prev.value === "." || prev.value === ":")) continue;
-      if (next && next.value === "=" && prev && (prev.value === "{" || prev.value === ",")) continue;
-      t.value = mappings.get(t.value);
-    }
-
-    return tokens.map((t) => t.value).join("");
-  }
-
-  function decodeLuaString(literal) {
-    if (!literal || (literal[0] !== '"' && literal[0] !== "'")) return null;
-    const q = literal[0];
-    let out = "";
-    for (let i = 1; i < literal.length - 1; i++) {
-      let c = literal[i];
-      if (c !== "\\") { out += c; continue; }
-      i++;
-      c = literal[i];
-      const map = { a: "\x07", b: "\b", f: "\f", n: "\n", r: "\r", t: "\t", v: "\v", "\\": "\\", '"': '"', "'": "'" };
-      if (Object.prototype.hasOwnProperty.call(map, c)) { out += map[c]; continue; }
-      if (c === "z") {
-        while (/\s/.test(literal[i + 1] || "")) i++;
-        continue;
-      }
-      if (/\d/.test(c)) {
-        let digits = c;
-        while (digits.length < 3 && /\d/.test(literal[i + 1] || "")) digits += literal[++i];
-        out += String.fromCharCode(Number(digits) & 255);
-        continue;
-      }
-      if (c === "x") {
-        const hex = literal.slice(i + 1, i + 3);
-        if (/^[0-9a-fA-F]{2}$/.test(hex)) { out += String.fromCharCode(parseInt(hex, 16)); i += 2; continue; }
-      }
-      out += c;
-    }
-    return out;
-  }
-
-  function encodeStrings(source, rng, used, useBit32) {
-    const tokens = tokenize(source);
-    const decoder = generatedName(rng, used);
-    let changed = false;
-
-    tokens.forEach((t) => {
-      if (t.type !== "string") return;
-      const decoded = decodeLuaString(t.value);
-      if (decoded === null) return;
-      const key = randInt(rng, 7, 249);
-      const rawBytes = Array.from(new TextEncoder().encode(decoded));
-      const bytes = useBit32
-        ? rawBytes.map((byte) => (byte ^ key) & 255)
-        : rawBytes.map((byte) => (byte + key) % 256);
-      t.value = decoder + "({" + bytes.join(",") + "}," + key + ")";
-      changed = true;
-    });
-
-    if (!changed) return source;
-
-    // Build helper with stable names so references match.
-    const arr = generatedName(rng, used);
-    const keyName = generatedName(rng, used);
-    const result = generatedName(rng, used);
-    const index = generatedName(rng, used);
-    const byteExpression = useBit32
-      ? "bit32.bxor(" + arr + "[" + index + "]," + keyName + ")"
-      : "(" + arr + "[" + index + "]-" + keyName + ")%256";
-    const helperCode = "local function " + decoder + "(" + arr + "," + keyName + ")" +
-      "local " + result + "={};for " + index + "=1,#" + arr + " do " +
-      result + "[" + index + "]=string.char(" + byteExpression + ") end;" +
-      "return table.concat(" + result + ") end;";
-
-    return helperCode + tokens.map((t) => t.value).join("");
-  }
-
-  function transformNumbers(source, rng, useMba) {
-    const tokens = tokenize(source);
-    tokens.forEach((t) => {
-      if (t.type !== "number") return;
-      const raw = t.value.replace(/_/g, "");
-      if (!/^\d+$/.test(raw)) return;
-      const n = Number(raw);
-      if (!Number.isSafeInteger(n) || n < 0 || n > 2147483647) return;
-      if (useMba) {
-        const key = randInt(rng, 1, 0x7fffffff);
-        const encoded = (n ^ key) >>> 0;
-        t.value = "bit32.bxor(" + encoded + "," + key + ")";
-      } else {
-        const a = randInt(rng, 1, Math.max(2, Math.min(50000, n + 200)));
-        if (rng() > .5) t.value = "(" + (n + a) + "-" + a + ")";
-        else t.value = "(" + Math.max(0, n - a) + "+" + Math.min(a, n) + ")";
-      }
-    });
-    return tokens.map((t) => t.value).join("");
-  }
-
-  const GLOBAL_CANDIDATES = new Set([
-    "print","warn","error","assert","pairs","ipairs","next","select","type","typeof",
-    "tostring","tonumber","pcall","xpcall","rawget","rawset","rawequal","setmetatable",
-    "getmetatable","unpack","require","game","workspace","script","task","wait","spawn",
-    "delay","tick","time","elapsedTime","settings","UserSettings","string","table","math",
-    "bit32","coroutine","utf8","os","debug","shared"
-  ]);
-
-  function collectGlobals(source) {
-    const tokens = tokenize(source);
-    const found = [];
-    const seen = new Set();
-    for (let i = 0; i < tokens.length; i++) {
-      const t = tokens[i];
-      if (t.type !== "identifier" || !GLOBAL_CANDIDATES.has(t.value) || seen.has(t.value)) continue;
-      const prev = previousSignificant(tokens, i);
-      if (prev && (prev.value === "." || prev.value === ":" || prev.value === "local")) continue;
-      seen.add(t.value);
-      found.push(t.value);
-    }
-    return found;
-  }
-
-  function aliasGlobals(source, rng, used) {
-    const globals = collectGlobals(source);
-    if (!globals.length) return source;
-    const tokens = tokenize(source);
-    const aliases = new Map();
-    globals.forEach((g) => aliases.set(g, generatedName(rng, used)));
-
-    tokens.forEach((t, i) => {
-      if (t.type !== "identifier" || !aliases.has(t.value)) return;
-      const prev = previousSignificant(tokens, i);
-      if (prev && (prev.value === "." || prev.value === ":")) return;
-      t.value = aliases.get(t.value);
-    });
-
-    const aliasNames = globals.map((g) => aliases.get(g)).join(",");
-    const globalValues = globals.join(",");
-    return "local " + aliasNames + "=" + globalValues + ";" + tokens.map((t) => t.value).join("");
-  }
-
-  function tableIndirection(source, rng, used, swizzleEnabled) {
-    let globals = collectGlobals(source);
-    if (!globals.length) return source;
-    if (swizzleEnabled) globals = shuffle(globals, rng);
-
-    const tableName = generatedName(rng, used);
-    const entries = globals.map((name) => ({ name, index: randInt(rng, 20, 999) }));
-    const occupied = new Set();
-    entries.forEach((entry) => {
-      while (occupied.has(entry.index)) entry.index = randInt(rng, 20, 999);
-      occupied.add(entry.index);
-    });
-    const lookup = new Map(entries.map((entry) => [entry.name, tableName + "[" + entry.index + "]"]));
-    const tokens = tokenize(source);
-    tokens.forEach((t, i) => {
-      if (t.type !== "identifier" || !lookup.has(t.value)) return;
-      const prev = previousSignificant(tokens, i);
-      if (prev && (prev.value === "." || prev.value === ":")) return;
-      t.value = lookup.get(t.value);
-    });
-    const init = entries.map((e) => "[" + e.index + "]=" + e.name).join(",");
-    return "local " + tableName + "={" + init + "};" + tokens.map((t) => t.value).join("");
-  }
-
-  function addJunkIf(source, rng, used, reversed) {
-    const a = randInt(rng, 20, 300);
-    const b = randInt(rng, 2, 20);
-    const junkName = generatedName(rng, used);
-    if (reversed) {
-      return "if not((" + a + "+" + b + ")==" + (a + b) + ") then error() else local " + junkName + "=" + (a ^ b) + " end;" + source;
-    }
-    return "if (" + a + "*" + b + ")==" + (a * b) + " then local " + junkName + "=" + (a + b) + " end;" + source;
-  }
-
-  function wrapCff(source, rng, used) {
-    const state = generatedName(rng, used);
-    const start = randInt(rng, 40, 400);
-    const finish = start + randInt(rng, 11, 99);
-    return "local " + state + "=" + start + ";while true do if " + state + "==" + start + " then " +
-      state + "=" + finish + ";" + source + ";elseif " + state + "==" + finish + " then break else " +
-      state + "=" + finish + " end end";
-  }
-
-  function makeDemoVm(source, rng, used, useBit32) {
-    const dataName = generatedName(rng, used);
-    const keyName = generatedName(rng, used);
-    const indexName = generatedName(rng, used);
-    const outName = generatedName(rng, used);
-    const fnName = generatedName(rng, used);
-    const key = randInt(rng, 8, 240);
-    const rawBytes = Array.from(new TextEncoder().encode(source));
-    const bytes = useBit32
-      ? rawBytes.map((byte) => (byte ^ key) & 255)
-      : rawBytes.map((byte) => (byte + key) % 256);
-    const byteExpression = useBit32
-      ? "bit32.bxor(" + dataName + "[" + indexName + "]," + keyName + ")"
-      : "(" + dataName + "[" + indexName + "]-" + keyName + ")%256";
-    return "local " + dataName + "={" + bytes.join(",") + "};local " + keyName + "=" + key + ";" +
-      "local " + outName + "={};for " + indexName + "=1,#" + dataName + " do " +
-      outName + "[" + indexName + "]=string.char(" + byteExpression + ") end;" +
-      "local " + fnName + "=assert(loadstring(table.concat(" + outName + ")));return " + fnName + "()";
-  }
-
-  function addHeader(source, seedValue, selectedMode) {
-    const stamp = new Date().toISOString().replace(/\.\d{3}Z$/, "Z");
-    return "--[[ RRixh Luau Obfuskator v1.1 | mode: " + selectedMode + " | seed: " + seedValue + " | " + stamp + " ]]\n" + source;
-  }
-
-  function runObfuscation(source, opts, rng, seedValue) {
-    let code = source.replace(/^\uFEFF/, "");
-    const used = new Set();
-    significant(tokenize(code)).forEach((t) => {
-      if (t.type === "identifier") used.add(t.value);
-    });
-
-    if (opts.removeLph) code = removeLphMacros(code);
-    if (opts.renameLocals) code = renameLocals(code, rng, used);
-
-    // Alias Globals and Table Indirection perform similar jobs; table mode wins.
-    if (opts.tableIndirection) code = tableIndirection(code, rng, used, opts.swizzle);
-    else if (opts.aliasGlobals) code = aliasGlobals(code, rng, used);
-
-    if (opts.strings) code = encodeStrings(code, rng, used, opts.addBit32);
-    if (opts.mba || opts.literals) code = transformNumbers(code, rng, opts.mba);
-    if (opts.junkIf) code = addJunkIf(code, rng, used, opts.reverseIf);
-    else if (opts.reverseIf) code = addJunkIf(code, rng, used, true);
-    if (opts.cff) code = wrapCff(code, rng, used);
-    if (opts.demoVm) code = makeDemoVm(code, rng, used, opts.addBit32);
-
-    if (opts.minify) code = tokensToMinified(tokenize(code));
-    else if (opts.beautify) code = beautifyLua(code);
-
-    if (opts.header) code = addHeader(code, seedValue, mode.value);
-    return code;
-  }
-
-  function pushHistory() {
-    history.push(output.value);
-    if (history.length > 50) history.shift();
-  }
-
-  $("#obfuscateBtn").addEventListener("click", () => {
-    const source = input.value;
-    if (!source.trim()) { setStatus("Add some Lua/Luau kode first.", "bad"); return; }
-
-    try {
-      const opts = getOptions();
-      const seedValue = seedInput.value.trim() || String(Date.now());
-      const rng = makeRng(seedValue);
-      if (!originalBeforeRun) originalBeforeRun = source;
-      pushHistory();
-      output.value = runObfuscation(source, opts, rng, seedValue);
-      updateStats();
-      setStatus("Obfuskation finished. Seed: " + seedValue, "good");
-    } catch (error) {
-      console.error(error);
-      setStatus("Obfuskation failed: " + (error && error.message ? error.message : String(error)), "bad");
-    }
-  });
-
-  $("#copyBtn").addEventListener("click", async () => {
-    if (!output.value) { setStatus("There is no output to kopy.", "bad"); return; }
-    try {
-      await navigator.clipboard.writeText(output.value);
-      setStatus("Output kopied.", "good");
-    } catch {
-      output.readOnly = false;
-      output.select();
-      document.execCommand("copy");
-      output.readOnly = true;
-      setStatus("Output kopied.", "good");
-    }
-  });
-
-  $("#pasteBtn").addEventListener("click", async () => {
-    try {
-      input.value = await navigator.clipboard.readText();
-      updateStats();
-      setStatus("Klipped kode pasted.", "good");
-    } catch {
-      setStatus("Safari blocked direct paste. Hold inside Input and tap Paste.", "bad");
-    }
-  });
-
-  $("#downloadBtn").addEventListener("click", () => {
-    if (!output.value) { setStatus("There is no output to download.", "bad"); return; }
-    const blob = new Blob([output.value], { type: "text/plain;charset=utf-8" });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = "obfuskated.lua";
-    document.body.appendChild(a);
-    a.click();
-    a.remove();
-    setTimeout(() => URL.revokeObjectURL(url), 1000);
-    setStatus("Download kreated.", "good");
-  });
-
-  $("#fileInput").addEventListener("change", async (event) => {
-    const file = event.target.files && event.target.files[0];
-    if (!file) return;
-    if (file.size > 5 * 1024 * 1024) {
-      setStatus("That file is over the 5 MB browser limit.", "bad");
-      event.target.value = "";
-      return;
-    }
-    input.value = await file.text();
-    updateStats();
-    setStatus(file.name + " loaded.", "good");
-    event.target.value = "";
-  });
-
-  $("#clearInputBtn").addEventListener("click", () => {
-    input.value = "";
-    updateStats();
-    setStatus("Input kleared.");
-  });
-
-  $("#undoBtn").addEventListener("click", () => {
-    if (!history.length) { setStatus("Nothing left to undo.", "bad"); return; }
-    output.value = history.pop();
-    updateStats();
-    setStatus("Last output restored.", "good");
-  });
-
-  $("#undoAllBtn").addEventListener("click", () => {
-    if (!originalBeforeRun) { setStatus("Nothing to restore yet.", "bad"); return; }
-    input.value = originalBeforeRun;
-    output.value = "";
-    history = [];
-    originalBeforeRun = "";
-    updateStats();
-    setStatus("Original input restored.", "good");
-  });
-
-  $("#resetBtn").addEventListener("click", () => {
-    input.value = DEFAULT_INPUT;
-    output.value = "";
-    history = [];
-    originalBeforeRun = "";
-    seedInput.value = "";
-    mode.value = "dense";
-    nameStyle.value = "numbered";
-    applyPreset("dense");
-    updateStats();
-    setStatus("Obfuskator reset.");
-  });
-
-  input.addEventListener("input", updateStats);
-  output.addEventListener("input", updateStats);
-
-  input.addEventListener("keydown", (event) => {
-    if (event.key === "Tab") {
-      event.preventDefault();
-      const start = input.selectionStart;
-      const end = input.selectionEnd;
-      input.value = input.value.slice(0, start) + "    " + input.value.slice(end);
-      input.selectionStart = input.selectionEnd = start + 4;
-      updateStats();
-    }
-  });
-
-  applyPreset("dense");
-  updateStats();
-  </script>
+  stream.push(HALT);
+  const handlers=[
+    {op:ADD,body:names.x+"=("+names.d+"["+names.pc+"]-"+k1+"-(#"+names.out+"%17))%256;"+names.pc+"="+names.pc+"+1;"+names.out+"[#"+names.out+"+1]=string.char("+names.x+")"},
+    {op:XOR,body:names.x+"="+(useBit32?"bit32.bxor("+names.d+"["+names.pc+"],"+k2+",(#"+names.out+"%31))":"(("+names.d+"["+names.pc+"]~"+k2+")~(#"+names.out+"%31))")+";"+names.pc+"="+names.pc+"+1;"+names.out+"[#"+names.out+"+1]=string.char("+names.x+")"},
+    {op:REV,body:names.x+"=(255-(("+names.d+"["+names.pc+"]-"+k1+"-(#"+names.out+"%13))%256))%256;"+names.pc+"="+names.pc+"+1;"+names.out+"[#"+names.out+"+1]=string.char("+names.x+")"},
+    {op:JUNK,body:names.junk+"=(("+names.d+"["+names.pc+"]*33+"+names.d+"["+names.pc+"+1])%65521);"+names.pc+"="+names.pc+"+2"},
+    {op:HALT,body:names.state+"=false"}
+  ];
+  const shuffled=shuffle(handlers,r);
+  const states=shuffle(shuffled.map(()=>randInt(r,1000000,9999999)),r);
+  let dispatch="";
+  shuffled.forEach((h,i)=>{dispatch+=(i?"elseif ":"if ")+names.op+"=="+h.op+" then "+names.state+"="+states[i]+";"+h.body+";"+names.state+"=0 "});
+  dispatch+="else "+names.state+"=false end";
+  const stateNoise=states.map((s,i)=>"elseif "+names.state+"=="+s+" then "+names.state+"=0").join(" ");
+  return "return(function(...)local "+names.d+"={"+stream.join(",")+"};local "+names.pc+"=1;local "+names.out+"={};local "+names.state+"=0;local "+names.junk+"=0;local "+names.x+";while "+names.state+"~=false do if "+names.state+"==0 then local "+names.op+"="+names.d+"["+names.pc+"];"+names.pc+"="+names.pc+"+1;"+dispatch+" "+stateNoise+" else "+names.state+"=0 end end;local "+names.fn+"=assert(loadstring(table.concat("+names.out+")));return "+names.fn+"(...)end)(...)";
+}
+function addHeader(source,seed,selected){return"--[[ RRixh Luau Obfuskator v2.0 | mode: "+selected+" | seed: "+seed+" | "+new Date().toISOString().replace(/\.\d{3}Z$/,"Z")+" ]]\n"+source}
+function runObfuscation(source,opts,r,seed){
+  let code=source.replace(/^\uFEFF/,"");const used=new Set();significant(tokenize(code)).forEach(t=>{if(t.type==="identifier")used.add(t.value)});
+  if(opts.removeLph)code=removeLphMacros(code);
+  if(opts.renameLocals)code=renameLocals(code,r,used);
+  if(opts.tableIndirection)code=tableIndirection(code,r,used,opts.swizzle);else if(opts.aliasGlobals)code=aliasGlobals(code,r,used);
+  if(opts.strings)code=encodeStrings(code,r,used,opts.addBit32);
+  if(opts.mba||opts.literals)code=transformNumbers(code,r,opts.mba);
+  if(opts.junkIf)code=addJunkIf(code,r,used,opts.reverseIf);else if(opts.reverseIf)code=addJunkIf(code,r,used,true);
+  if(opts.cff)code=wrapCff(code,r,used);
+  if(opts.demoVm)code=makeDemoVm(code,r,used,opts.addBit32);
+  if(opts.minify)code=tokensToMinified(tokenize(code));else if(opts.beautify)code=beautifyLua(code);
+  if(opts.header)code=addHeader(code,seed,mode.value);return code
+}
+function pushHistory(){history.push(output.value);if(history.length>50)history.shift()}
+
+function rippleButton(el,event){
+  el.classList.add("pressed");setTimeout(()=>el.classList.remove("pressed"),120);
+  const rect=el.getBoundingClientRect(),s=Math.max(rect.width,rect.height),span=document.createElement("span");
+  span.className="ripple";span.style.width=span.style.height=s+"px";span.style.left=((event.clientX||rect.left+rect.width/2)-rect.left-s/2)+"px";span.style.top=((event.clientY||rect.top+rect.height/2)-rect.top-s/2)+"px";
+  el.appendChild(span);setTimeout(()=>span.remove(),500);
+}
+$$("button,.file-btn").forEach(el=>el.addEventListener("pointerdown",e=>rippleButton(el,e)));
+
+$("#obfuscateBtn").addEventListener("click",()=>{
+  const source=input.value,btn=$("#obfuscateBtn");if(!source.trim()){setStatus("Add some Lua/Luau kode first.","bad");return}
+  try{
+    btn.classList.add("busy");btn.textContent="Obfuskating...";
+    const opts=getOptions(),seed=seedInput.value.trim()||String(Date.now()),r=makeRng(seed);
+    if(!originalBeforeRun)originalBeforeRun=source;pushHistory();
+    output.value=runObfuscation(source,opts,r,seed);updateStats();setStatus("Obfuskation finished. Seed: "+seed,"good");
+    output.scrollIntoView({behavior:"smooth",block:"start"});
+  }catch(e){console.error(e);setStatus("Obfuskation failed: "+(e&&e.message?e.message:String(e)),"bad")}
+  finally{setTimeout(()=>{btn.classList.remove("busy");btn.textContent="Obfuskate"},180)}
+});
+$("#copyBtn").addEventListener("click",async()=>{if(!output.value){setStatus("There is no output to kopy.","bad");return}try{await navigator.clipboard.writeText(output.value);setStatus("Output kopied.","good")}catch{output.readOnly=false;output.select();document.execCommand("copy");output.readOnly=true;setStatus("Output kopied.","good")}});
+$("#pasteBtn").addEventListener("click",async()=>{try{input.value=await navigator.clipboard.readText();updateStats();setStatus("Klipped kode pasted.","good")}catch{setStatus("Safari blocked direct paste. Hold inside Input and tap Paste.","bad")}});
+$("#downloadBtn").addEventListener("click",()=>{if(!output.value){setStatus("There is no output to download.","bad");return}const blob=new Blob([output.value],{type:"text/plain;charset=utf-8"}),url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download="obfuskated.lua";document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);setStatus("Download kreated.","good")});
+$("#fileInput").addEventListener("change",async e=>{const f=e.target.files&&e.target.files[0];if(!f)return;if(f.size>5*1024*1024){setStatus("That file is over the 5 MB browser limit.","bad");e.target.value="";return}input.value=await f.text();updateStats();setStatus(f.name+" loaded.","good");e.target.value=""});
+$("#clearInputBtn").addEventListener("click",()=>{input.value="";updateStats();setStatus("Input kleared.")});
+$("#undoBtn").addEventListener("click",()=>{if(!history.length){setStatus("Nothing left to undo.","bad");return}output.value=history.pop();updateStats();setStatus("Last output restored.","good")});
+$("#undoAllBtn").addEventListener("click",()=>{if(!originalBeforeRun){setStatus("Nothing to restore yet.","bad");return}input.value=originalBeforeRun;output.value="";history=[];originalBeforeRun="";updateStats();setStatus("Original input restored.","good")});
+$("#resetBtn").addEventListener("click",()=>{input.value=DEFAULT_INPUT;output.value="";history=[];originalBeforeRun="";seedInput.value="";mode.value="eclipse";nameStyle.value="mixed";vmJunk.value="medium";applyPreset("eclipse");updateStats();setStatus("Obfuskator reset.")});
+input.addEventListener("input",updateStats);output.addEventListener("input",updateStats);
+input.addEventListener("keydown",e=>{if(e.key==="Tab"){e.preventDefault();const s=input.selectionStart,n=input.selectionEnd;input.value=input.value.slice(0,s)+"    "+input.value.slice(n);input.selectionStart=input.selectionEnd=s+4;updateStats()}});
+applyPreset("eclipse");updateStats();
+</script>
 </body>
 </html>
