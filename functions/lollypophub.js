@@ -14,10 +14,7 @@ export async function onRequestGet(context) {
     fetchMode === "navigate" ||
     fetchDestination === "document";
 
-  // ============================================
-  // NORMAL BROWSER VISIT
-  // ============================================
-
+  // Browser visit = show protected page
   if (isBrowserVisit) {
     const html = `<!DOCTYPE html>
 <html lang="en">
@@ -53,13 +50,13 @@ export async function onRequestGet(context) {
       min-height: 100dvh;
 
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       justify-content: center;
 
       padding:
-        max(22px, env(safe-area-inset-top))
-        20px
-        max(22px, env(safe-area-inset-bottom));
+        max(120px, env(safe-area-inset-top))
+        16px
+        max(35px, env(safe-area-inset-bottom));
 
       color: #ffffff;
 
@@ -75,15 +72,13 @@ export async function onRequestGet(context) {
 
     .page {
       width: 100%;
-      max-width: 760px;
+      max-width: 720px;
     }
 
     .card {
-      position: relative;
-
       width: 100%;
 
-      padding: 54px 52px 50px;
+      padding: 48px 48px 42px;
 
       background:
         linear-gradient(
@@ -93,10 +88,10 @@ export async function onRequestGet(context) {
         );
 
       border: 1px solid #29292e;
-      border-radius: 28px;
+      border-radius: 26px;
 
       box-shadow:
-        0 30px 80px rgba(0, 0, 0, 0.35),
+        0 28px 70px rgba(0, 0, 0, 0.32),
         inset 0 1px 0 rgba(255, 255, 255, 0.025);
     }
 
@@ -105,7 +100,7 @@ export async function onRequestGet(context) {
       align-items: center;
       justify-content: center;
 
-      padding: 12px 21px;
+      padding: 10px 19px;
 
       border: 1px solid #7c3035;
       border-radius: 999px;
@@ -114,30 +109,25 @@ export async function onRequestGet(context) {
 
       color: #ffc8cb;
 
-      font-size: 15px;
+      font-size: 14px;
       font-weight: 800;
 
-      letter-spacing: 2.2px;
-
-      text-transform: uppercase;
+      letter-spacing: 2px;
     }
 
     h1 {
-      max-width: 650px;
+      max-width: 580px;
 
-      margin:
-        36px
-        0
-        26px;
+      margin: 31px 0 23px;
 
       color: #ffffff;
 
-      font-size: clamp(38px, 7vw, 60px);
+      font-size: clamp(34px, 6vw, 50px);
       font-weight: 800;
 
-      line-height: 1.08;
+      line-height: 1.09;
 
-      letter-spacing: -2.4px;
+      letter-spacing: -2px;
     }
 
     .description {
@@ -145,40 +135,41 @@ export async function onRequestGet(context) {
 
       color: #a5a5ae;
 
-      font-size: 21px;
+      font-size: 19px;
       font-weight: 600;
 
-      line-height: 1.65;
+      line-height: 1.55;
     }
 
     .description + .description {
-      margin-top: 25px;
+      margin-top: 23px;
     }
 
     .buttons {
       display: flex;
       flex-direction: column;
 
-      gap: 15px;
+      align-items: flex-start;
 
-      margin-top: 39px;
+      gap: 13px;
+
+      margin-top: 32px;
     }
 
     .button {
-      width: fit-content;
-      min-width: 260px;
-
       display: inline-flex;
       align-items: center;
       justify-content: center;
 
-      padding: 18px 28px;
+      min-width: 235px;
 
-      border-radius: 14px;
+      padding: 16px 24px;
+
+      border-radius: 13px;
 
       font-family: inherit;
 
-      font-size: 18px;
+      font-size: 17px;
       font-weight: 800;
 
       text-decoration: none;
@@ -186,10 +177,10 @@ export async function onRequestGet(context) {
       cursor: pointer;
 
       transition:
-        transform 0.16s ease,
-        opacity 0.16s ease,
-        background 0.16s ease,
-        border-color 0.16s ease;
+        transform 0.15s ease,
+        opacity 0.15s ease,
+        background 0.15s ease,
+        border-color 0.15s ease;
     }
 
     .button:active {
@@ -209,7 +200,7 @@ export async function onRequestGet(context) {
       color: #ffffff;
 
       box-shadow:
-        0 9px 28px rgba(209, 45, 117, 0.17);
+        0 8px 24px rgba(209, 45, 117, 0.16);
     }
 
     .primary:hover {
@@ -221,7 +212,7 @@ export async function onRequestGet(context) {
 
       background: transparent;
 
-      color: #ddddE2;
+      color: #dedee3;
     }
 
     .secondary:hover {
@@ -233,7 +224,7 @@ export async function onRequestGet(context) {
       display: flex;
       justify-content: center;
 
-      margin-top: 42px;
+      margin-top: 34px;
     }
 
     .domain {
@@ -241,7 +232,7 @@ export async function onRequestGet(context) {
       align-items: center;
       justify-content: center;
 
-      padding: 11px 22px;
+      padding: 10px 20px;
 
       border: 1px solid #303035;
       border-radius: 999px;
@@ -250,20 +241,15 @@ export async function onRequestGet(context) {
 
       color: #eeeeF1;
 
-      font-size: 15px;
+      font-size: 14px;
       font-weight: 700;
-
-      letter-spacing: 0.2px;
     }
 
     @media (max-width: 600px) {
       body {
-        align-items: flex-start;
-
+        padding-top: 125px;
         padding-left: 0;
         padding-right: 0;
-
-        padding-top: 125px;
       }
 
       .page {
@@ -271,47 +257,48 @@ export async function onRequestGet(context) {
       }
 
       .card {
-        padding: 55px 29px 48px;
-
-        border-left: 1px solid #29292e;
-        border-right: 1px solid #29292e;
-
-        border-radius: 27px;
+        padding: 38px 28px 36px;
+        border-radius: 24px;
       }
 
       .badge {
-        font-size: 14px;
-        padding: 11px 18px;
+        font-size: 13px;
+        padding: 9px 17px;
       }
 
       h1 {
-        margin-top: 34px;
+        margin-top: 28px;
+        margin-bottom: 21px;
 
-        font-size: 42px;
-
-        letter-spacing: -1.9px;
+        font-size: 36px;
+        line-height: 1.08;
+        letter-spacing: -1.6px;
       }
 
       .description {
-        font-size: 19px;
-        line-height: 1.65;
+        font-size: 17px;
+        line-height: 1.55;
+      }
+
+      .description + .description {
+        margin-top: 21px;
       }
 
       .buttons {
-        margin-top: 35px;
+        margin-top: 29px;
+        gap: 12px;
       }
 
       .button {
         min-width: 0;
-        width: fit-content;
 
-        padding: 17px 24px;
+        padding: 15px 22px;
 
-        font-size: 17px;
+        font-size: 16px;
       }
 
       .domain-wrap {
-        margin-top: 40px;
+        margin-top: 32px;
       }
     }
   </style>
@@ -344,16 +331,16 @@ export async function onRequestGet(context) {
 
         <a
           class="button primary"
-          href="https://rrixh.pages.dev/"
+          href="https://www.roblox.com/users/3001347724/profile"
         >
           Return Home
         </a>
 
         <a
           class="button secondary"
-          href="https://rrixh.pages.dev/"
+          href="https://discordapp.com/users/1284685023630458963"
         >
-          Contact Lollypop Hub
+          Kontact Lollypop Hub
         </a>
 
       </div>
@@ -390,10 +377,7 @@ export async function onRequestGet(context) {
     });
   }
 
-  // ============================================
-  // ROBLOX / NON-BROWSER REQUEST
-  // ============================================
-
+  // Roblox / other non-browser request = return Lua
   try {
     const luaResponse = await fetch(LOLLYPOPHUB, {
       headers: {
