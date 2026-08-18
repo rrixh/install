@@ -1,4 +1,4 @@
-const LOLLYPOPHUB =
+const _ =
   "https://raw.githubusercontent.com/rrixh/lollypophubv5.8test/refs/heads/main/lulaslollipop";
 
 export async function onRequestGet(context) {
@@ -61,8 +61,7 @@ export async function onRequestGet(context) {
       font-size: 14px;
       line-height: 1.35;
 
-      white-space: pre;
-      overflow-x: auto;
+      overflow-x: hidden;
     }
 
     pre {
@@ -72,7 +71,11 @@ export async function onRequestGet(context) {
       font: inherit;
       color: inherit;
 
-      white-space: pre;
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+
+      max-width: 100%;
     }
 
     @media (max-width: 600px) {
@@ -97,7 +100,7 @@ export async function onRequestGet(context) {
     });
   }
 
-  const luaResponse = await fetch(LOLLYPOPHUB);
+  const luaResponse = await fetch(_);
 
   if (!luaResponse.ok) {
     return new Response(
