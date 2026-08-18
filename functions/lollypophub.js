@@ -32,9 +32,13 @@ export async function onRequestGet(context) {
     content="width=device-width, initial-scale=1.0"
   >
 
-  <title>raw.githubuserconten...</title>
+  <title>Raw Source</title>
 
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     html,
     body {
       margin: 0;
@@ -48,9 +52,11 @@ export async function onRequestGet(context) {
     }
 
     body {
-      padding: 12px;
+      padding: 8px 7px;
 
       font-family:
+        ui-monospace,
+        "SFMono-Regular",
         Menlo,
         Monaco,
         Consolas,
@@ -58,30 +64,41 @@ export async function onRequestGet(context) {
         "Courier New",
         monospace;
 
-      font-size: 14px;
-      line-height: 1.35;
+      font-size: 11px;
+      line-height: 1.28;
 
       overflow-x: hidden;
     }
 
     pre {
+      display: block;
+
+      width: 100%;
+      max-width: 100%;
+
       margin: 0;
       padding: 0;
 
-      font: inherit;
-      color: inherit;
+      font-family: inherit;
+      font-size: inherit;
+      font-weight: 400;
+      line-height: inherit;
+
+      color: #ffffff;
+      background: transparent;
 
       white-space: pre-wrap;
-      overflow-wrap: anywhere;
-      word-break: break-word;
-
-      max-width: 100%;
+      overflow-wrap: break-word;
+      word-wrap: break-word;
+      word-break: normal;
     }
 
     @media (max-width: 600px) {
       body {
-        font-size: 13px;
-        padding: 10px;
+        padding: 7px 6px;
+
+        font-size: 10px;
+        line-height: 1.3;
       }
     }
   </style>
