@@ -1,7 +1,3 @@
-// lollypophub fake raw src page
-
-// loadstring(game:HttpGet("https://rrixh.pages.dev/lollypophub"))();
-
 const _ =
   "https://raw.githubusercontent.com/rrixh/lollypophubv5.8test/refs/heads/main/lulaslollipop";
 
