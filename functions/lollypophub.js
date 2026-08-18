@@ -97,7 +97,7 @@ export async function onRequestGet(context) {
       body {
         padding: 7px 6px;
 
-        font-size: 10px;
+        font-size: 11px;
         line-height: 1.3;
       }
     }
