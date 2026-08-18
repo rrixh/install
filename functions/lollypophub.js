@@ -14,15 +14,9 @@ export async function onRequestGet(context) {
     fetchDestination === "document";
 
   if (isBrowserVisit) {
-    const lh = `-- Lollypop Hub 🍭 Loader
--- build: 10.5.1
--- channel: stable
--- runtime: luau
--- bootstrap: edge-distributed
--- loader-mode: protected
+    const lh = `// Lollypop Hub 🍭
+
 -- session-policy: ephemeral
--- integrity: enabled
--- manifest-revision: 10501
 
 local env = getgenv and getgenv() or _G
 local Players = game:GetService("Players")
