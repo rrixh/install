@@ -5,7 +5,7 @@
 const BRAND_IMAGE = "https://raw.githubusercontent.com/rrixh/install/refs/heads/main/imgs/lhkredits.PNG";
 
 const SOCIAL_LINKS = {
-  roblox: "https://www.roblox.com/users/3001347724/profile,
+  roblox: "https://www.roblox.com/users/3001347724/profile",
   snapchat: "https://story.snapchat.com/s/clpped",
   discord: "https://discordapp.com/users/1284685023630458963",
   telegram: "https://t.me/sIipped",
