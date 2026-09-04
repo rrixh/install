@@ -255,53 +255,49 @@ async function incrementGlobalStats(env) {
 
 
 async function resolveBypassOnServer(input) {
-  const providerUrl =
-    "https://bypass.vip/userscript.html?url=" +
-    encodeURIComponent(input) +
-    "&time=" +
-    encodeURIComponent(String(BYPASS_TIME)) +
-    "&key=" +
-    encodeURIComponent(BYPASS_KEY);
+  const apiUrl =
+    "https://api.bypass.vip/bypass?url=" +
+    encodeURIComponent(input);
 
   try {
-    const res = await fetch(providerUrl, {
+    const res = await fetch(apiUrl, {
       method: "GET",
-      redirect: "manual",
       headers: {
-        "User-Agent": "Mozilla/5.0",
-        "Accept": "text/html,application/xhtml+xml,application/json;q=0.9,*/*;q=0.8"
+        "Accept": "application/json"
       }
     });
 
-    const location = res.headers.get("Location");
+    let data = null;
 
-    if (location) {
-      const direct = new URL(location, providerUrl).toString();
-
-      try {
-        const directHost = new URL(direct).hostname.toLowerCase();
-        if (directHost !== "bypass.vip" && !directHost.endsWith(".bypass.vip")) {
-          return { ok: true, url: direct };
-        }
-      } catch {}
+    try {
+      data = await res.json();
+    } catch {
+      return {
+        ok: false,
+        error: "bypass API returned an invalid response"
+      };
     }
 
-    const finalUrl = res.url || "";
-
-    if (finalUrl) {
-      try {
-        const finalHost = new URL(finalUrl).hostname.toLowerCase();
-        if (finalHost !== "bypass.vip" && !finalHost.endsWith(".bypass.vip")) {
-          return { ok: true, url: finalUrl };
-        }
-      } catch {}
+    if (
+      res.ok &&
+      data &&
+      data.status === "success" &&
+      typeof data.result === "string" &&
+      /^https?:\/\//i.test(data.result)
+    ) {
+      return {
+        ok: true,
+        url: data.result
+      };
     }
 
     return {
       ok: false,
-      error: "the current bypass kode does not expose a direct result to the server"
+      error:
+        (data && typeof data.message === "string" && data.message) ||
+        "bypass failed"
     };
-  } catch (err) {
+  } catch {
     return {
       ok: false,
       error: "bypass request failed"
@@ -1291,7 +1287,7 @@ function pageHtml() {
         </h1>
 
         <p class="subtitle">
-          paste a supported https:// link below. the bypass button wakes up automatically when a link is entered.
+          paste a supported link below
         </p>
 
         <div class="bypass-card">
@@ -1484,14 +1480,6 @@ function pageHtml() {
           return;
         }
 
-        bumpLocalStats();
-
-        if (typeof data.global === "number") {
-          renderStats(data.global, true);
-        } else {
-          renderStats(getLocalStats(), false);
-        }
-
         let resultHost = "";
         try {
           resultHost = new URL(data.resultUrl).hostname.toLowerCase();
@@ -1503,6 +1491,14 @@ function pageHtml() {
         if (resultHost === "bypass.vip" || resultHost.endsWith(".bypass.vip")) {
           showToast("bypass failed. direct result unavailable!", "error");
           return;
+        }
+
+        bumpLocalStats();
+
+        if (typeof data.global === "number") {
+          renderStats(data.global, true);
+        } else {
+          renderStats(getLocalStats(), false);
         }
 
         showToast("bypass started", "success");
