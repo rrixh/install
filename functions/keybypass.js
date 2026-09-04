@@ -253,6 +253,62 @@ async function incrementGlobalStats(env) {
   }
 }
 
+
+async function resolveBypassOnServer(input) {
+  const providerUrl =
+    "https://bypass.vip/userscript.html?url=" +
+    encodeURIComponent(input) +
+    "&time=" +
+    encodeURIComponent(String(BYPASS_TIME)) +
+    "&key=" +
+    encodeURIComponent(BYPASS_KEY);
+
+  try {
+    const res = await fetch(providerUrl, {
+      method: "GET",
+      redirect: "manual",
+      headers: {
+        "User-Agent": "Mozilla/5.0",
+        "Accept": "text/html,application/xhtml+xml,application/json;q=0.9,*/*;q=0.8"
+      }
+    });
+
+    const location = res.headers.get("Location");
+
+    if (location) {
+      const direct = new URL(location, providerUrl).toString();
+
+      try {
+        const directHost = new URL(direct).hostname.toLowerCase();
+        if (directHost !== "bypass.vip" && !directHost.endsWith(".bypass.vip")) {
+          return { ok: true, url: direct };
+        }
+      } catch {}
+    }
+
+    const finalUrl = res.url || "";
+
+    if (finalUrl) {
+      try {
+        const finalHost = new URL(finalUrl).hostname.toLowerCase();
+        if (finalHost !== "bypass.vip" && !finalHost.endsWith(".bypass.vip")) {
+          return { ok: true, url: finalUrl };
+        }
+      } catch {}
+    }
+
+    return {
+      ok: false,
+      error: "the current bypass kode does not expose a direct result to the server"
+    };
+  } catch (err) {
+    return {
+      ok: false,
+      error: "bypass request failed"
+    };
+  }
+}
+
 async function handleApi(request, env, url) {
   if (request.method === "GET" && url.searchParams.get("api") === "stats") {
     const globalCount = await getGlobalStats(env);
@@ -310,23 +366,20 @@ async function handleApi(request, env, url) {
       }, 422);
     }
 
-    /*
-      This keeps the same bypass flow used by the supplied userscript:
-      https://bypass.vip/userscript.html?url=<target>&time=<time>&key=<key>
-    */
-    const bypassUrl =
-      "https://bypass.vip/userscript.html?url=" +
-      encodeURIComponent(input) +
-      "&time=" +
-      encodeURIComponent(String(BYPASS_TIME)) +
-      "&key=" +
-      encodeURIComponent(BYPASS_KEY);
+    const resolved = await resolveBypassOnServer(input);
+
+    if (!resolved.ok || !resolved.url) {
+      return json({
+        ok: false,
+        error: resolved.error || "bypass failed"
+      }, 502);
+    }
 
     const globalCount = await incrementGlobalStats(env);
 
     return json({
       ok: true,
-      bypassUrl,
+      resultUrl: resolved.url,
       global: globalCount,
       globalEnabled: globalCount !== null
     });
@@ -1439,10 +1492,23 @@ function pageHtml() {
           renderStats(getLocalStats(), false);
         }
 
+        let resultHost = "";
+        try {
+          resultHost = new URL(data.resultUrl).hostname.toLowerCase();
+        } catch {
+          showToast("bypass failed. invalid result!", "error");
+          return;
+        }
+
+        if (resultHost === "bypass.vip" || resultHost.endsWith(".bypass.vip")) {
+          showToast("bypass failed. direct result unavailable!", "error");
+          return;
+        }
+
         showToast("bypass started", "success");
 
         setTimeout(() => {
-          location.href = data.bypassUrl;
+          location.href = data.resultUrl;
         }, 330);
       } catch (err) {
         showToast("something went wrong. try again!", "error");
