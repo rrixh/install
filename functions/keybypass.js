@@ -255,10 +255,11 @@ async function incrementGlobalStats(env) {
 
 
 async function resolveBypassOnServer(input) {
-  const apiUrl = "https://api.bypass.vip/bypass?url=" + encodeURIComponent(input);
+  const apiUrl = new URL("https://api.bypass.vip/bypass");
+  apiUrl.searchParams.set("url", input);
 
   try {
-    const res = await fetch(apiUrl, {
+    const res = await fetch(apiUrl.toString(), {
       method: "GET",
       headers: {
         "Accept": "application/json",
@@ -266,11 +267,11 @@ async function resolveBypassOnServer(input) {
       }
     });
 
-    const text = await res.text();
-    let data;
+    const raw = await res.text();
+    let data = null;
 
     try {
-      data = JSON.parse(text);
+      data = JSON.parse(raw);
     } catch {
       return {
         ok: false,
@@ -279,22 +280,79 @@ async function resolveBypassOnServer(input) {
       };
     }
 
-    if (
-      res.ok &&
-      data &&
-      data.status === "success" &&
-      typeof data.result === "string" &&
-      /^https?:\/\//i.test(data.result)
-    ) {
-      return { ok: true, url: data.result };
+    // The public docs show `result`, but accept a few common response
+    // shapes too so a harmless API format change does not break the site.
+    const candidates = [
+      data && data.result,
+      data && data.bypassed,
+      data && data.url,
+      data && data.destination,
+      data && data.data && data.data.result,
+      data && data.data && data.data.url
+    ];
+
+    let finalUrl = null;
+
+    for (const value of candidates) {
+      if (typeof value !== "string") continue;
+
+      const trimmed = value.trim();
+
+      if (/^https?:\/\//i.test(trimmed)) {
+        finalUrl = trimmed;
+        break;
+      }
+    }
+
+    // A valid direct result is enough. Do not require status === "success",
+    // because some API clients only check the returned result URL.
+    if (finalUrl) {
+      try {
+        const host = new URL(finalUrl).hostname.toLowerCase();
+
+        if (host === "bypass.vip" || host.endsWith(".bypass.vip")) {
+          return {
+            ok: false,
+            error: "bypass API did not return a direct result",
+            status: res.status
+          };
+        }
+      } catch {
+        return {
+          ok: false,
+          error: "bypass API returned an invalid result",
+          status: res.status
+        };
+      }
+
+      return {
+        ok: true,
+        url: finalUrl
+      };
+    }
+
+    if (data && typeof data.message === "string" && data.message.trim()) {
+      return {
+        ok: false,
+        error: data.message.trim(),
+        status: res.status
+      };
+    }
+
+    if (data && data.status === "error") {
+      return {
+        ok: false,
+        error: "this URL could not be bypassed. enter a new link!",
+        status: res.status
+      };
     }
 
     return {
       ok: false,
-      error: (data && data.message) || ("bypass failed (HTTP " + res.status + ")"),
+      error: "this URL did not return a bypassed link. enter a new link!",
       status: res.status
     };
-  } catch (err) {
+  } catch {
     return {
       ok: false,
       error: "bypass request failed"
@@ -1537,9 +1595,11 @@ function pageHtml() {
 
         if (!response.ok || !data.ok) {
           let message = data.error || "this URL is not supported. enter a new link!";
+
           if (data.upstreamStatus === 429) {
             message = "bypass API rate limit reached. try again later!";
           }
+
           showToast(message, "error");
           return;
         }
