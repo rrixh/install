@@ -255,26 +255,27 @@ async function incrementGlobalStats(env) {
 
 
 async function resolveBypassOnServer(input) {
-  const apiUrl =
-    "https://api.bypass.vip/bypass?url=" +
-    encodeURIComponent(input);
+  const apiUrl = "https://api.bypass.vip/bypass?url=" + encodeURIComponent(input);
 
   try {
     const res = await fetch(apiUrl, {
       method: "GET",
       headers: {
-        "Accept": "application/json"
+        "Accept": "application/json",
+        "User-Agent": "Mozilla/5.0"
       }
     });
 
-    let data = null;
+    const text = await res.text();
+    let data;
 
     try {
-      data = await res.json();
+      data = JSON.parse(text);
     } catch {
       return {
         ok: false,
-        error: "bypass API returned an invalid response"
+        error: "bypass API returned an invalid response",
+        status: res.status
       };
     }
 
@@ -285,19 +286,15 @@ async function resolveBypassOnServer(input) {
       typeof data.result === "string" &&
       /^https?:\/\//i.test(data.result)
     ) {
-      return {
-        ok: true,
-        url: data.result
-      };
+      return { ok: true, url: data.result };
     }
 
     return {
       ok: false,
-      error:
-        (data && typeof data.message === "string" && data.message) ||
-        "bypass failed"
+      error: (data && data.message) || ("bypass failed (HTTP " + res.status + ")"),
+      status: res.status
     };
-  } catch {
+  } catch (err) {
     return {
       ok: false,
       error: "bypass request failed"
@@ -367,7 +364,8 @@ async function handleApi(request, env, url) {
     if (!resolved.ok || !resolved.url) {
       return json({
         ok: false,
-        error: resolved.error || "bypass failed"
+        error: resolved.error || "bypass failed",
+        upstreamStatus: resolved.status || null
       }, 502);
     }
 
@@ -964,6 +962,54 @@ function pageHtml() {
       white-space:nowrap;
     }
 
+
+    .result-panel{
+      display:none;
+      margin-top:16px;
+      padding:18px;
+      border:1px solid rgba(82,226,155,.22);
+      border-radius:18px;
+      background:linear-gradient(160deg,rgba(82,226,155,.07),rgba(143,108,255,.045));
+    }
+    .result-panel.show{display:block;animation:fadeIn .2s ease}
+    .result-label{
+      color:var(--success);
+      font-size:10px;
+      font-weight:900;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+    }
+    .result-url{
+      margin-top:10px;
+      padding:13px 14px;
+      border:1px solid var(--line);
+      border-radius:13px;
+      color:#dfe6f2;
+      background:rgba(0,0,0,.22);
+      font-size:12px;
+      line-height:1.45;
+      word-break:break-all;
+    }
+    .result-actions{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:10px;
+      margin-top:12px;
+    }
+    .result-action{
+      min-height:46px;
+      border:1px solid var(--line);
+      border-radius:13px;
+      color:#fff;
+      background:rgba(255,255,255,.045);
+      font-weight:800;
+      cursor:pointer;
+    }
+    .result-action.primary{
+      border-color:rgba(82,226,155,.28);
+      background:rgba(82,226,155,.09);
+    }
+
     .footer{
       padding:24px 2px 0;
       color:#50596a;
@@ -1287,7 +1333,7 @@ function pageHtml() {
         </h1>
 
         <p class="subtitle">
-          paste a supported link below
+          paste a supported https:// link below. the bypass button wakes up automatically when a link is entered.
         </p>
 
         <div class="bypass-card">
@@ -1339,6 +1385,15 @@ function pageHtml() {
                 <span id="miniStats">loading...</span>
               </div>
             </button>
+          </div>
+
+          <div class="result-panel" id="resultPanel">
+            <div class="result-label">bypass successful</div>
+            <div class="result-url" id="resultUrl"></div>
+            <div class="result-actions">
+              <button class="result-action primary" id="copyResult" type="button">kopy link</button>
+              <button class="result-action" id="openResult" type="button">open link</button>
+            </div>
           </div>
         </div>
       </div>
@@ -1413,6 +1468,11 @@ function pageHtml() {
     const statsNumber = document.getElementById("statsNumber");
     const statsMode = document.getElementById("statsMode");
     const miniStats = document.getElementById("miniStats");
+    const resultPanel = document.getElementById("resultPanel");
+    const resultUrl = document.getElementById("resultUrl");
+    const copyResult = document.getElementById("copyResult");
+    const openResult = document.getElementById("openResult");
+    let currentResultUrl = "";
 
     document.getElementById("brandImage").src = BRAND_IMAGE;
 
@@ -1476,7 +1536,11 @@ function pageHtml() {
         const data = await response.json();
 
         if (!response.ok || !data.ok) {
-          showToast(data.error || "this URL is not supported. enter a new link!", "error");
+          let message = data.error || "this URL is not supported. enter a new link!";
+          if (data.upstreamStatus === 429) {
+            message = "bypass API rate limit reached. try again later!";
+          }
+          showToast(message, "error");
           return;
         }
 
@@ -1493,6 +1557,10 @@ function pageHtml() {
           return;
         }
 
+        currentResultUrl = data.resultUrl;
+        resultUrl.textContent = currentResultUrl;
+        resultPanel.classList.add("show");
+
         bumpLocalStats();
 
         if (typeof data.global === "number") {
@@ -1501,11 +1569,8 @@ function pageHtml() {
           renderStats(getLocalStats(), false);
         }
 
-        showToast("bypass started", "success");
-
-        setTimeout(() => {
-          location.href = data.resultUrl;
-        }, 330);
+        showToast("bypass successful", "success");
+        resultPanel.scrollIntoView({behavior:"smooth", block:"nearest"});
       } catch (err) {
         showToast("something went wrong. try again!", "error");
       } finally {
@@ -1517,6 +1582,21 @@ function pageHtml() {
     }
 
     bypassButton.addEventListener("click", launchBypass);
+
+    copyResult.addEventListener("click", async () => {
+      if (!currentResultUrl) return;
+      try {
+        await navigator.clipboard.writeText(currentResultUrl);
+        showToast("link kopied!", "success");
+      } catch {
+        showToast("kopy failed. press and hold the result link!", "error");
+      }
+    });
+
+    openResult.addEventListener("click", () => {
+      if (!currentResultUrl) return;
+      window.open(currentResultUrl, "_blank", "noopener,noreferrer");
+    });
 
     function getLocalStats() {
       const n = Number.parseInt(localStorage.getItem("deltaSuccessfulBypasses") || "0", 10);
