@@ -4,15 +4,6 @@
 
 const BRAND_IMAGE = "https://raw.githubusercontent.com/rrixh/install/refs/heads/main/imgs/lhkredits.PNG";
 
-const SOCIAL_LINKS = [
-  { name:"Snapchat", iconType:"font", icon:"fa-brands fa-snapchat", url:"https://story.snapchat.com/s/clpped" },
-  { name:"Discord", iconType:"font", icon:"fa-brands fa-discord", url:"https://discordapp.com/users/1284685023630458963" },
-  { name:"Telegram", iconType:"font", icon:"fa-brands fa-telegram", url:"https://t.me/sIipped" },
-  { name:"Cash App", iconType:"font", icon:"fa-solid fa-dollar-sign", url:"https://cash.app/$99fail" },
-  { name:"TikTok", iconType:"font", icon:"fa-brands fa-tiktok", url:"https://www.tiktok.com/@rrixh" },
-  { name:"Instagram", iconType:"font", icon:"fa-brands fa-instagram", url:"https://www.instagram.com/nugit" }
-];
-
 const SOCIAL_LINKS = {
   roblox: "https://www.roblox.com/users/3001347724/profile,
   snapchat: "https://story.snapchat.com/s/clpped",
