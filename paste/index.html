@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="referrer" content="no-referrer">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-G89P2eEzg4TixlNLeapC7hjDUIvQoo4NiJwTRU5zljg='; style-src 'unsafe-inline'; img-src data:; connect-src https://api.github.com https://rrixh.pages.dev; base-uri 'none'; form-action 'none'; object-src 'none'">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-aUbdzBe/ErkjG1jlmZmysTzcKnIijNr8ShERZqdRA20='; style-src 'unsafe-inline'; img-src data:; connect-src https://api.github.com https://rrixh.pages.dev; base-uri 'none'; form-action 'none'; object-src 'none'">
   <title>rrixh — raw skript host</title>
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='11' fill='%23ef2b3a'/%3E%3Cpath d='m14 13-7 7 7 7m12-14 7 7-7 7m-4-17-4 20' fill='none' stroke='white' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
   <style>:root { color-scheme: dark; --foreground: #f5f5f5; --primary: #ef2b3a; --muted: #939393; --border: #272727; }
@@ -102,6 +102,7 @@ input:focus, textarea:focus { border-color: #c43844; }
 .save-status { min-height: 18px; margin-top: 12px; color: #a0a0a0; font-size: 12px; line-height: 1.5; }
 .save-status.is-live { color: #56d38d; }
 .raw-link-card { margin-top: 12px; display: grid; grid-template-columns: 38px minmax(0,1fr) auto; gap: 12px; align-items: center; padding: 12px; border: 1px solid #282828; border-radius: 13px; background: #121212; }
+.raw-actions { display: flex; gap: 8px; }
 .raw-icon { width: 38px; height: 38px; display: grid; place-items: center; border-radius: 10px; background: rgba(239,43,58,.12); color: #ef2b3a; }
 .raw-copy { min-width: 0; }
 .raw-copy span { display: block; margin-bottom: 4px; color: #939393; font-size: 11px; text-transform: uppercase; letter-spacing: .12em; }
@@ -112,6 +113,7 @@ dialog { width: min(calc(100% - 32px),440px); padding: 28px; border: 1px solid #
 dialog::backdrop { background: #000b; backdrop-filter: blur(4px); }
 dialog h2 { margin: 12px 0; font-size: 23px; letter-spacing: -.03em; }
 dialog p:not(.eyebrow) { color: #aaa; font-size: 14px; line-height: 1.7; overflow-wrap: anywhere; }
+dialog textarea { min-height: 88px; resize: vertical; font-family: "SFMono-Regular",Consolas,"Liberation Mono",monospace; font-size: 13px; line-height: 1.55; }
 .dialog-actions { margin-top: 24px; display: flex; gap: 10px; justify-content: flex-end; }
 .toast { position: fixed; z-index: 5; bottom: 24px; left: 50%; transform: translateX(-50%); width: max-content; max-width: calc(100vw - 32px); padding: 14px 18px; border: 1px solid #3b3b3b; border-radius: 12px; background: #1b1b1b; color: #eee; box-shadow: 0 12px 50px #0008; font-size: 13px; line-height: 1.5; }
 .noscript { position: fixed; inset: 0 0 auto; margin: 0; padding: 16px; background: #501923; text-align: center; }
@@ -138,12 +140,14 @@ dialog p:not(.eyebrow) { color: #aaa; font-size: 14px; line-height: 1.7; overflo
   input, .kode-block textarea { font-size: 16px; }
   .kode-block textarea { min-height: 410px; }
   .raw-link-card { grid-template-columns: 34px minmax(0,1fr); }
-  .raw-link-card button { grid-column: 1 / -1; width: 100%; }
+  .raw-actions { grid-column: 1 / -1; display: grid; grid-template-columns: 1fr 1fr; }
+  .raw-actions .button { width: 100%; }
   .auth-card { padding: 34px 22px; }
   .editor-foot { align-items: flex-start; }
   .editor-foot > span { max-width: 52%; }
   .kode-label span { font-size: 11px; }
 }
+@media (max-width: 430px) { .raw-actions { grid-template-columns: 1fr; } }
 @media (max-width: 380px) { .editor-head { flex-wrap: wrap; } .editor-actions { margin-left: auto; } .dialog-actions { flex-direction: column; } }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; animation: none !important; } }
 </style>
@@ -206,14 +210,14 @@ dialog p:not(.eyebrow) { color: #aaa; font-size: 14px; line-height: 1.7; overflo
         <div class="filename-block"><label for="filename">filename</label><input id="filename" placeholder="filename.lua" maxlength="120" autocomplete="off" autocapitalize="off" spellcheck="false" aria-describedby="filename-hint"><span id="filename-hint">include your extension</span></div>
         <div class="kode-block"><div class="kode-label"><label for="kode">kode</label><span id="char-count">0 characters</span></div><textarea id="kode" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" aria-describedby="save-status" placeholder="-- paste your skript here"></textarea></div>
         <div id="save-status" class="save-status" role="status" aria-live="polite">Save a skript to get its raw link.</div>
-        <div class="raw-link-card"><div class="raw-icon"><svg class="icon"><use href="#i-link"/></svg></div><div class="raw-copy"><span id="link-label">raw link</span><code id="raw-url">rrixh.pages.dev/raw/filename.lua</code></div><button id="copy" class="button secondary" disabled><svg class="icon"><use href="#i-copy"/></svg><span>kopy link</span></button></div>
+        <div class="raw-link-card"><div class="raw-icon"><svg class="icon"><use href="#i-link"/></svg></div><div class="raw-copy"><span id="link-label">raw link</span><code id="raw-url">rrixh.pages.dev/raw/filename.lua</code></div><div class="raw-actions"><button id="copy" class="button secondary" disabled><svg class="icon"><use href="#i-copy"/></svg><span>kopy link</span></button><button id="copy-loadstring" class="button primary" disabled><svg class="icon"><use href="#i-code"/></svg><span>kopy loadstring</span></button></div></div>
         <div class="editor-foot"><span id="draft-note">Each save publishes through Cloudflare.</span><button id="check-live" class="text-button" disabled>check live link ↗</button></div>
         <div id="editor-error" class="error-message" role="alert" hidden></div>
       </section>
     </div>
   </main>
   <dialog id="confirm-dialog"><form method="dialog"><p class="eyebrow">rrixh raw</p><h2 id="confirm-title">Discard changes?</h2><p id="confirm-copy"></p><div class="dialog-actions"><button class="button secondary" value="cancel" autofocus>keep editing</button><button id="confirm-accept" class="button primary" value="accept">discard</button></div></form></dialog>
-  <dialog id="copy-dialog"><form method="dialog"><h2>kopy your link</h2><p>Your browser blocked automatic copying. Select and kopy this link.</p><input id="copy-value" readonly aria-label="Raw link"><div class="dialog-actions"><button class="button primary" value="close">done</button></div></form></dialog>
+  <dialog id="copy-dialog"><form method="dialog"><h2 id="copy-title">kopy your link</h2><p>Your browser blocked automatic copying. Select and kopy this text.</p><textarea id="copy-value" readonly aria-label="Text to kopy" rows="3"></textarea><div class="dialog-actions"><button class="button primary" value="close">done</button></div></form></dialog>
   <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
   <noscript><p class="noscript">Enable JavaScript to use this dashboard. Your published raw links work without JavaScript.</p></noscript>
   <script type="module">const CONFIG = Object.freeze({ owner: "rrixh", repo: "install", branch: "main", origin: "https://rrixh.pages.dev" });
@@ -419,6 +423,7 @@ function renderEditor() {
   $("delete").disabled = state.busy || !state.saved;
   $("download").disabled = state.busy || (!$("filename").value && !$("kode").value);
   $("copy").disabled = !state.saved;
+  $("copy-loadstring").disabled = !state.saved;
   $("check-live").disabled = state.busy || state.checking || !state.saved;
   for (const id of ["new-file", "refresh", "sign-out", "filename", "kode", "search"]) $(id).disabled = state.busy;
   $("raw-url").textContent = state.saved ? rawURL(state.saved.name) : "rrixh.pages.dev/raw/filename.lua";
@@ -469,12 +474,12 @@ async function checkLive({ auto = false, attempt = 0 } = {}) {
   let matches = false;
   try {
     const response = await fetch(`${rawURL(saved.name)}?v=${Date.now()}`, { cache: "no-store", credentials: "omit", redirect: "follow", signal: AbortSignal.timeout(12000) });
-    if (response.ok && /^text\/plain\b/i.test(response.headers.get("Content-Type") || "")) {
+    if (response.ok) {
       const bytes = new Uint8Array(await response.arrayBuffer());
       matches = bytes.byteLength <= MAX_BYTES && await gitBlobSHA(bytes) === saved.sha;
     }
     if (generation !== state.liveGeneration) return;
-    status(matches ? "Live on rrixh.pages.dev — raw text verified." : "Saved to GitHub. The live link has not updated yet; check your Cloudflare deployment.", matches);
+    status(matches ? "Live on rrixh.pages.dev — exact saved kode verified." : "Saved to GitHub. The live link has not updated yet; check your Cloudflare deployment.", matches);
   } catch {
     if (generation === state.liveGeneration) status("Saved to GitHub. Could not verify the live link; check Cloudflare’s deployment status.");
   } finally {
@@ -560,11 +565,20 @@ $("delete").addEventListener("click", async () => {
   finally { setBusy(false); }
 });
 
-$("copy").addEventListener("click", async () => {
+async function kopy(value, success, title) {
+  try { await navigator.clipboard.writeText(value); toast(success); }
+  catch {
+    $("copy-title").textContent = title; $("copy-value").value = value;
+    $("copy-dialog").showModal(); $("copy-value").focus(); $("copy-value").select();
+  }
+}
+$("copy").addEventListener("click", () => {
+  if (state.saved) kopy(rawURL(state.saved.name), "Raw link kopied.", "kopy your raw link");
+});
+$("copy-loadstring").addEventListener("click", () => {
   if (!state.saved) return;
-  const url = rawURL(state.saved.name);
-  try { await navigator.clipboard.writeText(url); toast("Raw link kopied."); }
-  catch { $("copy-value").value = url; $("copy-dialog").showModal(); $("copy-value").focus(); $("copy-value").select(); }
+  const loader = `loadstring(game:HttpGet("${rawURL(state.saved.name)}", true))()`;
+  kopy(loader, "Loadstring kopied.", "kopy your loadstring");
 });
 $("check-live").addEventListener("click", () => { clearTimeout(state.poll); checkLive(); });
 $("download").addEventListener("click", () => {
