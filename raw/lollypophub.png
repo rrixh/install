@@ -1,0 +1,1 @@
+loadstring(game:HttpGet("https://rrixh.pages.dev/lollypophub", true))();
