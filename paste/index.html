@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="referrer" content="no-referrer">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-aUbdzBe/ErkjG1jlmZmysTzcKnIijNr8ShERZqdRA20='; style-src 'unsafe-inline'; img-src data:; connect-src https://api.github.com https://rrixh.pages.dev; base-uri 'none'; form-action 'none'; object-src 'none'">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-F3qJ/Uq0OH5Nwb1Q2AAlqgLhoq1ySi9D0XisFF1r2gA='; style-src 'unsafe-inline'; img-src data:; connect-src https://api.github.com https://rrixh.pages.dev; base-uri 'none'; form-action 'none'; object-src 'none'">
   <title>rrixh — raw skript host</title>
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='11' fill='%23ef2b3a'/%3E%3Cpath d='m14 13-7 7 7 7m12-14 7 7-7 7m-4-17-4 20' fill='none' stroke='white' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
   <style>:root { color-scheme: dark; --foreground: #f5f5f5; --primary: #ef2b3a; --muted: #939393; --border: #272727; }
@@ -46,7 +46,12 @@ input:focus, textarea:focus { border-color: #c43844; }
 .auth-copy span { color: #e8e8e8; }
 .connect-form { display: grid; width: 100%; gap: 10px; text-align: left; }
 .connect-form label { font-size: 13px; color: #b8b8b8; }
-.connect-form input { min-height: 46px; }
+.connect-form > input { min-height: 46px; }
+.remember-row { display: grid; grid-template-columns: 20px minmax(0,1fr); gap: 10px; align-items: start; margin: 2px 0 4px; cursor: pointer; color: #d0d0d0 !important; }
+.remember-row input { width: 20px; height: 20px; min-height: 0; margin: 1px 0 0; accent-color: #ef2b3a; }
+.remember-row strong, .remember-row small { display: block; }
+.remember-row strong { font-size: 13px; }
+.remember-row small { margin-top: 3px; color: #8f8f8f; font-size: 12px; line-height: 1.45; }
 .primary-action { min-height: 46px; box-shadow: 0 10px 30px rgba(239,43,58,.22); }
 .auth-note { margin: 20px 0 0; display: flex; gap: 8px; align-items: flex-start; color: #929292; font-size: 12px; line-height: 1.6; text-align: left; }
 .auth-note .icon { width: 15px; height: 15px; margin-top: 2px; color: #49c782; }
@@ -176,10 +181,11 @@ dialog textarea { min-height: 88px; resize: vertical; font-family: "SFMono-Regul
       <form id="connect-form" class="connect-form">
         <label for="token">GitHub access token</label>
         <input id="token" type="password" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="github_pat_…" required aria-describedby="token-note">
+        <label class="remember-row" for="remember-token"><input id="remember-token" type="checkbox" checked><span><strong>stay konnected on this device</strong><small>Use this only on ur personal phone or komputer.</small></span></label>
         <button id="connect-button" class="button primary primary-action" type="submit"><svg class="icon"><use href="#i-lock"/></svg><span>connect GitHub</span></button>
         <p id="auth-error" class="error-message" role="alert" hidden></p>
       </form>
-      <p id="token-note" class="auth-note"><svg class="icon"><use href="#i-lock"/></svg>Token stays in this tab. Reconnect after refreshing.</p>
+      <p id="token-note" class="auth-note"><svg class="icon"><use href="#i-lock"/></svg>Remembered only on this device. Signing out erases it.</p>
       <details class="setup-details">
         <summary>first time? set up your token</summary>
         <ol>
@@ -372,8 +378,12 @@ class GitHubStore {
 
 
 const $ = id => document.getElementById(id);
+const TOKEN_KEY = "rrixh.raw.github-token.v1";
 const state = { api: null, files: [], saved: null, baseline: { name: "", content: "" }, busy: false, checking: false, liveGeneration: 0, poll: null };
 let toastTimer;
+
+function getRememberedToken() { try { return localStorage.getItem(TOKEN_KEY) || ""; } catch { return ""; } }
+function rememberToken(token) { try { if (token) localStorage.setItem(TOKEN_KEY, token); else localStorage.removeItem(TOKEN_KEY); return true; } catch { return false; } }
 
 function icon(name) {
   const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
@@ -490,10 +500,7 @@ async function checkLive({ auto = false, attempt = 0 } = {}) {
   }
 }
 
-$("connect-form").addEventListener("submit", async event => {
-  event.preventDefault();
-  const token = $("token").value.trim();
-  if (!token) return;
+async function connectGitHub(token, { remember = false, automatic = false } = {}) {
   $("connect-button").disabled = true; $("connect-button").querySelector("span").textContent = "connecting…";
   $("auth-error").hidden = true;
   const api = new GitHubStore(token);
@@ -501,19 +508,29 @@ $("connect-form").addEventListener("submit", async event => {
   try {
     const snapshot = await api.connect();
     state.api = api; state.files = snapshot.files;
+    if (remember && !rememberToken(token)) toast("This browser blocked remembered login. Keep this tab open or reconnect after refreshing.");
+    if (!remember) rememberToken("");
     $("auth").hidden = true; $("dashboard").hidden = false;
     $("search").value = ""; setEditor(null); $("filename").focus();
     if (state.files.length) await openFile(state.files[0]);
   } catch (err) {
+    if (automatic && [401, 403, 404].includes(err.status)) rememberToken("");
     api.disconnect(); $("auth-error").textContent = err.message; $("auth-error").hidden = false; $("token").focus();
   } finally {
     $("connect-button").disabled = false; $("connect-button").querySelector("span").textContent = "connect GitHub";
   }
+}
+
+$("connect-form").addEventListener("submit", async event => {
+  event.preventDefault();
+  const token = $("token").value.trim();
+  if (!token) return;
+  await connectGitHub(token, { remember: $("remember-token").checked });
 });
 
 $("sign-out").addEventListener("click", async () => {
   if (state.busy || !(await canLeave())) return;
-  stopPolling(); state.api.disconnect(); state.api = null; state.files = []; setEditor(null);
+  stopPolling(); state.api.disconnect(); state.api = null; state.files = []; rememberToken(""); setEditor(null);
   $("dashboard").hidden = true; $("auth").hidden = false; $("token").value = ""; $("token").focus();
 });
 $("new-file").addEventListener("click", async () => {
@@ -596,6 +613,15 @@ window.addEventListener("pagehide", () => {
   // A page restored from the browser’s back/forward cache must not reuse authentication.
   $("dashboard").hidden = true; $("auth").hidden = false;
 });
+window.addEventListener("pageshow", event => {
+  if (event.persisted && !state.api) {
+    const token = getRememberedToken();
+    if (token) connectGitHub(token, { remember: true, automatic: true });
+  }
+});
+
+const rememberedToken = getRememberedToken();
+if (rememberedToken) connectGitHub(rememberedToken, { remember: true, automatic: true });
 </script>
 </body>
 </html>
