@@ -1,0 +1,587 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="no-referrer">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-G89P2eEzg4TixlNLeapC7hjDUIvQoo4NiJwTRU5zljg='; style-src 'unsafe-inline'; img-src data:; connect-src https://api.github.com https://rrixh.pages.dev; base-uri 'none'; form-action 'none'; object-src 'none'">
+  <title>rrixh — raw skript host</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='11' fill='%23ef2b3a'/%3E%3Cpath d='m14 13-7 7 7 7m12-14 7 7-7 7m-4-17-4 20' fill='none' stroke='white' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+  <style>:root { color-scheme: dark; --foreground: #f5f5f5; --primary: #ef2b3a; --muted: #939393; --border: #272727; }
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html, body { min-height: 100%; }
+body { margin: 0; background: radial-gradient(circle at 50% -20%, rgba(239,43,58,.15), transparent 34rem), #070707; color: var(--foreground); font-family: Arial, Helvetica, sans-serif; }
+button, input, textarea { font: inherit; }
+button { cursor: pointer; }
+button:disabled { cursor: not-allowed; opacity: .45; }
+a { color: #f98690; text-underline-offset: 3px; }
+button, a, input, textarea, summary { -webkit-tap-highlight-color: transparent; }
+:focus-visible { outline: 2px solid #ff6370; outline-offset: 3px; }
+input, textarea { width: 100%; border: 1px solid #303030; border-radius: 9px; background: #141414; color: #f5f5f5; padding: 10px 12px; }
+input { min-height: 42px; }
+input::placeholder, textarea::placeholder { color: #737373; }
+input:focus, textarea:focus { border-color: #c43844; }
+.icon-definitions { position: absolute; width: 0; height: 0; overflow: hidden; }
+.icon { width: 18px; height: 18px; flex: 0 0 auto; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.button { min-height: 42px; display: inline-flex; align-items: center; justify-content: center; gap: 8px; border: 1px solid transparent; border-radius: 9px; padding: 10px 14px; color: #f5f5f5; font-size: 13px; font-weight: 600; line-height: 1.3; white-space: nowrap; }
+.button.primary { background: #e52435; color: #fff; }
+.button.primary:hover:enabled { background: #fa3e4d; }
+.button.secondary { background: #1c1c1c; border-color: #303030; }
+.button.secondary:hover:enabled { background: #282828; }
+.button.ghost { background: transparent; color: #aaa; }
+.button.ghost:hover:enabled { background: #222; color: #fff; }
+.button.danger:hover:enabled { color: #ff6370; background: #2d1418; }
+.icon-button { width: 42px; padding: 10px; }
+.text-button { border: 0; background: none; color: #f4838d; padding: 6px 0; font-size: 12px; text-align: right; }
+.text-button:hover:enabled { text-decoration: underline; }
+.auth-shell { min-height: 100vh; display: grid; place-items: center; padding: 24px; }
+.auth-card { width: min(100%, 480px); display: flex; flex-direction: column; align-items: center; text-align: center; padding: 44px; border: 1px solid #282828; border-radius: 24px; background: linear-gradient(160deg, rgba(22,22,22,.96), rgba(11,11,11,.96)); box-shadow: 0 32px 100px rgba(0,0,0,.55), inset 0 1px rgba(255,255,255,.04); }
+.brand-mark, .mini-mark { display: grid; place-items: center; color: white; background: linear-gradient(145deg,#ff4050,#b90016); box-shadow: 0 12px 36px rgba(239,43,58,.28); }
+.brand-mark { width: 58px; height: 58px; border-radius: 17px; margin-bottom: 24px; }
+.brand-mark .icon { width: 27px; height: 27px; }
+.eyebrow, .panel-label { margin: 0; color: #ef2b3a; font-size: 12px; font-weight: 800; letter-spacing: .18em; text-transform: uppercase; }
+.auth-card h1 { margin: 8px 0 12px; font-size: clamp(30px,7vw,44px); letter-spacing: -.055em; line-height: 1.08; }
+.auth-copy { margin: 0 0 26px; color: #a2a2a2; font-size: 16px; line-height: 1.65; }
+.auth-copy span { color: #e8e8e8; }
+.connect-form { display: grid; width: 100%; gap: 10px; text-align: left; }
+.connect-form label { font-size: 13px; color: #b8b8b8; }
+.connect-form input { min-height: 46px; }
+.primary-action { min-height: 46px; box-shadow: 0 10px 30px rgba(239,43,58,.22); }
+.auth-note { margin: 20px 0 0; display: flex; gap: 8px; align-items: flex-start; color: #929292; font-size: 12px; line-height: 1.6; text-align: left; }
+.auth-note .icon { width: 15px; height: 15px; margin-top: 2px; color: #49c782; }
+.setup-details { width: 100%; margin-top: 22px; padding-top: 18px; border-top: 1px solid #272727; color: #aaa; font-size: 13px; line-height: 1.65; text-align: left; }
+.setup-details summary { cursor: pointer; color: #ccc; }
+.setup-details ol { padding-left: 18px; }
+.setup-details li { margin: 10px 0; }
+.setup-details strong { color: #eee; }
+.setup-details p { margin-bottom: 0; }
+.dashboard-shell { min-height: 100vh; padding: 18px; }
+.topbar { max-width: 1500px; min-height: 68px; margin: 0 auto 16px; padding: 0 18px; display: flex; align-items: center; justify-content: space-between; border: 1px solid #242424; border-radius: 17px; background: rgba(14,14,14,.85); backdrop-filter: blur(18px); }
+.brand-lockup, .owner-chip { display: flex; align-items: center; }
+.brand-lockup { gap: 11px; }
+.mini-mark { width: 38px; height: 38px; border-radius: 11px; }
+.mini-mark .icon { width: 20px; height: 20px; }
+.brand-lockup strong { display: block; font-size: 18px; letter-spacing: -.03em; }
+.brand-lockup span { display: block; margin-top: 2px; color: #929292; font-size: 12px; }
+.owner-chip { gap: 9px; color: #a0a0a0; font-size: 13px; }
+.owner-dot { width: 7px; height: 7px; border-radius: 50%; background: #43c67a; box-shadow: 0 0 12px #43c67a; }
+.workspace { width: 100%; max-width: 1500px; height: calc(100vh - 120px); min-height: 720px; margin: 0 auto; display: grid; grid-template-columns: 290px minmax(0,1fr); overflow: hidden; border: 1px solid #242424; border-radius: 20px; background: #0d0d0d; box-shadow: 0 28px 90px rgba(0,0,0,.3); }
+.file-panel { min-width: 0; display: flex; flex-direction: column; border-right: 1px solid #242424; background: #0a0a0a; }
+.file-panel-head { padding: 21px 18px 15px; display: flex; align-items: center; justify-content: space-between; }
+.file-panel-head span { display: block; margin-top: 5px; color: #929292; font-size: 12px; }
+.panel-tools { display: flex; gap: 3px; }
+.search-wrap { position: relative; margin: 0 14px 12px; }
+.search-wrap .icon { position: absolute; z-index: 1; left: 11px; top: 50%; width: 15px; transform: translateY(-50%); color: #858585; }
+.search-wrap input { padding-left: 34px; border-color: #232323; background: #101010; }
+.file-list { min-height: 0; flex: 1; overflow: auto; padding: 0 9px 12px; }
+.file-row { width: 100%; min-height: 60px; display: grid; grid-template-columns: 22px minmax(0,1fr) 18px; gap: 10px; align-items: center; padding: 10px 11px; border: 1px solid transparent; border-radius: 11px; color: #909090; background: transparent; text-align: left; }
+.file-row:hover:enabled { background: #121212; color: #aaa; }
+.file-row.active { border-color: #3b2426; background: linear-gradient(90deg,rgba(239,43,58,.13),rgba(239,43,58,.03)); color: #ef2b3a; }
+.file-row span { min-width: 0; }
+.file-row strong { display: block; overflow: hidden; color: #d5d5d5; font-size: 14px; text-overflow: ellipsis; white-space: nowrap; }
+.file-row small { display: block; margin-top: 4px; color: #929292; font-size: 11px; }
+.active-check { width: 14px; }
+.empty-list { margin: 46px 12px; color: #898989; text-align: center; }
+.empty-list .icon { width: 27px; height: 27px; margin-bottom: 9px; }
+.empty-list p { margin: 0; font-size: 13px; }
+.repo-link { display: block; margin: 4px 18px 18px; color: #929292; font-size: 12px; text-decoration: none; }
+.repo-link:hover { color: #fff; }
+.editor-panel { min-width: 0; display: flex; flex-direction: column; padding: 26px; background: radial-gradient(circle at 100% 0,rgba(239,43,58,.05),transparent 27rem), #0e0e0e; }
+.editor-head { display: flex; justify-content: space-between; align-items: center; gap: 18px; }
+.editor-heading { min-width: 0; }
+.editor-head h1 { overflow: hidden; margin: 6px 0 0; font-size: 24px; letter-spacing: -.035em; text-overflow: ellipsis; white-space: nowrap; }
+.editor-actions { display: flex; gap: 6px; flex-shrink: 0; }
+.save-button { min-width: 132px; }
+.filename-block { margin-top: 22px; display: grid; grid-template-columns: 72px minmax(0,460px) auto; align-items: center; gap: 12px; }
+.filename-block label, .kode-label label { font-size: 13px; font-weight: 700; color: #b8b8b8; }
+.filename-block span, .kode-label span { color: #929292; font-size: 12px; }
+.kode-block { min-height: 0; flex: 1; display: flex; flex-direction: column; margin-top: 18px; }
+.kode-label { display: flex; justify-content: space-between; gap: 12px; margin-bottom: 9px; }
+.kode-block textarea { min-height: 320px; height: 100%; resize: none; border-color: #272727; border-radius: 13px; padding: 17px; background: #090909; color: #dadada; font-family: "SFMono-Regular",Consolas,"Liberation Mono",monospace; font-size: 14px; line-height: 1.65; tab-size: 2; }
+.save-status { min-height: 18px; margin-top: 12px; color: #a0a0a0; font-size: 12px; line-height: 1.5; }
+.save-status.is-live { color: #56d38d; }
+.raw-link-card { margin-top: 12px; display: grid; grid-template-columns: 38px minmax(0,1fr) auto; gap: 12px; align-items: center; padding: 12px; border: 1px solid #282828; border-radius: 13px; background: #121212; }
+.raw-icon { width: 38px; height: 38px; display: grid; place-items: center; border-radius: 10px; background: rgba(239,43,58,.12); color: #ef2b3a; }
+.raw-copy { min-width: 0; }
+.raw-copy span { display: block; margin-bottom: 4px; color: #939393; font-size: 11px; text-transform: uppercase; letter-spacing: .12em; }
+.raw-copy code { display: block; overflow: hidden; color: #cfcfcf; font-size: 13px; text-overflow: ellipsis; white-space: nowrap; user-select: all; }
+.editor-foot { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 8px; color: #939393; font-size: 11px; line-height: 1.5; }
+.error-message { margin: 12px 0 0; border: 1px solid #673039; border-radius: 10px; padding: 12px; background: #2a1317; color: #ff9fa7; font-size: 13px; line-height: 1.6; overflow-wrap: anywhere; }
+dialog { width: min(calc(100% - 32px),440px); padding: 28px; border: 1px solid #333; border-radius: 20px; background: #111; color: #eee; box-shadow: 0 32px 100px #0009; }
+dialog::backdrop { background: #000b; backdrop-filter: blur(4px); }
+dialog h2 { margin: 12px 0; font-size: 23px; letter-spacing: -.03em; }
+dialog p:not(.eyebrow) { color: #aaa; font-size: 14px; line-height: 1.7; overflow-wrap: anywhere; }
+.dialog-actions { margin-top: 24px; display: flex; gap: 10px; justify-content: flex-end; }
+.toast { position: fixed; z-index: 5; bottom: 24px; left: 50%; transform: translateX(-50%); width: max-content; max-width: calc(100vw - 32px); padding: 14px 18px; border: 1px solid #3b3b3b; border-radius: 12px; background: #1b1b1b; color: #eee; box-shadow: 0 12px 50px #0008; font-size: 13px; line-height: 1.5; }
+.noscript { position: fixed; inset: 0 0 auto; margin: 0; padding: 16px; background: #501923; text-align: center; }
+@media (max-width: 1020px) { .filename-block { grid-template-columns: 72px minmax(0,1fr); } .filename-block span { grid-column: 2; } }
+@media (max-width: 760px) {
+  .dashboard-shell { padding: 10px; }
+  .topbar { min-height: 60px; margin-bottom: 10px; padding: 0 12px; border-radius: 14px; }
+  .owner-email, .brand-lockup span { display: none; }
+  .workspace { height: auto; min-height: calc(100vh - 80px); grid-template-columns: 1fr; border-radius: 15px; }
+  .file-panel { max-height: 242px; border-right: 0; border-bottom: 1px solid #242424; }
+  .file-panel-head { padding: 14px 14px 10px; }
+  .file-list { display: flex; flex: 0 1 auto; gap: 7px; overflow-x: auto; padding: 0 12px 12px; }
+  .file-row { min-width: 190px; width: 190px; flex-shrink: 0; }
+  .empty-list { width: 100%; margin: 14px; }
+  .repo-link { display: none; }
+  .editor-panel { min-height: 710px; padding: 18px 14px; }
+  .editor-head { align-items: flex-start; gap: 8px; }
+  .editor-head h1 { font-size: 20px; }
+  .editor-actions { align-items: center; gap: 3px; }
+  .editor-actions .icon-button { width: 36px; padding: 8px; }
+  .save-button { min-width: 0; padding-inline: 10px; }
+  .filename-block { grid-template-columns: 1fr; gap: 7px; }
+  .filename-block span { grid-column: auto; font-size: 11px; }
+  input, .kode-block textarea { font-size: 16px; }
+  .kode-block textarea { min-height: 410px; }
+  .raw-link-card { grid-template-columns: 34px minmax(0,1fr); }
+  .raw-link-card button { grid-column: 1 / -1; width: 100%; }
+  .auth-card { padding: 34px 22px; }
+  .editor-foot { align-items: flex-start; }
+  .editor-foot > span { max-width: 52%; }
+  .kode-label span { font-size: 11px; }
+}
+@media (max-width: 380px) { .editor-head { flex-wrap: wrap; } .editor-actions { margin-left: auto; } .dialog-actions { flex-direction: column; } }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; animation: none !important; } }
+</style>
+</head>
+<body>
+  <svg class="icon-definitions" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs>
+    <symbol id="i-code" viewBox="0 0 24 24"><path d="m16 18 6-6-6-6M8 6l-6 6 6 6m6-14-4 16"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m20 6-11 11-5-5"/></symbol>
+    <symbol id="i-copy" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></symbol>
+    <symbol id="i-link" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7 .1l3-3a5 5 0 0 0-7-7l-1.7 1.7M14 11a5 5 0 0 0-7-.1l-3 3a5 5 0 0 0 7 7l1.7-1.7"/></symbol>
+    <symbol id="i-save" viewBox="0 0 24 24"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h12l4 4v12a2 2 0 0 1-2 2Z"/><path d="M17 21v-8H7v8M7 3v5h8"/></symbol>
+    <symbol id="i-trash" viewBox="0 0 24 24"><path d="M3 6h18M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2M5 6l1 14h12l1-14M10 10v7M14 10v7"/></symbol>
+    <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M20 7v5h-5M4 17v-5h5"/><path d="M6.1 7a7 7 0 0 1 11.6-2L20 8M4 16l2.3 3A7 7 0 0 0 18 17"/></symbol>
+    <symbol id="i-download" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></symbol>
+    <symbol id="i-lock" viewBox="0 0 24 24"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4M12 15v2"/></symbol>
+  </defs></svg>
+
+  <main id="auth" class="auth-shell">
+    <section class="auth-card" aria-labelledby="auth-title">
+      <div class="brand-mark"><svg class="icon"><use href="#i-code"/></svg></div>
+      <p class="eyebrow">rrixh raw</p>
+      <h1 id="auth-title">your kode.<br>your links.</h1>
+      <p class="auth-copy">Write skripts. Save to <span>rrixh/install</span>.<br>Share a clean raw link.</p>
+      <form id="connect-form" class="connect-form">
+        <label for="token">GitHub access token</label>
+        <input id="token" type="password" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="github_pat_…" required aria-describedby="token-note">
+        <button id="connect-button" class="button primary primary-action" type="submit"><svg class="icon"><use href="#i-lock"/></svg><span>connect GitHub</span></button>
+        <p id="auth-error" class="error-message" role="alert" hidden></p>
+      </form>
+      <p id="token-note" class="auth-note"><svg class="icon"><use href="#i-lock"/></svg>Token stays in this tab. Reconnect after refreshing.</p>
+      <details class="setup-details">
+        <summary>first time? set up your token</summary>
+        <ol>
+          <li>Open <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener noreferrer">GitHub’s token settings</a> as <strong>rrixh</strong>.</li>
+          <li>Create a fine-grained token. Select only <strong>rrixh/install</strong>.</li>
+          <li>Under Repository permissions, set <strong>Contents → Read and write</strong>. Leave the other permissions at their defaults.</li>
+          <li>Generate the token and paste it above. Keep it private.</li>
+        </ol>
+        <p>Cloudflare Pages must deploy the <strong>main</strong> branch with the repository root as its output. New saves go live after that deployment completes.</p>
+      </details>
+    </section>
+  </main>
+
+  <main id="dashboard" class="dashboard-shell" hidden>
+    <header class="topbar">
+      <div class="brand-lockup"><div class="mini-mark"><svg class="icon"><use href="#i-code"/></svg></div><div><strong>rrixh</strong><span>raw skript host</span></div></div>
+      <div class="owner-chip"><span class="owner-dot"></span><span class="owner-email">rrixh · owner</span><button id="sign-out" class="button ghost" type="button">sign out</button></div>
+    </header>
+    <div class="workspace">
+      <aside class="file-panel" aria-label="Your skripts">
+        <div class="file-panel-head"><div><p class="panel-label">skripts</p><span id="file-count">0 files</span></div><div class="panel-tools"><button id="refresh" class="button ghost icon-button" aria-label="Refresh file list" title="Refresh file list"><svg class="icon"><use href="#i-refresh"/></svg></button><button id="new-file" class="button primary icon-button" aria-label="New skript" title="New skript"><svg class="icon"><use href="#i-plus"/></svg></button></div></div>
+        <div class="search-wrap"><svg class="icon"><use href="#i-search"/></svg><input id="search" type="search" placeholder="search skripts…" aria-label="Search skripts" autocomplete="off"></div>
+        <div id="file-list" class="file-list"></div>
+        <a class="repo-link" href="https://github.com/rrixh/install/tree/main/raw" target="_blank" rel="noopener noreferrer">rrixh/install ↗</a>
+      </aside>
+      <section class="editor-panel" aria-label="Skript editor">
+        <div class="editor-head"><div class="editor-heading"><p id="editor-mode" class="panel-label">new skript</p><h1 id="editor-title">untitled.lua</h1></div><div class="editor-actions"><button id="download" class="button ghost icon-button" aria-label="Download a local kopy" title="Download a local kopy"><svg class="icon"><use href="#i-download"/></svg></button><button id="delete" class="button ghost icon-button danger" aria-label="Delete skript" title="Delete skript" disabled><svg class="icon"><use href="#i-trash"/></svg></button><button id="save" class="button primary save-button"><svg class="icon"><use href="#i-save"/></svg><span id="save-label">save skript</span></button></div></div>
+        <div class="filename-block"><label for="filename">filename</label><input id="filename" placeholder="filename.lua" maxlength="120" autocomplete="off" autocapitalize="off" spellcheck="false" aria-describedby="filename-hint"><span id="filename-hint">include your extension</span></div>
+        <div class="kode-block"><div class="kode-label"><label for="kode">kode</label><span id="char-count">0 characters</span></div><textarea id="kode" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" aria-describedby="save-status" placeholder="-- paste your skript here"></textarea></div>
+        <div id="save-status" class="save-status" role="status" aria-live="polite">Save a skript to get its raw link.</div>
+        <div class="raw-link-card"><div class="raw-icon"><svg class="icon"><use href="#i-link"/></svg></div><div class="raw-copy"><span id="link-label">raw link</span><code id="raw-url">rrixh.pages.dev/raw/filename.lua</code></div><button id="copy" class="button secondary" disabled><svg class="icon"><use href="#i-copy"/></svg><span>kopy link</span></button></div>
+        <div class="editor-foot"><span id="draft-note">Each save publishes through Cloudflare.</span><button id="check-live" class="text-button" disabled>check live link ↗</button></div>
+        <div id="editor-error" class="error-message" role="alert" hidden></div>
+      </section>
+    </div>
+  </main>
+  <dialog id="confirm-dialog"><form method="dialog"><p class="eyebrow">rrixh raw</p><h2 id="confirm-title">Discard changes?</h2><p id="confirm-copy"></p><div class="dialog-actions"><button class="button secondary" value="cancel" autofocus>keep editing</button><button id="confirm-accept" class="button primary" value="accept">discard</button></div></form></dialog>
+  <dialog id="copy-dialog"><form method="dialog"><h2>kopy your link</h2><p>Your browser blocked automatic copying. Select and kopy this link.</p><input id="copy-value" readonly aria-label="Raw link"><div class="dialog-actions"><button class="button primary" value="close">done</button></div></form></dialog>
+  <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+  <noscript><p class="noscript">Enable JavaScript to use this dashboard. Your published raw links work without JavaScript.</p></noscript>
+  <script type="module">const CONFIG = Object.freeze({ owner: "rrixh", repo: "install", branch: "main", origin: "https://rrixh.pages.dev" });
+const MAX_BYTES = 2 * 1024 * 1024;
+const encoder = new TextEncoder();
+
+class AppError extends Error {
+  constructor(message, status = 0) { super(message); this.name = "AppError"; this.status = status; }
+}
+
+function validateFilename(name) {
+  if (typeof name !== "string" || name.length > 120 || !/^[A-Za-z0-9_-]+(?:\.[A-Za-z0-9_-]+)+$/.test(name)) {
+    throw new AppError("Use a filename with an extension, like main.lua. Letters, numbers, dots, dashes and underscores only; 120 characters max.");
+  }
+  return name;
+}
+
+function validateContent(content) {
+  if (encoder.encode(content).byteLength > MAX_BYTES) throw new AppError("This skript is over the 2 MB editor limit. Keep a local kopy and upload it directly through GitHub.");
+}
+
+function rawURL(name) { return `${CONFIG.origin}/raw/${encodeURIComponent(validateFilename(name))}`; }
+
+function decodeBlob(blob) {
+  if (blob.encoding !== "base64") throw new AppError("GitHub returned an unsupported file encoding.");
+  const binary = atob(blob.content.replace(/\s/g, ""));
+  const bytes = Uint8Array.from(binary, char => char.charCodeAt(0));
+  try { return new TextDecoder("utf-8", { fatal: true, ignoreBOM: true }).decode(bytes); }
+  catch { throw new AppError("This file is not UTF-8 text. Download it from GitHub instead of editing it here."); }
+}
+
+async function gitBlobSHA(bytes) {
+  const header = encoder.encode(`blob ${bytes.byteLength}\0`);
+  const data = new Uint8Array(header.length + bytes.length);
+  data.set(header); data.set(bytes, header.length);
+  return Array.from(new Uint8Array(await crypto.subtle.digest("SHA-1", data)), n => n.toString(16).padStart(2, "0")).join("");
+}
+
+class GitHubStore {
+  #token;
+  #fetch;
+  #root = `/repos/${CONFIG.owner}/${CONFIG.repo}`;
+  constructor(token, fetcher = globalThis.fetch.bind(globalThis)) { this.#token = token; this.#fetch = fetcher; }
+  disconnect() { this.#token = ""; }
+
+  async request(path, { method = "GET", body } = {}) {
+    if (!this.#token) throw new AppError("Connect your GitHub token again.", 401);
+    if (path !== "/user" && !path.startsWith(this.#root + "/") && path !== this.#root) throw new AppError("Invalid GitHub API path.");
+    let response;
+    try {
+      response = await this.#fetch(`https://api.github.com${path}`, {
+        method, redirect: "error", credentials: "omit", cache: "no-store",
+        signal: AbortSignal.timeout(30000),
+        headers: {
+          Accept: "application/vnd.github+json",
+          Authorization: `Bearer ${this.#token}`,
+          "X-GitHub-Api-Version": "2026-03-10",
+          ...(body ? { "Content-Type": "application/json" } : {})
+        },
+        ...(body ? { body: JSON.stringify(body) } : {})
+      });
+    } catch { throw new AppError("Could not reach GitHub. Check your connection and try again."); }
+    if (!response.ok) {
+      const messages = {
+        401: "Your GitHub token is invalid or expired. Sign out and connect a new token.",
+        403: "GitHub blocked this request. Check the token’s Contents: read and write permission, branch rules, or GitHub’s API limit.",
+        404: "GitHub could not find this repository, branch or file. Check your token has access to rrixh/install.",
+        409: "The repository changed while saving. Your draft is still here; refresh the file list and try again.",
+        422: "GitHub rejected the update. The branch may have changed or a branch rule may block direct commits. Your draft is still here.",
+        429: "GitHub’s request limit was reached. Your draft is still here; wait before trying again."
+      };
+      throw new AppError(messages[response.status] || `GitHub request failed (${response.status}). Your draft is still here.`, response.status);
+    }
+    return response.status === 204 ? null : response.json();
+  }
+
+  async connect() {
+    const user = await this.request("/user");
+    if (user.login.toLowerCase() !== CONFIG.owner.toLowerCase()) throw new AppError("Connect using the rrixh GitHub account that owns this repository.");
+    const repo = await this.request(this.#root);
+    if (!repo.permissions?.push) throw new AppError("This account cannot write to rrixh/install.");
+    return this.snapshot();
+  }
+
+  async snapshot() {
+    const ref = await this.request(`${this.#root}/git/ref/heads/${encodeURIComponent(CONFIG.branch)}`);
+    const commit = await this.request(`${this.#root}/git/commits/${ref.object.sha}`);
+    const tree = await this.request(`${this.#root}/git/trees/${commit.tree.sha}`);
+    if (tree.truncated) throw new AppError("The repository tree is too large to list safely.");
+    const directory = tree.tree.find(entry => entry.path === "raw");
+    if (directory && directory.type !== "tree") throw new AppError("The repository already has a file called raw. A raw folder is needed; rename that file in GitHub first.");
+    const raw = directory ? await this.request(`${this.#root}/git/trees/${directory.sha}`) : { tree: [] };
+    if (raw.truncated) throw new AppError("The raw folder is too large to list safely.");
+    const entries = new Map(raw.tree.map(entry => [entry.path, entry]));
+    const files = raw.tree.filter(entry => {
+      try { return entry.type === "blob" && entry.mode === "100644" && Boolean(validateFilename(entry.path)); }
+      catch { return false; }
+    }).map(entry => ({ name: entry.path, sha: entry.sha, size: entry.size || 0 })).sort((a, b) => a.name.localeCompare(b.name));
+    return { head: ref.object.sha, tree: commit.tree.sha, files, entries };
+  }
+
+  async read(file) {
+    if (file.size > MAX_BYTES) throw new AppError("This file is over the 2 MB editor limit. Open it in GitHub instead.");
+    const blob = await this.request(`${this.#root}/git/blobs/${file.sha}`);
+    if (blob.size > MAX_BYTES) throw new AppError("This file is over the 2 MB editor limit.");
+    const content = decodeBlob(blob);
+    validateContent(content);
+    return { name: file.name, sha: file.sha, content };
+  }
+
+  async write({ name, content = "", original = null, remove = false }) {
+    validateFilename(name);
+    if (!remove) validateContent(content);
+    if (remove && !original) throw new AppError("Choose a saved skript to delete.");
+    if (original) validateFilename(original.name);
+    const savedSHA = remove ? null : await gitBlobSHA(encoder.encode(content));
+    const current = await this.snapshot();
+    if (original) {
+      const entry = current.entries.get(original.name);
+      if (!entry || entry.sha !== original.sha || entry.type !== "blob" || entry.mode !== "100644") {
+        throw new AppError("This skript changed or was deleted in GitHub since you opened it. Your draft is still here. Download a kopy, then reopen the latest version before saving.", 409);
+      }
+    }
+    if (!remove && (!original || original.name !== name) && current.entries.has(name)) {
+      throw new AppError("That filename already exists. Choose a different name or open the existing skript.", 409);
+    }
+    const changes = [];
+    if (original && (remove || original.name !== name)) changes.push({ path: `raw/${original.name}`, mode: "100644", type: "blob", sha: null });
+    if (!remove) changes.push({ path: `raw/${name}`, mode: "100644", type: "blob", content });
+    const tree = await this.request(`${this.#root}/git/trees`, { method: "POST", body: { base_tree: current.tree, tree: changes } });
+    const verb = remove ? "Delete" : !original ? "Create" : original.name !== name ? "Rename" : "Update";
+    const commit = await this.request(`${this.#root}/git/commits`, {
+      method: "POST", body: { message: `${verb} raw/${remove ? original.name : name}`, tree: tree.sha, parents: [current.head] }
+    });
+    try {
+      await this.request(`${this.#root}/git/refs/heads/${encodeURIComponent(CONFIG.branch)}`, { method: "PATCH", body: { sha: commit.sha, force: false } });
+    } catch (error) {
+      // A lost response can happen after GitHub accepts the commit. Verify before saying it failed.
+      if (error.status) throw error;
+      try {
+        const ref = await this.request(`${this.#root}/git/ref/heads/${encodeURIComponent(CONFIG.branch)}`);
+        if (ref.object.sha !== commit.sha) throw new Error("unconfirmed");
+      } catch { throw new AppError("The save could not be confirmed. Your draft is still here. Check the GitHub commit history before trying again."); }
+    }
+    const sha = savedSHA;
+    const files = current.files.filter(file => file.name !== original?.name && file.name !== name);
+    if (!remove) files.push({ name, sha, size: encoder.encode(content).byteLength });
+    files.sort((a, b) => a.name.localeCompare(b.name));
+    return { files, saved: remove ? null : { name, sha, content }, commit: commit.sha };
+  }
+}
+
+
+const $ = id => document.getElementById(id);
+const state = { api: null, files: [], saved: null, baseline: { name: "", content: "" }, busy: false, checking: false, liveGeneration: 0, poll: null };
+let toastTimer;
+
+function icon(name) {
+  const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+  svg.setAttribute("class", "icon"); svg.setAttribute("aria-hidden", "true");
+  const use = document.createElementNS("http://www.w3.org/2000/svg", "use");
+  use.setAttribute("href", `#i-${name}`); svg.append(use); return svg;
+}
+function dirty() { return $("filename").value !== state.baseline.name || $("kode").value !== state.baseline.content; }
+function draftContent() { return state.saved && $("kode").value === state.baseline.content ? state.saved.content : $("kode").value; }
+function error(message = "") { $("editor-error").textContent = message; $("editor-error").hidden = !message; }
+function toast(message) { clearTimeout(toastTimer); $("toast").textContent = message; $("toast").hidden = false; toastTimer = setTimeout(() => { $("toast").hidden = true; }, 4000); }
+function status(message, live = false) { $("save-status").textContent = message; $("save-status").classList.toggle("is-live", live); }
+function bytesLabel(size) { return size < 1024 ? `${size} B` : `${(size / 1024).toFixed(1)} KB`; }
+function stopPolling() { clearTimeout(state.poll); state.poll = null; state.liveGeneration++; state.checking = false; }
+
+function renderList() {
+  const fragment = document.createDocumentFragment();
+  const query = $("search").value.toLowerCase();
+  const matches = state.files.filter(file => file.name.toLowerCase().includes(query));
+  $("file-count").textContent = `${state.files.length} ${state.files.length === 1 ? "file" : "files"}`;
+  for (const file of matches) {
+    const row = document.createElement("button"); row.type = "button"; row.className = "file-row";
+    const active = file.name === state.saved?.name;
+    row.classList.toggle("active", active); row.setAttribute("aria-pressed", String(active)); row.title = file.name; row.disabled = state.busy;
+    const label = document.createElement("span");
+    const name = document.createElement("strong"); name.textContent = file.name;
+    const meta = document.createElement("small"); meta.textContent = `${bytesLabel(file.size)} · saved on GitHub`;
+    label.append(name, meta); row.append(icon("code"), label);
+    if (active) { const check = icon("check"); check.classList.add("active-check"); row.append(check); }
+    row.addEventListener("click", () => openFile(file)); fragment.append(row);
+  }
+  if (!matches.length) {
+    const empty = document.createElement("div"); empty.className = "empty-list";
+    const message = document.createElement("p"); message.textContent = query ? "no matching skripts" : "your skripts start here";
+    empty.append(icon("code"), message); fragment.append(empty);
+  }
+  $("file-list").replaceChildren(fragment);
+}
+
+function renderEditor() {
+  const modified = dirty();
+  $("editor-title").textContent = $("filename").value || "untitled.lua";
+  $("editor-title").title = $("editor-title").textContent;
+  $("editor-mode").textContent = state.saved ? (modified ? "unsaved changes" : "edit skript") : "new skript";
+  $("char-count").textContent = `${$("kode").value.length.toLocaleString()} characters · ${bytesLabel(encoder.encode(draftContent()).length)}`;
+  $("save").disabled = state.busy || !$("filename").value || (Boolean(state.saved) && !modified);
+  $("delete").disabled = state.busy || !state.saved;
+  $("download").disabled = state.busy || (!$("filename").value && !$("kode").value);
+  $("copy").disabled = !state.saved;
+  $("check-live").disabled = state.busy || state.checking || !state.saved;
+  for (const id of ["new-file", "refresh", "sign-out", "filename", "kode", "search"]) $(id).disabled = state.busy;
+  $("raw-url").textContent = state.saved ? rawURL(state.saved.name) : "rrixh.pages.dev/raw/filename.lua";
+  $("link-label").textContent = state.saved && $("filename").value !== state.saved.name ? "saved file’s raw link" : "raw link";
+  $("draft-note").textContent = modified ? "Unsaved changes · Ctrl / ⌘ + S to save" : "Each save publishes through Cloudflare.";
+  document.title = `${modified ? "• " : ""}${state.saved?.name || "rrixh"} — raw skript host`;
+}
+
+function setBusy(busy, label = "saving…") {
+  state.busy = busy; $("save-label").textContent = busy ? label : "save skript";
+  $("dashboard").setAttribute("aria-busy", String(busy)); renderList(); renderEditor();
+}
+function setEditor(saved) {
+  stopPolling(); state.saved = saved;
+  $("filename").value = saved?.name || ""; $("kode").value = saved?.content || "";
+  state.baseline = { name: $("filename").value, content: $("kode").value };
+  error(); status(saved ? "Saved in GitHub. Check the live link to confirm publication." : "Save a skript to get its raw link.");
+  renderList(); renderEditor();
+}
+
+function confirmAction(title, copy, accept) {
+  const dialog = $("confirm-dialog");
+  if (dialog.open) return Promise.resolve(false);
+  $("confirm-title").textContent = title; $("confirm-copy").textContent = copy; $("confirm-accept").textContent = accept;
+  return new Promise(resolve => {
+    dialog.returnValue = "cancel";
+    dialog.addEventListener("close", () => resolve(dialog.returnValue === "accept"), { once: true });
+    dialog.showModal();
+  });
+}
+async function canLeave() {
+  return !dirty() || await confirmAction("Discard unsaved changes?", "Your current draft has not been saved. Download a local kopy first if you need to keep it.", "discard changes");
+}
+
+async function openFile(file) {
+  if (state.busy || !(await canLeave())) return;
+  setBusy(true, "opening…"); error();
+  try { setEditor(await state.api.read(file)); }
+  catch (err) { error(err.message); }
+  finally { setBusy(false); }
+}
+
+async function checkLive({ auto = false, attempt = 0 } = {}) {
+  const saved = state.saved;
+  if (!saved || state.checking || state.busy) return;
+  const generation = state.liveGeneration;
+  state.checking = true; renderEditor();
+  let matches = false;
+  try {
+    const response = await fetch(`${rawURL(saved.name)}?v=${Date.now()}`, { cache: "no-store", credentials: "omit", redirect: "follow", signal: AbortSignal.timeout(12000) });
+    if (response.ok && /^text\/plain\b/i.test(response.headers.get("Content-Type") || "")) {
+      const bytes = new Uint8Array(await response.arrayBuffer());
+      matches = bytes.byteLength <= MAX_BYTES && await gitBlobSHA(bytes) === saved.sha;
+    }
+    if (generation !== state.liveGeneration) return;
+    status(matches ? "Live on rrixh.pages.dev — raw text verified." : "Saved to GitHub. The live link has not updated yet; check your Cloudflare deployment.", matches);
+  } catch {
+    if (generation === state.liveGeneration) status("Saved to GitHub. Could not verify the live link; check Cloudflare’s deployment status.");
+  } finally {
+    if (generation === state.liveGeneration) {
+      state.checking = false; renderEditor();
+      if (auto && !matches && attempt < 11) state.poll = setTimeout(() => checkLive({ auto: true, attempt: attempt + 1 }), 10000);
+    }
+  }
+}
+
+$("connect-form").addEventListener("submit", async event => {
+  event.preventDefault();
+  const token = $("token").value.trim();
+  if (!token) return;
+  $("connect-button").disabled = true; $("connect-button").querySelector("span").textContent = "connecting…";
+  $("auth-error").hidden = true;
+  const api = new GitHubStore(token);
+  $("token").value = "";
+  try {
+    const snapshot = await api.connect();
+    state.api = api; state.files = snapshot.files;
+    $("auth").hidden = true; $("dashboard").hidden = false;
+    $("search").value = ""; setEditor(null); $("filename").focus();
+    if (state.files.length) await openFile(state.files[0]);
+  } catch (err) {
+    api.disconnect(); $("auth-error").textContent = err.message; $("auth-error").hidden = false; $("token").focus();
+  } finally {
+    $("connect-button").disabled = false; $("connect-button").querySelector("span").textContent = "connect GitHub";
+  }
+});
+
+$("sign-out").addEventListener("click", async () => {
+  if (state.busy || !(await canLeave())) return;
+  stopPolling(); state.api.disconnect(); state.api = null; state.files = []; setEditor(null);
+  $("dashboard").hidden = true; $("auth").hidden = false; $("token").value = ""; $("token").focus();
+});
+$("new-file").addEventListener("click", async () => {
+  if (state.busy || !(await canLeave())) return;
+  setEditor(null); $("filename").focus();
+});
+$("refresh").addEventListener("click", async () => {
+  if (state.busy) return;
+  setBusy(true, "refreshing…"); error();
+  try {
+    state.files = (await state.api.snapshot()).files;
+    toast("File list refreshed. Your open draft was kept.");
+  } catch (err) { error(err.message); }
+  finally { setBusy(false); }
+});
+$("search").addEventListener("input", renderList);
+for (const id of ["filename", "kode"]) $(id).addEventListener("input", () => { error(); renderEditor(); });
+
+$("save").addEventListener("click", async () => {
+  if (state.busy || $("save").disabled) return;
+  error();
+  const name = $("filename").value;
+  const content = draftContent();
+  try { validateFilename(name); validateContent(content); }
+  catch (err) { error(err.message); return; }
+  if (state.saved && name !== state.saved.name) {
+    if (!(await confirmAction("Rename this skript?", `The raw link for ${state.saved.name} will stop working after deployment. The new link will use ${name}.`, "rename and save"))) return;
+  }
+  stopPolling(); setBusy(true);
+  try {
+    const result = await state.api.write({ name, content, original: state.saved });
+    state.files = result.files; setEditor(result.saved);
+    status("Saved to GitHub — waiting for Cloudflare to publish.");
+    toast("Skript saved to GitHub.");
+    state.poll = setTimeout(() => checkLive({ auto: true }), 6000);
+  } catch (err) { error(err.message); }
+  finally { setBusy(false); }
+});
+
+$("delete").addEventListener("click", async () => {
+  if (state.busy || !state.saved) return;
+  if (!(await confirmAction("Delete this skript?", `${state.saved.name} will be removed from GitHub. Its raw link will stop working after deployment.${dirty() ? " Your unsaved changes will also be discarded." : ""}`, "delete skript"))) return;
+  stopPolling(); setBusy(true, "deleting…"); error();
+  try {
+    const result = await state.api.write({ name: state.saved.name, original: state.saved, remove: true });
+    state.files = result.files; setEditor(null);
+    toast("Deleted in GitHub. Cloudflare will update after deployment."); $("filename").focus();
+  } catch (err) { error(err.message); }
+  finally { setBusy(false); }
+});
+
+$("copy").addEventListener("click", async () => {
+  if (!state.saved) return;
+  const url = rawURL(state.saved.name);
+  try { await navigator.clipboard.writeText(url); toast("Raw link kopied."); }
+  catch { $("copy-value").value = url; $("copy-dialog").showModal(); $("copy-value").focus(); $("copy-value").select(); }
+});
+$("check-live").addEventListener("click", () => { clearTimeout(state.poll); checkLive(); });
+$("download").addEventListener("click", () => {
+  const blob = new Blob([draftContent()], { type: "text/plain;charset=utf-8" });
+  const url = URL.createObjectURL(blob); const link = document.createElement("a");
+  link.href = url; link.download = $("filename").value.replace(/[^A-Za-z0-9_.-]/g, "_") || "skript.lua";
+  document.body.append(link); link.click(); link.remove(); setTimeout(() => URL.revokeObjectURL(url), 1000);
+});
+document.addEventListener("keydown", event => {
+  if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === "s" && !$("dashboard").hidden) { event.preventDefault(); if (!$("confirm-dialog").open && !$("copy-dialog").open) $("save").click(); }
+});
+window.addEventListener("beforeunload", event => { if (state.busy || dirty()) { event.preventDefault(); event.returnValue = ""; } });
+window.addEventListener("pagehide", () => {
+  stopPolling(); state.api?.disconnect(); state.api = null;
+  // A page restored from the browser’s back/forward cache must not reuse authentication.
+  $("dashboard").hidden = true; $("auth").hidden = false;
+});
+</script>
+</body>
+</html>
