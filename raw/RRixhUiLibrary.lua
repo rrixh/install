@@ -6,13 +6,15 @@
     toggle(), textbox(), kounter(), slider(), kolorpicker() and dropdown().
 ]]
 
-local Players = game:GetService("Players")
-local UserInputService = game:GetService("UserInputService")
-local TweenService = game:GetService("TweenService")
-local RunService = game:GetService("RunService")
-local TextService = game:GetService("TextService")
-local HttpService = game:GetService("HttpService")
-local Lighting = game:GetService("Lighting")
+s = cloneref;
+
+local Players = s(game:GetService("Players"))
+local UserInputService = s(game:GetService("UserInputService"))
+local TweenService = s(game:GetService("TweenService"))
+local RunService = s(game:GetService("RunService"))
+local TextService = s(game:GetService("TextService"))
+local HttpService = s(game:GetService("HttpService"))
+local Lighting = s(game:GetService("Lighting")) or game.Lighting;
 
 local LocalPlayer = Players.LocalPlayer
 
@@ -35,8 +37,7 @@ local COLORS = {
     Stroke = Color3.fromRGB(55, 59, 73),
 }
 
--- Generate every symbol at runtime so source hosts cannot turn UTF-8 into
--- mojibake such as the malformed "a" glyphs seen on some executors.
+-- to prevent mojibake 
 local ICONS = {
     Toggle = utf8.char(0x1F47A),
     Home = utf8.char(0x1F3E0),
@@ -69,7 +70,7 @@ local function pageIcon(name)
         return ICONS.Home
     end
     return ICONS.Page
-end
+end;
 
 local function create(className, properties, children)
     local object = Instance.new(className)
@@ -2157,9 +2158,7 @@ function RRixh:DestroyAll()
     end
 end
 
---// SIMPLE API -------------------------------------------------------------
--- Every element accepts a page as its first argument. If that argument is nil
--- or omitted, the first existing page is used. If no page exists, home is made.
+--// SIMPLE API 
 
 local environment = _G
 pcall(function()
@@ -2208,9 +2207,9 @@ local function buildESPSystem(window)
     }
     local glowBloom = create("BloomEffect", {
         Enabled = false,
-        Intensity = 1.4,
+        Intensity = 1.2,
         Name = "RRixhESPGlow",
-        Size = 32,
+        Size = 30,
         Threshold = 0.72,
         Parent = Lighting,
     })
@@ -2768,22 +2767,22 @@ local function buildESPSystem(window)
         end
     end)
 
-    pageObject:Section("highlight")
-    pageObject:Toggle("Highlight Players", false, function(value) manager.Config.Highlight = value end)
-    pageObject:Toggle("Include NPCs", false, function(value) manager.Config.NPCs = value; if not value then clearNPCs() end end)
-    pageObject:ColorPicker("Highlight Kolor", COLORS.Accent, function(value) manager.Config.Color = value end)
-    pageObject:Toggle("Rainbow Highlight Kolor", false, function(value) manager.Config.Rainbow = value end)
-    pageObject:Toggle("Team Kolor ESP", false, function(value) manager.Config.TeamColor = value end)
-    pageObject:Toggle("Glowing ESP", false, function(value) manager.Config.Glow = value end)
+    pageObject:Section("ESP")
+    pageObject:Toggle("highlight all players", false, function(value) manager.Config.Highlight = value end)
+    pageObject:Toggle("include NPCs", false, function(value) manager.Config.NPCs = value; if not value then clearNPCs() end end)
+    pageObject:ColorPicker("ESP highlight kolor", COLORS.Accent, function(value) manager.Config.Color = value end)
+    pageObject:Toggle("rainbow mode", false, function(value) manager.Config.Rainbow = value end)
+    pageObject:Toggle("teams ESP", false, function(value) manager.Config.TeamColor = value end)
+    pageObject:Toggle("glowing ESP (bright)", false, function(value) manager.Config.Glow = value end)
 
-    pageObject:Section("esp types")
-    pageObject:Toggle("Skeleton ESP", false, function(value) manager.Config.Skeleton = value end)
-    pageObject:Toggle("Minecraft Korner ESP", false, function(value) manager.Config.Minecraft = value end)
-    pageObject:Toggle("Username ESP", false, function(value) manager.Config.Username = value end)
-    pageObject:Toggle("Health Display ESP", false, function(value) manager.Config.Health = value end)
-    pageObject:Toggle("Directional Arrows ESP", false, function(value) manager.Config.Arrow = value end)
-    pageObject:Toggle("Studs Distance ESP", false, function(value) manager.Config.Distance = value end)
-    pageObject:Toggle("Pointing Arrow", false, function(value) manager.Config.Pointer = value end)
+    pageObject:Section("ESP TYPES")
+    pageObject:Toggle("stickman ESP", false, function(value) manager.Config.Skeleton = value end)
+    pageObject:Toggle("minecraft ESP", false, function(value) manager.Config.Minecraft = value end)
+    pageObject:Toggle("usernames ESP", false, function(value) manager.Config.Username = value end)
+    pageObject:Toggle("health bar ESP", false, function(value) manager.Config.Health = value end)
+    pageObject:Toggle("directional arrows ESP", false, function(value) manager.Config.Arrow = value end)
+    pageObject:Toggle("studs distance ESP", false, function(value) manager.Config.Distance = value end)
+    pageObject:Toggle("pointing arrow", false, function(value) manager.Config.Pointer = value end)
     pageObject:Toggle("Tracer ESP", false, function(value) manager.Config.Tracer = value end)
     pageObject:Toggle("Head Dot ESP", false, function(value) manager.Config.HeadDot = value end)
     return manager
@@ -2792,7 +2791,7 @@ end
 local ESPManager = buildESPSystem(simpleWindow)
 
 local function buildPlayerSystem(window)
-    local pageObject = window:_buildPage("Player", {Search = true, Order = 91000}, false)
+    local pageObject = window:_buildPage("player movement", {Search = true, Order = 91000}, false)
     local state = {
         TeleportWalk = false,
         TeleportSpeed = 0.1,
@@ -2918,35 +2917,35 @@ local function buildPlayerSystem(window)
 
     pageObject:Section("movement")
     local humanoid = humanoidAndRoot()
-    pageObject:Counter("WalkSpeed", 0, 600, humanoid and humanoid.WalkSpeed or 16, 1, function(value)
+    pageObject:Counter("walkspeed", 0, 600, humanoid and humanoid.WalkSpeed or 16, 1, function(value)
         local currentHumanoid = humanoidAndRoot()
         if currentHumanoid then
             currentHumanoid.WalkSpeed = value
         end
     end)
-    pageObject:Counter("JumpPower", 0, 500, humanoid and humanoid.JumpPower or 50, 1, function(value)
+    pageObject:Counter("jump power", 0, 500, humanoid and humanoid.JumpPower or 50, 1, function(value)
         local currentHumanoid = humanoidAndRoot()
         if currentHumanoid then
             pcall(function() currentHumanoid.UseJumpPower = true end)
             currentHumanoid.JumpPower = value
         end
     end)
-    pageObject:Counter("HipHeight", -10, 100, humanoid and humanoid.HipHeight or 0, 0.1, function(value)
+    pageObject:Counter("airwalk", -10, 100, humanoid and humanoid.HipHeight or 0, 0.1, function(value)
         local currentHumanoid = humanoidAndRoot()
         if currentHumanoid then
             currentHumanoid.HipHeight = value
         end
     end)
-    pageObject:Counter("TP Walk Speed", 0.1, 10, 0.1, 0.1, function(value)
+    pageObject:Counter("teleport walk speed", 0.1, 10, 0.1, 0.1, function(value)
         state.TeleportSpeed = value
     end)
-    pageObject:Toggle("Teleport Walk", false, function(value)
+    pageObject:Toggle("teleport walk", false, function(value)
         state.TeleportWalk = value
     end)
 
     pageObject:Section("jump")
-    pageObject:Toggle("Better Jump Button", false, setBetterJump)
-    pageObject:Label("better jump", "replaces the Roblox jump button with a red hold-to-fly jump button")
+    pageObject:Toggle("better jump button", false, setBetterJump)
+    pageObject:Label("better jump", "replaces the roblox jump button with a red hold-to-fly jump button")
 
     window:_connect(UserInputService.InputEnded, function(input)
         if input.UserInputType == Enum.UserInputType.Touch
@@ -3000,7 +2999,7 @@ end
 local PlayerSystem = buildPlayerSystem(simpleWindow)
 
 local function buildPlayerTeleportSystem(window, espManager)
-    local pageObject = window:_buildPage("Player Teleport", {Search = true, Order = 92000}, false)
+    local pageObject = window:_buildPage("player teleport", {Search = true, Order = 92000}, false)
     local state = {
         Entries = {},
         Spectating = nil,
