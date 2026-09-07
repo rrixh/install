@@ -974,7 +974,7 @@ function Page:Toggle(text, default, callback)
         Parent = track,
     }, {corner(9)})
 
-    local controller = {Window = self.Window}
+    local controller = {Window = self.Window, Frame = row}
     function controller:Set(value, silent)
         value = value == true
         if state == value then
@@ -1039,7 +1039,7 @@ function Page:Loop(text, default, callback)
         Parent = row,
     }, {corner(11), indicatorOutline})
 
-    local controller = {Window = self.Window}
+    local controller = {Window = self.Window, Frame = row}
     function controller:Set(value, silent)
         value = value == true
         if state == value then
@@ -3599,6 +3599,7 @@ local function simpleDestroy(skipConfirmation)
 end
 
 local simpleAPI = {
+    esppage = ESPManager.Page,
     page = newPage,
     section = simpleSection,
     label = simpleLabel,
