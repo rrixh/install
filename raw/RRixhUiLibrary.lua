@@ -3,12 +3,12 @@
     Mobile + PC Luau interface library
 
     Loading this file installs simple functions such as page(), button(),
-    toggle(), textbox(), kounter(), slider(), kolorpicker() and dropdown().
+    toggle(), loop(), textbox(), kounter(), slider(), kolorpicker() and dropdown().
 ]]
 
-local s = cloneref or function(srv)
-    return srv
-end;
+local s = cloneref or function(service)
+    return service
+end
 
 local Players = s(game:GetService("Players"))
 local UserInputService = s(game:GetService("UserInputService"))
@@ -1004,6 +1004,116 @@ function Page:Toggle(text, default, callback)
             end
         end)
     end
+    return controller
+end
+
+function Page:Loop(text, default, callback)
+    local row = self:_row(50, text)
+    local state = default == true
+    local button = create("TextButton", {
+        AutoButtonColor = false,
+        BackgroundTransparency = 1,
+        Size = UDim2.fromScale(1, 1),
+        Text = "",
+        Parent = row,
+    })
+    create("TextLabel", {
+        BackgroundTransparency = 1,
+        Position = UDim2.fromOffset(14, 0),
+        Size = UDim2.new(1, -62, 1, 0),
+        Font = Enum.Font.GothamBold,
+        Text = tostring(text or "loop"),
+        TextColor3 = COLORS.Text,
+        TextSize = 13,
+        TextXAlignment = Enum.TextXAlignment.Left,
+        Parent = row,
+    })
+    local indicatorOutline = stroke(COLORS.Accent, 0, 2)
+    local indicator = create("Frame", {
+        AnchorPoint = Vector2.new(1, 0.5),
+        BackgroundColor3 = COLORS.Accent,
+        BackgroundTransparency = state and 0 or 1,
+        BorderSizePixel = 0,
+        Position = UDim2.new(1, -14, 0.5, 0),
+        Size = UDim2.fromOffset(22, 22),
+        Parent = row,
+    }, {corner(11), indicatorOutline})
+
+    local controller = {Window = self.Window}
+    function controller:Set(value, silent)
+        value = value == true
+        if state == value then
+            return
+        end
+        state = value
+        tween(indicator, 0.16, {
+            BackgroundTransparency = state and 0 or 1,
+        })
+        tween(indicatorOutline, 0.16, {
+            Color = state and Color3.new(1, 1, 1) or COLORS.Accent,
+            Transparency = state and 0.35 or 0,
+        })
+        if not silent then
+            safeCallback(self.Window, callback, state)
+        end
+    end
+    function controller:Get()
+        return state
+    end
+
+    self.Window:_connect(button.Activated, function()
+        controller:Set(not state, false)
+    end)
+    table.insert(self.Window._toggles, controller)
+    if state then
+        task.defer(function()
+            if not self.Window._destroyed then
+                safeCallback(self.Window, callback, true)
+            end
+        end)
+    end
+    return controller
+end
+
+function Page:toggle(text, default, callback)
+    if type(default) == "function" and callback == nil then
+        callback = default
+        default = false
+    end
+    return self:Toggle(text, default, callback)
+end
+
+function Page:loop(text, default, callback)
+    if type(default) == "function" and callback == nil then
+        callback = default
+        default = false
+    end
+
+    local generation = 0
+    local controller
+    controller = self:Loop(text, default, function(enabled)
+        generation += 1
+        local thisGeneration = generation
+        if not enabled then
+            return
+        end
+
+        task.spawn(function()
+            while controller
+                and controller:Get()
+                and generation == thisGeneration
+                and not self.Window._destroyed do
+                local success = safeCallback(self.Window, callback)
+                if not success then
+                    if controller and controller:Get() then
+                        controller:Set(false, true)
+                    end
+                    break
+                end
+                task.wait()
+            end
+        end)
+    end)
     return controller
 end
 
@@ -3360,35 +3470,22 @@ local function simpleToggle(pageArgument, textArgument, callbackArgument)
         callback = textArgument
     end
 
-    local generation = 0
-    local controller
-    controller = targetPage:Toggle(text, false, function(enabled)
-        generation += 1
-        local thisGeneration = generation
-        if not enabled then
-            return
-        end
+    return targetPage:Toggle(text, false, callback)
+end
 
-        task.spawn(function()
-            while controller
-                and controller:Get()
-                and generation == thisGeneration
-                and not simpleWindow._destroyed do
-                local success = safeCallback(simpleWindow, callback)
-                if not success then
-                    if controller and controller:Get() then
-                        controller:Set(false, true)
-                    end
-                    break
-                end
+local function simpleLoop(pageArgument, textArgument, callbackArgument)
+    local targetPage, text, callback
+    if isPage(pageArgument) or pageArgument == nil then
+        targetPage = pageArgument or getDefaultPage()
+        text = textArgument
+        callback = callbackArgument
+    else
+        targetPage = getDefaultPage()
+        text = pageArgument
+        callback = textArgument
+    end
 
-                -- wait(1) inside the callback makes it loop about every second.
-                -- With no wait it safely loops once per frame without freezing.
-                task.wait()
-            end
-        end)
-    end)
-    return controller
+    return targetPage:loop(text, false, callback)
 end
 
 local function simpleTextbox(pageArgument, textArgument, placeholderArgument, callbackArgument)
@@ -3507,6 +3604,7 @@ local simpleAPI = {
     label = simpleLabel,
     button = simpleButton,
     toggle = simpleToggle,
+    loop = simpleLoop,
     textbox = simpleTextbox,
     kounter = simpleCounter,
     slider = simpleSlider,
