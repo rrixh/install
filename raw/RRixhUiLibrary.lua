@@ -6,7 +6,9 @@
     toggle(), textbox(), kounter(), slider(), kolorpicker() and dropdown().
 ]]
 
-s = cloneref;
+local s = cloneref or function(srv)
+    return srv
+end;
 
 local Players = s(game:GetService("Players"))
 local UserInputService = s(game:GetService("UserInputService"))
