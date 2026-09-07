@@ -1,3 +1,5 @@
+-- function:kode() globals v2
+
 local kode = {}
 
 kode.Services = {
@@ -8,7 +10,50 @@ kode.Settings = {
     TPTime = 1,
     SafeWalkSpeed = 23.5,
 }
-kode.ActiveTween = nil
+kode.ActiveTween = nil;
+
+--// name in part \\--
+function kode.nameinpart(target, funk)
+	target = string.lower(tostring(target))
+	local found = {}
+
+	for _, obj in ipairs(workspace:GetDescendants()) do
+		if obj:IsA("BasePart") and string.find(string.lower(obj.Name), target, 1, true) then
+			table.insert(found, obj)
+
+			if funk then
+				funk(obj)
+			else
+				warn("part found:", obj:GetFullName())
+			end
+		end
+	end
+
+	return found
+end;
+kode.nameInPart = kode.nameinpart;
+kode.NameInPart = kode.nameinpart;
+
+--// Fire (fcd,fti,fpp) \\--
+function kode.fire(obj,dur)
+if not obj then
+    warn("must insert objekt; see example:\n1. Fire(workspace.Part)\n2. Fire(workspace.Part.ClickDetector)\n3. Fire(workspace.Part.ProximityPrompt)")
+    return
+end;
+
+if obj:IsA("ProximityPrompt") then       fireproximityprompt(obj)
+elseif obj:IsA("ClickDetector") then
+   fireclickdetector(obj)
+elseif obj:IsA("BasePart") then
+    local char = cloneref(game:GetService("Players")).LocalPlayer.Character or cloneref(game:GetService("Players")).LocalPlayer.CharacterAdded:Wait();
+    hrp = char:WaitForChild("HumanoidRootPart")
+    firetouchinterest(hrp, obj, 0)
+        task.wait(dur or .3)
+    firetouchinterest(hrp, obj, 1)
+      end
+end;
+kode.Fire = kode.fire;
+kode.FIRE = kode.fire;
 
 function kode.tp(x, y, z, seconds)
     local plr = kode.Services.Players.LocalPlayer
