@@ -1096,7 +1096,7 @@
       const distance = Math.hypot(b.clientX - a.clientX, b.clientY - a.clientY);
       setScale(pinchStartScale * (distance / pinchStartDistance));
     } else if (event.touches.length === 1 && dragging && scale > 1) {
-      event.preventDefault();
+      event.preventDefault(); 
       translateX = startTranslateX + (event.touches[0].clientX - dragStartX);
       translateY = startTranslateY + (event.touches[0].clientY - dragStartY);
       applyLightboxTransform();
