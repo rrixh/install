@@ -5,7 +5,7 @@
     region: "DMV",
     genre: "Hip-Hop / Rap",
     profession: "Independent recording artist",
-    published: "August 21, 2020",
+    published: "September 20, 2026",
 
     cover: "https://raw.githubusercontent.com/rrixh/install/refs/heads/main/RSG_MJ_Life_Wat_U_Make_It_Cover.PNG",
     lifestyle: "https://raw.githubusercontent.com/rrixh/install/refs/heads/main/RSG_MJ_Lifestyle_Photo.JPG",
@@ -781,7 +781,7 @@
 
           <div class="fact">
             <small>Recurring collaborators</small>
-            <b>Young Kutthroat · Lil Northside / Monalit07 · Official King Reck</b>
+            <b>Young Kutthroat · Lil Northside / Monalit07 · Official King Reck · Geesway · Wokstar Jay · Asia9loxkk · KuttaGang HOG · 9400wokky · Niko & many more</b>
           </div>
 
           <div class="fact">
