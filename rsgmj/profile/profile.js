@@ -5,7 +5,8 @@
     region: "DMV",
     genre: "Hip-Hop / Rap",
     profession: "Independent recording artist",
-    published: "August 21, 2020",
+    published: "August 5, 2021",
+    careerStart: "Feburary 26, 2019",
 
     cover: "https://raw.githubusercontent.com/rrixh/install/refs/heads/main/RSG_MJ_Life_Wat_U_Make_It_Cover.PNG",
     lifestyle: "https://raw.githubusercontent.com/rrixh/install/refs/heads/main/RSG_MJ_Lifestyle_Photo.JPG",
@@ -338,6 +339,117 @@
       font-size:12px;line-height:1.6;color:#9d9892;margin:0
     }
 
+
+    .zoomableImage{
+      cursor:zoom-in;
+      transition:transform .22s ease,filter .22s ease
+    }
+
+    .zoomableImage:hover{
+      transform:scale(1.012);
+      filter:brightness(1.03)
+    }
+
+    .imageLightbox{
+      position:fixed;
+      inset:0;
+      z-index:9999;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      background:rgba(0,0,0,.94);
+      backdrop-filter:blur(12px);
+      touch-action:none
+    }
+
+    .imageLightbox.open{display:flex}
+
+    .lightboxStage{
+      position:relative;
+      width:100%;
+      height:100%;
+      overflow:hidden;
+      display:flex;
+      align-items:center;
+      justify-content:center
+    }
+
+    .lightboxImage{
+      max-width:94vw;
+      max-height:88vh;
+      object-fit:contain;
+      user-select:none;
+      -webkit-user-drag:none;
+      transform-origin:center center;
+      will-change:transform;
+      transition:transform .08s linear
+    }
+
+    .lightboxTopbar{
+      position:absolute;
+      top:max(14px,env(safe-area-inset-top));
+      left:14px;
+      right:14px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+      z-index:3
+    }
+
+    .lightboxHint{
+      color:#d6d1cb;
+      font-size:11px;
+      background:rgba(18,18,22,.82);
+      border:1px solid rgba(255,255,255,.12);
+      border-radius:999px;
+      padding:9px 12px;
+      backdrop-filter:blur(10px)
+    }
+
+    .lightboxControls{
+      display:flex;
+      gap:8px
+    }
+
+    .lightboxBtn{
+      width:42px;
+      height:42px;
+      border-radius:50%;
+      border:1px solid rgba(255,255,255,.15);
+      background:rgba(18,18,22,.86);
+      color:#fff;
+      display:grid;
+      place-items:center;
+      font-size:20px;
+      font-weight:800;
+      cursor:pointer;
+      backdrop-filter:blur(10px)
+    }
+
+    .lightboxBtn:hover{
+      background:rgba(35,35,40,.95)
+    }
+
+    .lightboxBottom{
+      position:absolute;
+      bottom:max(18px,env(safe-area-inset-bottom));
+      left:50%;
+      transform:translateX(-50%);
+      display:flex;
+      gap:8px;
+      z-index:3
+    }
+
+    .lightboxBottom .lightboxBtn{
+      width:auto;
+      min-width:44px;
+      height:40px;
+      border-radius:999px;
+      padding:0 14px;
+      font-size:14px
+    }
+
     .footer{
       border-top:1px solid var(--line);
       padding:32px 0 48px;
@@ -409,7 +521,7 @@
     <div class="topbar">
       <div class="wrap">
         <a class="pub" href="${DATA.links.official}">
-          <span>R$G MJ</span> · Media Profile
+          <span>R$G MJ</span> Â· Media Profile
         </a>
 
         <nav class="nav">
@@ -424,7 +536,7 @@
 
     <header class="articleHead">
       <div class="wrap">
-        <div class="category">Official Artist Profile · DMV Hip-Hop</div>
+        <div class="category">Official Artist Profile Â· DMV Hip-Hop</div>
 
         <h1>R$G MJ Is Building an Independent Rap Catalog From South Laurel</h1>
 
@@ -436,6 +548,7 @@
 
         <div class="meta">
           <span><b>Published:</b> ${DATA.published}</span>
+          <span><b>Career documented since:</b> ${DATA.careerStart}</span>
           <span><b>Subject:</b> R$G MJ</span>
           <span><b>Profession:</b> ${DATA.profession}</span>
           <span><b>Location:</b> South Laurel, Maryland / DMV</span>
@@ -446,13 +559,13 @@
     <section class="hero">
       <div class="wrap heroGrid">
         <figure class="heroImg">
-          <img src="${DATA.lifestyle}" alt="R$G MJ lifestyle portrait">
-          <figcaption class="caption">R$G MJ · Official lifestyle image</figcaption>
+          <img class="zoomableImage" src="${DATA.lifestyle}" data-full="${DATA.lifestyle}" alt="R$G MJ lifestyle portrait" tabindex="0" role="button" aria-label="Open R$G MJ lifestyle photo">
+          <figcaption class="caption">R$G MJ Â· Official lifestyle image</figcaption>
         </figure>
 
         <figure class="coverImg">
-          <img src="${DATA.cover}" alt="LIFE WAT U MAKE IT by R$G MJ">
-          <figcaption class="caption">LIFE WAT U MAKE IT · 2026</figcaption>
+          <img class="zoomableImage" src="${DATA.cover}" data-full="${DATA.cover}" alt="LIFE WAT U MAKE IT by R$G MJ" tabindex="0" role="button" aria-label="Open LIFE WAT U MAKE IT cover artwork">
+          <figcaption class="caption">LIFE WAT U MAKE IT Â· 2026</figcaption>
         </figure>
       </div>
     </section>
@@ -472,7 +585,7 @@
           within the Washington metropolitan area, the community places him directly inside the
           wider DMV cultural region while keeping his identity specifically rooted in Maryland.
           His official artist presentation consistently emphasizes that connection rather than
-          treating “DMV” as a generic label.
+          treating âDMVâ as a generic label.
         </p>
 
         <p>
@@ -486,21 +599,21 @@
           through-lines in the R$G MJ catalog.
         </div>
 
-        <h2 id="career">The early catalog: 2020–2022</h2>
+        <h2 id="career">The early catalog: 2020â2022</h2>
 
         <p>
           Public music-service listings show material from R$G MJ reaching back to 2020,
-          including the track “again.” By 2021, the catalog had expanded significantly.
-          Audiomack lists songs from the project <i>$lime Season</i>, including “Among Us,”
-          while the December 2021 project <i>Penny</i> includes “No Pixks,” “Slide,”
-          “Get Tha Picture,” “Empty,” “Slaughter,” “Facts,” and “Triple Slatt.”
+          including the track âagain.â By 2021, the catalog had expanded significantly.
+          Audiomack lists songs from the project <i>$lime Season</i>, including âAmong Us,â
+          while the December 2021 project <i>Penny</i> includes âNo Pixks,â âSlide,â
+          âGet Tha Picture,â âEmpty,â âSlaughter,â âFacts,â and âTriple Slatt.â
         </p>
 
         <p>
-          Another 2021 project, <i>Sauna</i>, includes “Hoodie On,” “The 3 Slayers,”
-          “Trap Nigga,” and “Slatt Flow V.” In 2022, R$G MJ continued the catalog with
-          <i>Squid Games</i>, including records such as “[Day 2] Kandy Man” featuring UPGR4YD
-          and “[Day 4] Dirt/Rookie.”
+          Another 2021 project, <i>Sauna</i>, includes âHoodie On,â âThe 3 Slayers,â
+          âTrap Nigga,â and âSlatt Flow V.â In 2022, R$G MJ continued the catalog with
+          <i>Squid Games</i>, including records such as â[Day 2] Kandy Manâ featuring UPGR4YD
+          and â[Day 4] Dirt/Rookie.â
         </p>
 
         <div class="timeline">
@@ -508,7 +621,7 @@
             <div class="year">2020</div>
             <div>
               <strong>Early publicly indexed material</strong>
-              <span>Streaming listings include “again,” establishing material before the larger 2021 catalog.</span>
+              <span>Streaming listings include âagain,â establishing material before the larger 2021 catalog.</span>
             </div>
           </div>
 
@@ -551,17 +664,17 @@
           R$G MJ's catalog is not limited to one release format. Public listings show albums,
           short projects, singles, interludes, and featured appearances. The 2024 project
           <i>ALL GAS NO MORALS</i> includes a lengthy track list with titles such as
-          “Dreaming (intro),” “StaRRy Night,” “Koke inna kabinet,” “Beef,” “NO RUSH,”
-          “HOODIE ON,” “Traphouse,” “Krime pays,” “Money win wars,” “ROOT OF ALL EVIL,”
-          “FreeKars,” “FreeKar musik,” “Gangstas Paradise,” “RRaised $luts,”
-          “Slime szn,” “Stuxk ona bloxk (Extended Version),” and “HEAVYWEIGHT.”
+          âDreaming (intro),â âStaRRy Night,â âKoke inna kabinet,â âBeef,â âNO RUSH,â
+          âHOODIE ON,â âTraphouse,â âKrime pays,â âMoney win wars,â âROOT OF ALL EVIL,â
+          âFreeKars,â âFreeKar musik,â âGangstas Paradise,â âRRaised $luts,â
+          âSlime szn,â âStuxk ona bloxk (Extended Version),â and âHEAVYWEIGHT.â
         </p>
 
         <p>
           Public credits attached to that period also show collaborative work with artists
           including Young Kutthroat, Lil Northside, Monalit07, and Official King Reck.
           Earlier catalog entries include collaborations with UPGR4YD, while Apple Music
-          also indexes a 2021 appearance by R$G MJ on “No purpin” by PopUpJay.
+          also indexes a 2021 appearance by R$G MJ on âNo purpinâ by PopUpJay.
         </p>
 
 
@@ -570,34 +683,45 @@
         <p>
           Collaboration has become a visible part of the R$G MJ catalog. Rather than limiting
           projects to solo records, several releases bring recurring collaborators back across
-          multiple songs and different years. The strongest concentration appears on
-          <i>ALL GAS NO MORALS</i>, where Young Kutthroat, Lil Northside, Monalit07, and
-          Official King Reck appear throughout the public track credits.
+          multiple songs and different years. The strongest concentration appears around
+          <i>ALL GAS NO MORALS</i>, with recurring credits tied to Young Kutthroat,
+          Lil Northside, Monalit07, and Official King Reck. R$G MJ's broader collaborative
+          circle also includes Geesway, Wokstar Jay, Asia9loxkk, KuttaGang HOG, 9400wokky,
+          Niko, and additional artists connected to different release periods.
         </p>
 
         <p>
           <b>Young Kutthroat</b> is the most frequent collaborator on
-          <i>ALL GAS NO MORALS</i>. Public album credits list him on “StaRRy Night,”
-          “Koke inna kabinet,” “Beef,” “Krime pays,” “Money win wars,”
-          “ROOT OF ALL EVIL,” “FreeKars,” “Gangstas Paradise,” and “RRaised $luts.”
+          <i>ALL GAS NO MORALS</i>. Public album credits list him on âStaRRy Night,â
+          âKoke inna kabinet,â âBeef,â âKrime pays,â âMoney win wars,â
+          âROOT OF ALL EVIL,â âFreeKars,â âGangstas Paradise,â and âRRaised $luts.â
           That run makes the collaboration more than a one-song feature and gives Young Kutthroat
           a recurring role throughout the project.
         </p>
 
         <p>
           <b>Lil Northside</b> is another recurring collaborator. Public credits connect
-          Lil Northside to “NO RUSH,” “HOODIE ON,” “Traphouse,” and
-          “Gangstas Paradise” on <i>ALL GAS NO MORALS</i>, as well as later R$G MJ releases
-          including “3am” and “been that.” R$G MJ also identifies <b>Monalit07</b> as a name
+          Lil Northside to âNO RUSH,â âHOODIE ON,â âTraphouse,â and
+          âGangstas Paradiseâ on <i>ALL GAS NO MORALS</i>, as well as later R$G MJ releases
+          including â3amâ and âbeen that.â R$G MJ also identifies <b>Monalit07</b> as a name
           connected with Lil Northside. Because some streaming metadata still lists
-          “Lil Northside” and “Monalit07” as separate credits on “NO RUSH,” that name
+          âLil Northsideâ and âMonalit07â as separate credits on âNO RUSH,â that name
           relationship is presented here as artist-provided background rather than a platform-verified alias.
         </p>
 
         <p>
-          <b>Official King Reck</b> appears with R$G MJ on “Traphouse,” alongside
-          Lil Northside, and later on records including “been that” and the 2025 single
-          “OFF THE EARLY.” Those releases show the collaboration continuing beyond one album cycle.
+          <b>Official King Reck</b> appears with R$G MJ on âTraphouse,â alongside
+          Lil Northside, and later on records including âbeen thatâ and the 2025 single
+          âOFF THE EARLY.â Those releases show the collaboration continuing beyond one album cycle.
+        </p>
+
+        <p>
+          Beyond the recurring names highlighted below, the wider R$G MJ collaboration network
+          spans several independent artists and release eras. Additional collaborators associated
+          with the catalog include <b>Geesway</b>, <b>Wokstar Jay</b>, <b>Asia9loxkk</b>,
+          <b>KuttaGang HOG</b>, <b>9400wokky</b>, and <b>Niko</b>, among others. Their inclusion
+          reflects a catalog that has grown through both solo work and a rotating group of
+          collaborators rather than a fixed feature lineup.
         </p>
 
         <div class="collabGrid">
@@ -609,8 +733,8 @@
               <i>ALL GAS NO MORALS</i>.
             </p>
             <div class="collabTracks">
-              Selected credits: StaRRy Night · Koke inna kabinet · Beef · Krime pays ·
-              Money win wars · ROOT OF ALL EVIL · FreeKars · Gangstas Paradise · RRaised $luts
+              Selected credits: StaRRy Night Â· Koke inna kabinet Â· Beef Â· Krime pays Â·
+              Money win wars Â· ROOT OF ALL EVIL Â· FreeKars Â· Gangstas Paradise Â· RRaised $luts
             </div>
             <a class="collabLink" href="${DATA.links.youngKutthroat}" target="_blank" rel="noopener">
               Watch on YouTube
@@ -625,8 +749,8 @@
               Monalit07 as a name connected with Lil Northside.
             </p>
             <div class="collabTracks">
-              Selected credits: NO RUSH · HOODIE ON · Traphouse · Gangstas Paradise ·
-              3am · been that
+              Selected credits: NO RUSH Â· HOODIE ON Â· Traphouse Â· Gangstas Paradise Â·
+              3am Â· been that
             </div>
             <a class="collabLink" href="${DATA.links.lilNorthside}" target="_blank" rel="noopener">
               YouTube channel
@@ -641,7 +765,7 @@
               <i>ALL GAS NO MORALS</i> period into later releases.
             </p>
             <div class="collabTracks">
-              Selected credits: Traphouse · been that · OFF THE EARLY
+              Selected credits: Traphouse Â· been that Â· OFF THE EARLY
             </div>
             <a class="collabLink" href="${DATA.links.officialKingReck}" target="_blank" rel="noopener">
               YouTube channel
@@ -653,8 +777,8 @@
 
         <p>
           The following year continued the release pace. Public listings include songs and
-          projects such as “GMA PRAYING,” “KAPOW!,” “GET OUT THE WAY,” “ME N MARY JANE,”
-          “Dirty Game (The Interlude),” and a 2025 version of
+          projects such as âGMA PRAYING,â âKAPOW!,â âGET OUT THE WAY,â âME N MARY JANE,â
+          âDirty Game (The Interlude),â and a 2025 version of
           <i>SQUID GAMES (INTERLUDE)</i> featuring UPGR4YD.
         </p>
 
@@ -667,9 +791,9 @@
         <h2>The 2026 era: HIGHSPEED, NO SMOKE, BOMPTON, and LIFE WAT U MAKE IT</h2>
 
         <p>
-          In March 2026, R$G MJ released “HIGHSPEED,” followed by “NO SMOKE.”
+          In March 2026, R$G MJ released âHIGHSPEED,â followed by âNO SMOKE.â
           April brought <i>BOMPTON</i>, a two-song release containing
-          “THUGGIN IN HARMONY” and “DISSING ME?!”.
+          âTHUGGIN IN HARMONYâ and âDISSING ME?!â.
         </p>
 
         <p>
@@ -690,8 +814,8 @@
         <p>
           R$G MJ identifies South Laurel, Maryland as his home base and the DMV as the
           regional culture connected to his music. South Laurel sits in Prince George's County
-          in the Maryland side of the Washington metropolitan area, making “Maryland artist”
-          and “DMV artist” complementary descriptions rather than competing ones.
+          in the Maryland side of the Washington metropolitan area, making âMaryland artistâ
+          and âDMV artistâ complementary descriptions rather than competing ones.
         </p>
 
         <p>
@@ -718,12 +842,12 @@
         </p>
 
         <div class="officialBox">
-          <strong>Editorial transparency</strong>
+          <strong>Profile note</strong>
           <p>
-            This is an official, self-published R$G MJ media profile hosted on the artist's
-            own web property. It is written in a professional article format for press,
-            research, and artist-reference purposes, but it is not presented as independent
-            third-party journalism.
+            This profile compiles publicly accessible music-service listings together with
+            biographical details provided for artist-reference, press, and research purposes.
+            Release dates, credits, platform availability, and catalog details are sourced
+            from the public references listed below.
           </p>
         </div>
 
@@ -736,12 +860,12 @@
             artist-provided.
           </p>
 
-          <p><a href="${DATA.links.life}" target="_blank" rel="noopener">Apple Music — LIFE WAT U MAKE IT</a></p>
-          <p><a href="${DATA.links.appleArtist}" target="_blank" rel="noopener">Apple Music — R$G MJ artist page</a></p>
-          <p><a href="${DATA.links.audiomack}" target="_blank" rel="noopener">Audiomack — R$G MJ</a></p>
-          <p><a href="${DATA.links.blessedShazam}" target="_blank" rel="noopener">Shazam — BLESSED by R$G MJ</a></p>
-          <p><a href="${DATA.links.unitedMasters}" target="_blank" rel="noopener">UnitedMasters — R$G MJ</a></p>
-          <p><a href="${DATA.links.spotify}" target="_blank" rel="noopener">Spotify — R$G MJ</a></p>
+          <p><a href="${DATA.links.life}" target="_blank" rel="noopener">Apple Music â LIFE WAT U MAKE IT</a></p>
+          <p><a href="${DATA.links.appleArtist}" target="_blank" rel="noopener">Apple Music â R$G MJ artist page</a></p>
+          <p><a href="${DATA.links.audiomack}" target="_blank" rel="noopener">Audiomack â R$G MJ</a></p>
+          <p><a href="${DATA.links.blessedShazam}" target="_blank" rel="noopener">Shazam â BLESSED by R$G MJ</a></p>
+          <p><a href="${DATA.links.unitedMasters}" target="_blank" rel="noopener">UnitedMasters â R$G MJ</a></p>
+          <p><a href="${DATA.links.spotify}" target="_blank" rel="noopener">Spotify â R$G MJ</a></p>
         </section>
       </article>
 
@@ -765,8 +889,13 @@
           </div>
 
           <div class="fact">
+            <small>Career documented since</small>
+            <b>${DATA.careerStart}</b>
+          </div>
+
+          <div class="fact">
             <small>Public catalog</small>
-            <b>2020–present</b>
+            <b>2020âpresent</b>
           </div>
 
           <div class="fact">
@@ -780,13 +909,13 @@
           </div>
 
           <div class="fact">
-            <small>Recurring collaborators</small>
-            <b>Young Kutthroat · Lil Northside / Monalit07 · Official King Reck · Geesway · Wokstar Jay · Asia9loxkk · KuttaGang HOG · 9400wokky · Niko & many more</b>
+            <small>Collaborators</small>
+            <b>Young Kutthroat Â· Lil Northside / Monalit07 Â· Official King Reck Â· Geesway Â· Wokstar Jay Â· Asia9loxkk Â· KuttaGang HOG Â· 9400wokky Â· Niko Â· and others</b>
           </div>
 
           <div class="fact">
             <small>Platforms</small>
-            <b>Apple Music · Spotify · Amazon Music · Audiomack · Shazam · UnitedMasters</b>
+            <b>Apple Music Â· Spotify Â· Amazon Music Â· Audiomack Â· Shazam Â· UnitedMasters</b>
           </div>
 
           <div class="sourceList">
@@ -803,11 +932,192 @@
       </aside>
     </div>
 
+
+    <div class="imageLightbox" id="imageLightbox" aria-hidden="true">
+      <div class="lightboxStage" id="lightboxStage">
+        <div class="lightboxTopbar">
+          <div class="lightboxHint">Pinch, scroll, or use + / â to zoom</div>
+          <div class="lightboxControls">
+            <button class="lightboxBtn" id="lightboxClose" type="button" aria-label="Close image">Ã</button>
+          </div>
+        </div>
+
+        <img class="lightboxImage" id="lightboxImage" src="" alt="Expanded media">
+
+        <div class="lightboxBottom">
+          <button class="lightboxBtn" id="zoomOut" type="button" aria-label="Zoom out">â</button>
+          <button class="lightboxBtn" id="zoomReset" type="button">Reset</button>
+          <button class="lightboxBtn" id="zoomIn" type="button" aria-label="Zoom in">+</button>
+        </div>
+      </div>
+    </div>
+
     <footer class="footer">
       <div class="wrap">
-        <span>R$G MJ Official Media Profile · Published ${DATA.published}</span>
+        <span>R$G MJ Official Media Profile Â· Published ${DATA.published}</span>
         <span><a href="${DATA.links.official}">Official R$G MJ artist page</a></span>
       </div>
     </footer>
   `;
+  const lightbox = document.getElementById("imageLightbox");
+  const lightboxImage = document.getElementById("lightboxImage");
+  const lightboxStage = document.getElementById("lightboxStage");
+  const closeBtn = document.getElementById("lightboxClose");
+  const zoomInBtn = document.getElementById("zoomIn");
+  const zoomOutBtn = document.getElementById("zoomOut");
+  const zoomResetBtn = document.getElementById("zoomReset");
+
+  let scale = 1;
+  let translateX = 0;
+  let translateY = 0;
+  let dragging = false;
+  let dragStartX = 0;
+  let dragStartY = 0;
+  let startTranslateX = 0;
+  let startTranslateY = 0;
+  let pinchStartDistance = 0;
+  let pinchStartScale = 1;
+
+  const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
+
+  function applyLightboxTransform() {
+    lightboxImage.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`;
+  }
+
+  function resetLightbox() {
+    scale = 1;
+    translateX = 0;
+    translateY = 0;
+    applyLightboxTransform();
+  }
+
+  function setScale(nextScale) {
+    scale = clamp(nextScale, 1, 6);
+    if (scale === 1) {
+      translateX = 0;
+      translateY = 0;
+    }
+    applyLightboxTransform();
+  }
+
+  function openLightbox(src, alt) {
+    lightboxImage.src = src;
+    lightboxImage.alt = alt || "Expanded media";
+    resetLightbox();
+    lightbox.classList.add("open");
+    lightbox.setAttribute("aria-hidden", "false");
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeLightbox() {
+    lightbox.classList.remove("open");
+    lightbox.setAttribute("aria-hidden", "true");
+    document.body.style.overflow = "";
+    setTimeout(() => {
+      lightboxImage.src = "";
+    }, 120);
+  }
+
+  document.querySelectorAll(".zoomableImage").forEach((img) => {
+    const open = () => openLightbox(img.dataset.full || img.src, img.alt);
+    img.addEventListener("click", open);
+    img.addEventListener("keydown", (event) => {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        open();
+      }
+    });
+  });
+
+  closeBtn.addEventListener("click", closeLightbox);
+  zoomInBtn.addEventListener("click", () => setScale(scale + 0.5));
+  zoomOutBtn.addEventListener("click", () => setScale(scale - 0.5));
+  zoomResetBtn.addEventListener("click", resetLightbox);
+
+  lightbox.addEventListener("click", (event) => {
+    if (event.target === lightbox || event.target === lightboxStage) {
+      closeLightbox();
+    }
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (!lightbox.classList.contains("open")) return;
+    if (event.key === "Escape") closeLightbox();
+    if (event.key === "+" || event.key === "=") setScale(scale + 0.5);
+    if (event.key === "-") setScale(scale - 0.5);
+    if (event.key === "0") resetLightbox();
+  });
+
+  lightboxStage.addEventListener("wheel", (event) => {
+    if (!lightbox.classList.contains("open")) return;
+    event.preventDefault();
+    setScale(scale + (event.deltaY < 0 ? 0.2 : -0.2));
+  }, { passive:false });
+
+  lightboxImage.addEventListener("mousedown", (event) => {
+    if (scale <= 1) return;
+    dragging = true;
+    dragStartX = event.clientX;
+    dragStartY = event.clientY;
+    startTranslateX = translateX;
+    startTranslateY = translateY;
+    event.preventDefault();
+  });
+
+  window.addEventListener("mousemove", (event) => {
+    if (!dragging) return;
+    translateX = startTranslateX + (event.clientX - dragStartX);
+    translateY = startTranslateY + (event.clientY - dragStartY);
+    applyLightboxTransform();
+  });
+
+  window.addEventListener("mouseup", () => {
+    dragging = false;
+  });
+
+  lightboxStage.addEventListener("touchstart", (event) => {
+    if (event.touches.length === 2) {
+      const [a, b] = event.touches;
+      pinchStartDistance = Math.hypot(b.clientX - a.clientX, b.clientY - a.clientY);
+      pinchStartScale = scale;
+    } else if (event.touches.length === 1 && scale > 1) {
+      dragging = true;
+      dragStartX = event.touches[0].clientX;
+      dragStartY = event.touches[0].clientY;
+      startTranslateX = translateX;
+      startTranslateY = translateY;
+    }
+  }, { passive:false });
+
+  lightboxStage.addEventListener("touchmove", (event) => {
+    if (event.touches.length === 2 && pinchStartDistance) {
+      event.preventDefault();
+      const [a, b] = event.touches;
+      const distance = Math.hypot(b.clientX - a.clientX, b.clientY - a.clientY);
+      setScale(pinchStartScale * (distance / pinchStartDistance));
+    } else if (event.touches.length === 1 && dragging && scale > 1) {
+      event.preventDefault();
+      translateX = startTranslateX + (event.touches[0].clientX - dragStartX);
+      translateY = startTranslateY + (event.touches[0].clientY - dragStartY);
+      applyLightboxTransform();
+    }
+  }, { passive:false });
+
+  lightboxStage.addEventListener("touchend", (event) => {
+    if (event.touches.length < 2) pinchStartDistance = 0;
+    if (event.touches.length === 0) dragging = false;
+  });
+
+  let lastTap = 0;
+  lightboxImage.addEventListener("touchend", (event) => {
+    if (event.changedTouches.length !== 1) return;
+    const now = Date.now();
+    if (now - lastTap < 280) {
+      setScale(scale > 1 ? 1 : 2.5);
+      lastTap = 0;
+    } else {
+      lastTap = now;
+    }
+  });
+
 })();
