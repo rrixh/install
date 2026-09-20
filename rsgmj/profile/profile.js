@@ -5,7 +5,7 @@
     region: "DMV",
     genre: "Hip-Hop / Rap",
     profession: "Independent recording artist",
-    published: "August 23, 2021",
+    published: "August 21, 2020",
 
     cover: "https://raw.githubusercontent.com/rrixh/install/refs/heads/main/RSG_MJ_Life_Wat_U_Make_It_Cover.PNG",
     lifestyle: "https://raw.githubusercontent.com/rrixh/install/refs/heads/main/RSG_MJ_Lifestyle_Photo.JPG",
@@ -20,6 +20,9 @@
       appleArtist: "https://music.apple.com/us/artist/r%24g-mj/1552992460",
       life: "https://music.apple.com/us/album/life-wat-u-make-it-single/6771527461",
       unitedMasters: "https://unitedmasters.com/a/rsg-mj",
+      youngKutthroat: "https://youtube.com/watch?v=tEwN1oNspMo",
+      lilNorthside: "https://youtube.com/channel/UCYtqLyU0N69jYh0hkCmskkg",
+      officialKingReck: "https://youtube.com/channel/UCW8br78xtXstfUVwNgvLm3w",
       blessedShazam: "https://www.shazam.com/song/1844755701/blessed",
       amongUs: "https://audiomack.com/rg-mj/song/among-us",
       penny: "https://audiomack.com/rg-mj/song/get-tha-picture"
@@ -238,6 +241,73 @@
 
     .sourceList a:hover{border-color:rgba(255,255,255,.25)}
 
+
+    .collabGrid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:12px;
+      margin:24px 0 34px;
+      font-family:Inter,ui-sans-serif,sans-serif
+    }
+
+    .collabCard{
+      border:1px solid var(--line);
+      border-radius:18px;
+      background:linear-gradient(145deg,#15151a,#101014);
+      padding:20px;
+      display:flex;
+      flex-direction:column;
+      min-height:250px
+    }
+
+    .collabNumber{
+      color:var(--red);
+      font-size:10px;
+      font-weight:950;
+      letter-spacing:.15em;
+      text-transform:uppercase
+    }
+
+    .collabCard h3{
+      margin:12px 0 10px;
+      font-size:22px;
+      letter-spacing:-.035em;
+      line-height:1.05
+    }
+
+    .collabCard p{
+      margin:0;
+      color:#a9a49e;
+      font-family:Inter,ui-sans-serif,sans-serif;
+      font-size:12px;
+      line-height:1.65
+    }
+
+    .collabTracks{
+      margin:14px 0 18px;
+      padding-top:13px;
+      border-top:1px solid var(--line);
+      color:#d4cfc9;
+      font-size:11px;
+      line-height:1.6
+    }
+
+    .collabLink{
+      margin-top:auto;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:11px 13px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background:#19191e;
+      color:#f0ece7;
+      font-size:11px;
+      font-weight:850
+    }
+
+    .collabLink:hover{border-color:rgba(255,255,255,.27)}
+
     .sourceSection{
       margin-top:58px;
       padding-top:28px;
@@ -283,7 +353,7 @@
     .footer a{color:#c8c2bb}
 
     @media(max-width:860px){
-      .heroGrid,.article{grid-template-columns:1fr}
+      .heroGrid,.article,.collabGrid{grid-template-columns:1fr}
       .heroImg,.coverImg{min-height:unset;aspect-ratio:4/5}
       .coverImg{aspect-ratio:1/1}
       .sidebar{order:-1}
@@ -346,6 +416,7 @@
           <a href="#profile">Profile</a>
           <a href="#career">Career</a>
           <a href="#catalog">Catalog</a>
+          <a href="#collaborations">Collaborations</a>
           <a href="#sources">Sources</a>
         </nav>
       </div>
@@ -493,6 +564,91 @@
           also indexes a 2021 appearance by R$G MJ on “No purpin” by PopUpJay.
         </p>
 
+
+        <h2 id="collaborations">Collaborations and connected artists</h2>
+
+        <p>
+          Collaboration has become a visible part of the R$G MJ catalog. Rather than limiting
+          projects to solo records, several releases bring recurring collaborators back across
+          multiple songs and different years. The strongest concentration appears on
+          <i>ALL GAS NO MORALS</i>, where Young Kutthroat, Lil Northside, Monalit07, and
+          Official King Reck appear throughout the public track credits.
+        </p>
+
+        <p>
+          <b>Young Kutthroat</b> is the most frequent collaborator on
+          <i>ALL GAS NO MORALS</i>. Public album credits list him on “StaRRy Night,”
+          “Koke inna kabinet,” “Beef,” “Krime pays,” “Money win wars,”
+          “ROOT OF ALL EVIL,” “FreeKars,” “Gangstas Paradise,” and “RRaised $luts.”
+          That run makes the collaboration more than a one-song feature and gives Young Kutthroat
+          a recurring role throughout the project.
+        </p>
+
+        <p>
+          <b>Lil Northside</b> is another recurring collaborator. Public credits connect
+          Lil Northside to “NO RUSH,” “HOODIE ON,” “Traphouse,” and
+          “Gangstas Paradise” on <i>ALL GAS NO MORALS</i>, as well as later R$G MJ releases
+          including “3am” and “been that.” R$G MJ also identifies <b>Monalit07</b> as a name
+          connected with Lil Northside. Because some streaming metadata still lists
+          “Lil Northside” and “Monalit07” as separate credits on “NO RUSH,” that name
+          relationship is presented here as artist-provided background rather than a platform-verified alias.
+        </p>
+
+        <p>
+          <b>Official King Reck</b> appears with R$G MJ on “Traphouse,” alongside
+          Lil Northside, and later on records including “been that” and the 2025 single
+          “OFF THE EARLY.” Those releases show the collaboration continuing beyond one album cycle.
+        </p>
+
+        <div class="collabGrid">
+          <div class="collabCard">
+            <div class="collabNumber">Collaborator 01</div>
+            <h3>Young Kutthroat</h3>
+            <p>
+              A recurring R$G MJ collaborator with multiple appearances throughout
+              <i>ALL GAS NO MORALS</i>.
+            </p>
+            <div class="collabTracks">
+              Selected credits: StaRRy Night · Koke inna kabinet · Beef · Krime pays ·
+              Money win wars · ROOT OF ALL EVIL · FreeKars · Gangstas Paradise · RRaised $luts
+            </div>
+            <a class="collabLink" href="${DATA.links.youngKutthroat}" target="_blank" rel="noopener">
+              Watch on YouTube
+            </a>
+          </div>
+
+          <div class="collabCard">
+            <div class="collabNumber">Collaborator 02</div>
+            <h3>Lil Northside</h3>
+            <p>
+              Recurring collaborator across album tracks and later singles. R$G MJ identifies
+              Monalit07 as a name connected with Lil Northside.
+            </p>
+            <div class="collabTracks">
+              Selected credits: NO RUSH · HOODIE ON · Traphouse · Gangstas Paradise ·
+              3am · been that
+            </div>
+            <a class="collabLink" href="${DATA.links.lilNorthside}" target="_blank" rel="noopener">
+              YouTube channel
+            </a>
+          </div>
+
+          <div class="collabCard">
+            <div class="collabNumber">Collaborator 03</div>
+            <h3>Official King Reck</h3>
+            <p>
+              A collaborator whose work with R$G MJ extends from the
+              <i>ALL GAS NO MORALS</i> period into later releases.
+            </p>
+            <div class="collabTracks">
+              Selected credits: Traphouse · been that · OFF THE EARLY
+            </div>
+            <a class="collabLink" href="${DATA.links.officialKingReck}" target="_blank" rel="noopener">
+              YouTube channel
+            </a>
+          </div>
+        </div>
+
         <h2>The 2025 transition</h2>
 
         <p>
@@ -621,6 +777,11 @@
           <div class="fact">
             <small>Primary genre</small>
             <b>Hip-Hop / Rap</b>
+          </div>
+
+          <div class="fact">
+            <small>Recurring collaborators</small>
+            <b>Young Kutthroat · Lil Northside / Monalit07 · Official King Reck</b>
           </div>
 
           <div class="fact">
