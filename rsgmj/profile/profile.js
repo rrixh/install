@@ -6,7 +6,7 @@
     genre: "Hip-Hop / Rap",
     profession: "Independent recording artist",
     published: "August 5, 2021",
-    careerStart: "Feburary 26, 2019",
+    careerStart: "February 26, 2019",
 
     cover: "https://raw.githubusercontent.com/rrixh/install/refs/heads/main/RSG_MJ_Life_Wat_U_Make_It_Cover.PNG",
     lifestyle: "https://raw.githubusercontent.com/rrixh/install/refs/heads/main/RSG_MJ_Lifestyle_Photo.JPG",
@@ -521,7 +521,7 @@
     <div class="topbar">
       <div class="wrap">
         <a class="pub" href="${DATA.links.official}">
-          <span>R$G MJ</span> Â· Media Profile
+          <span>R$G MJ</span> &middot; Media Profile
         </a>
 
         <nav class="nav">
@@ -536,7 +536,7 @@
 
     <header class="articleHead">
       <div class="wrap">
-        <div class="category">Official Artist Profile Â· DMV Hip-Hop</div>
+        <div class="category">Official Artist Profile &middot; DMV Hip-Hop</div>
 
         <h1>R$G MJ Is Building an Independent Rap Catalog From South Laurel</h1>
 
@@ -560,12 +560,12 @@
       <div class="wrap heroGrid">
         <figure class="heroImg">
           <img class="zoomableImage" src="${DATA.lifestyle}" data-full="${DATA.lifestyle}" alt="R$G MJ lifestyle portrait" tabindex="0" role="button" aria-label="Open R$G MJ lifestyle photo">
-          <figcaption class="caption">R$G MJ Â· Official lifestyle image</figcaption>
+          <figcaption class="caption">R$G MJ &middot; Official lifestyle image</figcaption>
         </figure>
 
         <figure class="coverImg">
           <img class="zoomableImage" src="${DATA.cover}" data-full="${DATA.cover}" alt="LIFE WAT U MAKE IT by R$G MJ" tabindex="0" role="button" aria-label="Open LIFE WAT U MAKE IT cover artwork">
-          <figcaption class="caption">LIFE WAT U MAKE IT Â· 2026</figcaption>
+          <figcaption class="caption">LIFE WAT U MAKE IT &middot; 2026</figcaption>
         </figure>
       </div>
     </section>
@@ -585,7 +585,7 @@
           within the Washington metropolitan area, the community places him directly inside the
           wider DMV cultural region while keeping his identity specifically rooted in Maryland.
           His official artist presentation consistently emphasizes that connection rather than
-          treating âDMVâ as a generic label.
+          treating &ldquo;DMV&rdquo; as a generic label.
         </p>
 
         <p>
@@ -599,21 +599,21 @@
           through-lines in the R$G MJ catalog.
         </div>
 
-        <h2 id="career">The early catalog: 2020â2022</h2>
+        <h2 id="career">The early catalog: 2020&ndash;2022</h2>
 
         <p>
           Public music-service listings show material from R$G MJ reaching back to 2020,
-          including the track âagain.â By 2021, the catalog had expanded significantly.
-          Audiomack lists songs from the project <i>$lime Season</i>, including âAmong Us,â
-          while the December 2021 project <i>Penny</i> includes âNo Pixks,â âSlide,â
-          âGet Tha Picture,â âEmpty,â âSlaughter,â âFacts,â and âTriple Slatt.â
+          including the track &ldquo;again.&rdquo; By 2021, the catalog had expanded significantly.
+          Audiomack lists songs from the project <i>$lime Season</i>, including &ldquo;Among Us,&rdquo;
+          while the December 2021 project <i>Penny</i> includes &ldquo;No Pixks,&rdquo; &ldquo;Slide,&rdquo;
+          &ldquo;Get Tha Picture,&rdquo; &ldquo;Empty,&rdquo; &ldquo;Slaughter,&rdquo; &ldquo;Facts,&rdquo; and &ldquo;Triple Slatt.&rdquo;
         </p>
 
         <p>
-          Another 2021 project, <i>Sauna</i>, includes âHoodie On,â âThe 3 Slayers,â
-          âTrap Nigga,â and âSlatt Flow V.â In 2022, R$G MJ continued the catalog with
-          <i>Squid Games</i>, including records such as â[Day 2] Kandy Manâ featuring UPGR4YD
-          and â[Day 4] Dirt/Rookie.â
+          Another 2021 project, <i>Sauna</i>, includes &ldquo;Hoodie On,&rdquo; &ldquo;The 3 Slayers,&rdquo;
+          &ldquo;Trap Nigga,&rdquo; and &ldquo;Slatt Flow V.&rdquo; In 2022, R$G MJ continued the catalog with
+          <i>Squid Games</i>, including records such as &ldquo;[Day 2] Kandy Man&rdquo; featuring UPGR4YD
+          and &ldquo;[Day 4] Dirt/Rookie.&rdquo;
         </p>
 
         <div class="timeline">
@@ -621,7 +621,7 @@
             <div class="year">2020</div>
             <div>
               <strong>Early publicly indexed material</strong>
-              <span>Streaming listings include âagain,â establishing material before the larger 2021 catalog.</span>
+              <span>Streaming listings include &ldquo;again,&rdquo; establishing material before the larger 2021 catalog.</span>
             </div>
           </div>
 
@@ -664,17 +664,17 @@
           R$G MJ's catalog is not limited to one release format. Public listings show albums,
           short projects, singles, interludes, and featured appearances. The 2024 project
           <i>ALL GAS NO MORALS</i> includes a lengthy track list with titles such as
-          âDreaming (intro),â âStaRRy Night,â âKoke inna kabinet,â âBeef,â âNO RUSH,â
-          âHOODIE ON,â âTraphouse,â âKrime pays,â âMoney win wars,â âROOT OF ALL EVIL,â
-          âFreeKars,â âFreeKar musik,â âGangstas Paradise,â âRRaised $luts,â
-          âSlime szn,â âStuxk ona bloxk (Extended Version),â and âHEAVYWEIGHT.â
+          &ldquo;Dreaming (intro),&rdquo; &ldquo;StaRRy Night,&rdquo; &ldquo;Koke inna kabinet,&rdquo; &ldquo;Beef,&rdquo; &ldquo;NO RUSH,&rdquo;
+          &ldquo;HOODIE ON,&rdquo; &ldquo;Traphouse,&rdquo; &ldquo;Krime pays,&rdquo; &ldquo;Money win wars,&rdquo; &ldquo;ROOT OF ALL EVIL,&rdquo;
+          &ldquo;FreeKars,&rdquo; &ldquo;FreeKar musik,&rdquo; &ldquo;Gangstas Paradise,&rdquo; &ldquo;RRaised $luts,&rdquo;
+          &ldquo;Slime szn,&rdquo; &ldquo;Stuxk ona bloxk (Extended Version),&rdquo; and &ldquo;HEAVYWEIGHT.&rdquo;
         </p>
 
         <p>
           Public credits attached to that period also show collaborative work with artists
           including Young Kutthroat, Lil Northside, Monalit07, and Official King Reck.
           Earlier catalog entries include collaborations with UPGR4YD, while Apple Music
-          also indexes a 2021 appearance by R$G MJ on âNo purpinâ by PopUpJay.
+          also indexes a 2021 appearance by R$G MJ on &ldquo;No purpin&rdquo; by PopUpJay.
         </p>
 
 
@@ -692,27 +692,27 @@
 
         <p>
           <b>Young Kutthroat</b> is the most frequent collaborator on
-          <i>ALL GAS NO MORALS</i>. Public album credits list him on âStaRRy Night,â
-          âKoke inna kabinet,â âBeef,â âKrime pays,â âMoney win wars,â
-          âROOT OF ALL EVIL,â âFreeKars,â âGangstas Paradise,â and âRRaised $luts.â
+          <i>ALL GAS NO MORALS</i>. Public album credits list him on &ldquo;StaRRy Night,&rdquo;
+          &ldquo;Koke inna kabinet,&rdquo; &ldquo;Beef,&rdquo; &ldquo;Krime pays,&rdquo; &ldquo;Money win wars,&rdquo;
+          &ldquo;ROOT OF ALL EVIL,&rdquo; &ldquo;FreeKars,&rdquo; &ldquo;Gangstas Paradise,&rdquo; and &ldquo;RRaised $luts.&rdquo;
           That run makes the collaboration more than a one-song feature and gives Young Kutthroat
           a recurring role throughout the project.
         </p>
 
         <p>
           <b>Lil Northside</b> is another recurring collaborator. Public credits connect
-          Lil Northside to âNO RUSH,â âHOODIE ON,â âTraphouse,â and
-          âGangstas Paradiseâ on <i>ALL GAS NO MORALS</i>, as well as later R$G MJ releases
-          including â3amâ and âbeen that.â R$G MJ also identifies <b>Monalit07</b> as a name
+          Lil Northside to &ldquo;NO RUSH,&rdquo; &ldquo;HOODIE ON,&rdquo; &ldquo;Traphouse,&rdquo; and
+          &ldquo;Gangstas Paradise&rdquo; on <i>ALL GAS NO MORALS</i>, as well as later R$G MJ releases
+          including &ldquo;3am&rdquo; and &ldquo;been that.&rdquo; R$G MJ also identifies <b>Monalit07</b> as a name
           connected with Lil Northside. Because some streaming metadata still lists
-          âLil Northsideâ and âMonalit07â as separate credits on âNO RUSH,â that name
+          &ldquo;Lil Northside&rdquo; and &ldquo;Monalit07&rdquo; as separate credits on &ldquo;NO RUSH,&rdquo; that name
           relationship is presented here as artist-provided background rather than a platform-verified alias.
         </p>
 
         <p>
-          <b>Official King Reck</b> appears with R$G MJ on âTraphouse,â alongside
-          Lil Northside, and later on records including âbeen thatâ and the 2025 single
-          âOFF THE EARLY.â Those releases show the collaboration continuing beyond one album cycle.
+          <b>Official King Reck</b> appears with R$G MJ on &ldquo;Traphouse,&rdquo; alongside
+          Lil Northside, and later on records including &ldquo;been that&rdquo; and the 2025 single
+          &ldquo;OFF THE EARLY.&rdquo; Those releases show the collaboration continuing beyond one album cycle.
         </p>
 
         <p>
@@ -733,8 +733,8 @@
               <i>ALL GAS NO MORALS</i>.
             </p>
             <div class="collabTracks">
-              Selected credits: StaRRy Night Â· Koke inna kabinet Â· Beef Â· Krime pays Â·
-              Money win wars Â· ROOT OF ALL EVIL Â· FreeKars Â· Gangstas Paradise Â· RRaised $luts
+              Selected credits: StaRRy Night &middot; Koke inna kabinet &middot; Beef &middot; Krime pays &middot;
+              Money win wars &middot; ROOT OF ALL EVIL &middot; FreeKars &middot; Gangstas Paradise &middot; RRaised $luts
             </div>
             <a class="collabLink" href="${DATA.links.youngKutthroat}" target="_blank" rel="noopener">
               Watch on YouTube
@@ -749,8 +749,8 @@
               Monalit07 as a name connected with Lil Northside.
             </p>
             <div class="collabTracks">
-              Selected credits: NO RUSH Â· HOODIE ON Â· Traphouse Â· Gangstas Paradise Â·
-              3am Â· been that
+              Selected credits: NO RUSH &middot; HOODIE ON &middot; Traphouse &middot; Gangstas Paradise &middot;
+              3am &middot; been that
             </div>
             <a class="collabLink" href="${DATA.links.lilNorthside}" target="_blank" rel="noopener">
               YouTube channel
@@ -765,7 +765,7 @@
               <i>ALL GAS NO MORALS</i> period into later releases.
             </p>
             <div class="collabTracks">
-              Selected credits: Traphouse Â· been that Â· OFF THE EARLY
+              Selected credits: Traphouse &middot; been that &middot; OFF THE EARLY
             </div>
             <a class="collabLink" href="${DATA.links.officialKingReck}" target="_blank" rel="noopener">
               YouTube channel
@@ -777,8 +777,8 @@
 
         <p>
           The following year continued the release pace. Public listings include songs and
-          projects such as âGMA PRAYING,â âKAPOW!,â âGET OUT THE WAY,â âME N MARY JANE,â
-          âDirty Game (The Interlude),â and a 2025 version of
+          projects such as &ldquo;GMA PRAYING,&rdquo; &ldquo;KAPOW!,&rdquo; &ldquo;GET OUT THE WAY,&rdquo; &ldquo;ME N MARY JANE,&rdquo;
+          &ldquo;Dirty Game (The Interlude),&rdquo; and a 2025 version of
           <i>SQUID GAMES (INTERLUDE)</i> featuring UPGR4YD.
         </p>
 
@@ -791,9 +791,9 @@
         <h2>The 2026 era: HIGHSPEED, NO SMOKE, BOMPTON, and LIFE WAT U MAKE IT</h2>
 
         <p>
-          In March 2026, R$G MJ released âHIGHSPEED,â followed by âNO SMOKE.â
+          In March 2026, R$G MJ released &ldquo;HIGHSPEED,&rdquo; followed by &ldquo;NO SMOKE.&rdquo;
           April brought <i>BOMPTON</i>, a two-song release containing
-          âTHUGGIN IN HARMONYâ and âDISSING ME?!â.
+          &ldquo;THUGGIN IN HARMONY&rdquo; and &ldquo;DISSING ME?!&rdquo;.
         </p>
 
         <p>
@@ -814,8 +814,8 @@
         <p>
           R$G MJ identifies South Laurel, Maryland as his home base and the DMV as the
           regional culture connected to his music. South Laurel sits in Prince George's County
-          in the Maryland side of the Washington metropolitan area, making âMaryland artistâ
-          and âDMV artistâ complementary descriptions rather than competing ones.
+          in the Maryland side of the Washington metropolitan area, making &ldquo;Maryland artist&rdquo;
+          and &ldquo;DMV artist&rdquo; complementary descriptions rather than competing ones.
         </p>
 
         <p>
@@ -860,12 +860,12 @@
             artist-provided.
           </p>
 
-          <p><a href="${DATA.links.life}" target="_blank" rel="noopener">Apple Music â LIFE WAT U MAKE IT</a></p>
-          <p><a href="${DATA.links.appleArtist}" target="_blank" rel="noopener">Apple Music â R$G MJ artist page</a></p>
-          <p><a href="${DATA.links.audiomack}" target="_blank" rel="noopener">Audiomack â R$G MJ</a></p>
-          <p><a href="${DATA.links.blessedShazam}" target="_blank" rel="noopener">Shazam â BLESSED by R$G MJ</a></p>
-          <p><a href="${DATA.links.unitedMasters}" target="_blank" rel="noopener">UnitedMasters â R$G MJ</a></p>
-          <p><a href="${DATA.links.spotify}" target="_blank" rel="noopener">Spotify â R$G MJ</a></p>
+          <p><a href="${DATA.links.life}" target="_blank" rel="noopener">Apple Music &mdash; LIFE WAT U MAKE IT</a></p>
+          <p><a href="${DATA.links.appleArtist}" target="_blank" rel="noopener">Apple Music &mdash; R$G MJ artist page</a></p>
+          <p><a href="${DATA.links.audiomack}" target="_blank" rel="noopener">Audiomack &mdash; R$G MJ</a></p>
+          <p><a href="${DATA.links.blessedShazam}" target="_blank" rel="noopener">Shazam &mdash; BLESSED by R$G MJ</a></p>
+          <p><a href="${DATA.links.unitedMasters}" target="_blank" rel="noopener">UnitedMasters &mdash; R$G MJ</a></p>
+          <p><a href="${DATA.links.spotify}" target="_blank" rel="noopener">Spotify &mdash; R$G MJ</a></p>
         </section>
       </article>
 
@@ -895,7 +895,7 @@
 
           <div class="fact">
             <small>Public catalog</small>
-            <b>2020âpresent</b>
+            <b>2020&ndash;present</b>
           </div>
 
           <div class="fact">
@@ -910,12 +910,12 @@
 
           <div class="fact">
             <small>Collaborators</small>
-            <b>Young Kutthroat Â· Lil Northside / Monalit07 Â· Official King Reck Â· Geesway Â· Wokstar Jay Â· Asia9loxkk Â· KuttaGang HOG Â· 9400wokky Â· Niko Â· and others</b>
+            <b>Young Kutthroat &middot; Lil Northside / Monalit07 &middot; Official King Reck &middot; Geesway &middot; Wokstar Jay &middot; Asia9loxkk &middot; KuttaGang HOG &middot; 9400wokky &middot; Niko &middot; and others</b>
           </div>
 
           <div class="fact">
             <small>Platforms</small>
-            <b>Apple Music Â· Spotify Â· Amazon Music Â· Audiomack Â· Shazam Â· UnitedMasters</b>
+            <b>Apple Music &middot; Spotify &middot; Amazon Music &middot; Audiomack &middot; Shazam &middot; UnitedMasters</b>
           </div>
 
           <div class="sourceList">
@@ -936,16 +936,16 @@
     <div class="imageLightbox" id="imageLightbox" aria-hidden="true">
       <div class="lightboxStage" id="lightboxStage">
         <div class="lightboxTopbar">
-          <div class="lightboxHint">Pinch, scroll, or use + / â to zoom</div>
+          <div class="lightboxHint">Pinch, scroll, or use + / &minus; to zoom</div>
           <div class="lightboxControls">
-            <button class="lightboxBtn" id="lightboxClose" type="button" aria-label="Close image">Ã</button>
+            <button class="lightboxBtn" id="lightboxClose" type="button" aria-label="Close image">&times;</button>
           </div>
         </div>
 
         <img class="lightboxImage" id="lightboxImage" src="" alt="Expanded media">
 
         <div class="lightboxBottom">
-          <button class="lightboxBtn" id="zoomOut" type="button" aria-label="Zoom out">â</button>
+          <button class="lightboxBtn" id="zoomOut" type="button" aria-label="Zoom out">&minus;</button>
           <button class="lightboxBtn" id="zoomReset" type="button">Reset</button>
           <button class="lightboxBtn" id="zoomIn" type="button" aria-label="Zoom in">+</button>
         </div>
@@ -954,7 +954,7 @@
 
     <footer class="footer">
       <div class="wrap">
-        <span>R$G MJ Official Media Profile Â· Published ${DATA.published}</span>
+        <span>R$G MJ Official Media Profile &middot; Published ${DATA.published}</span>
         <span><a href="${DATA.links.official}">Official R$G MJ artist page</a></span>
       </div>
     </footer>
