@@ -5,7 +5,7 @@
     region: "DMV",
     genre: "Hip-Hop / Rap",
     profession: "Independent recording artist",
-    published: "September 20, 2026",
+    published: "August 23, 2021",
 
     cover: "https://raw.githubusercontent.com/rrixh/install/refs/heads/main/RSG_MJ_Life_Wat_U_Make_It_Cover.PNG",
     lifestyle: "https://raw.githubusercontent.com/rrixh/install/refs/heads/main/RSG_MJ_Lifestyle_Photo.JPG",
