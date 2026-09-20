@@ -71,7 +71,8 @@
     audiomack: `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 15.5h2.2v3H3v-3Zm3.4-5h2.2v8H6.4v-8Zm3.4-4h2.2v12H9.8v-12Zm3.4 2h2.2v10h-2.2v-10Zm3.4 3h2.2v7h-2.2v-7Z" class="fill"/></svg>`,
     arrow: `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>`,
     play: `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 7 8 5-8 5V7Z" class="fill"/></svg>`,
-    download: `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v10m0 0 4-4m-4 4-4-4M5 18h14"/></svg>`
+    download: `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v10m0 0 4-4m-4 4-4-4M5 18h14"/></svg>`,
+    send: `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m4 5 16 7-16 7 3-7-3-7Zm3 7h13"/></svg>`
   };
 
   const style = document.createElement("style");
@@ -166,6 +167,40 @@
     .press p{color:var(--muted);line-height:1.65}
     .downloadRow{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
     .pressQuote{border-left:2px solid var(--red);padding:4px 0 4px 18px;color:#d7d3ce;line-height:1.7;font-size:16px}
+
+    .contactShell{border:1px solid var(--line);border-radius:var(--radius);background:linear-gradient(145deg,#101014,#0a0a0d);padding:38px}
+    .contactGrid{display:grid;grid-template-columns:.8fr 1.2fr;gap:38px;align-items:start}
+    .contactCopy h3{font-size:clamp(34px,4.5vw,58px);line-height:.98;letter-spacing:-.055em;margin:8px 0 15px}
+    .contactCopy p{color:var(--muted);line-height:1.7;margin:0;max-width:480px}
+    .contactNote{margin-top:22px;padding:14px 16px;border:1px solid var(--line);border-radius:15px;background:rgba(255,255,255,.025);font-size:12px;line-height:1.6;color:#c8c4bf}
+    .contactForm{display:grid;gap:13px}
+    .formRow{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+    .field{display:grid;gap:7px}
+    .field label{font-size:10px;text-transform:uppercase;letter-spacing:.13em;font-weight:900;color:#aaa6a1}
+    .field input,.field select,.field textarea{
+      width:100%;border:1px solid var(--line);background:#111115;color:var(--text);
+      border-radius:14px;padding:14px 15px;outline:none;font:inherit;font-size:14px;
+      transition:border-color .2s,box-shadow .2s,background .2s
+    }
+    .field textarea{min-height:160px;resize:vertical;line-height:1.55}
+    .field input:focus,.field select:focus,.field textarea:focus{
+      border-color:rgba(255,255,255,.28);box-shadow:0 0 0 3px rgba(255,255,255,.045);background:#141419
+    }
+    .field input::placeholder,.field textarea::placeholder{color:#67645f}
+    .contactSubmit{
+      width:100%;border:0;border-radius:999px;padding:15px 20px;background:var(--text);color:#09090a;
+      font-weight:900;font-size:13px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:9px;
+      transition:transform .2s,opacity .2s
+    }
+    .contactSubmit:hover{transform:translateY(-2px)}
+    .contactSubmit:disabled{cursor:not-allowed;opacity:.58;transform:none}
+    .contactSubmit svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+    .formStatus{display:none;border-radius:14px;padding:12px 14px;font-size:12px;line-height:1.5;border:1px solid var(--line)}
+    .formStatus.show{display:block}
+    .formStatus.success{background:rgba(57,164,93,.1);border-color:rgba(57,164,93,.28);color:#bce5c9}
+    .formStatus.error{background:rgba(181,31,46,.11);border-color:rgba(181,31,46,.3);color:#efc3c8}
+    .contactHoneypot{position:absolute!important;left:-9999px!important;width:1px!important;height:1px!important;opacity:0!important;pointer-events:none!important}
+
     .footer{border-top:1px solid var(--line);margin-top:40px}
     .footerIn{max-width:var(--max);margin:auto;padding:34px 24px 50px;display:flex;justify-content:space-between;gap:22px;align-items:center;color:#77736f;font-size:11px}
     .footer strong{color:#d7d3cf}
@@ -178,7 +213,7 @@
       .hero{grid-template-columns:1fr;min-height:auto;padding-top:50px}
       .heroArt{max-width:620px}
       .floatCard{left:14px}
-      .feature,.bioGrid,.photoStrip,.press{grid-template-columns:1fr}
+      .feature,.bioGrid,.photoStrip,.press,.contactGrid{grid-template-columns:1fr}
       .releaseInfo{padding:32px}
       .coverWrap{min-height:unset;aspect-ratio:1/1}
       .releases{grid-template-columns:1fr 1fr}
@@ -199,12 +234,14 @@
       .portraitFrame{border-radius:24px}
       .floatCard{bottom:14px;right:14px;left:14px}
       .section{padding-top:56px;padding-bottom:56px}
-      .feature,.bioCard,.facts,.press{border-radius:22px}
+      .feature,.bioCard,.facts,.press,.contactShell{border-radius:22px}
       .releaseInfo{padding:26px 22px}
       .releases,.socialGrid{grid-template-columns:1fr}
       .facts{grid-template-columns:1fr 1fr;padding:18px}
       .fact{padding:15px}
       .photoLarge,.photoSmall{min-height:420px}
+      .formRow{grid-template-columns:1fr}
+      .contactShell{padding:22px}
       .footerIn{flex-direction:column;align-items:flex-start}
     }
   `;
@@ -254,6 +291,7 @@
             <a href="#media">Media</a>
             <a href="#links">Links</a>
             <a href="#press">Press / EPK</a>
+            <a href="#contact">Contact</a>
           </div>
           <button class="menu" id="menu" aria-label="Toggle navigation">Menu</button>
         </div>
@@ -280,7 +318,7 @@
             </div>
             <div class="floatCard">
               <small>From</small>
-              <strong>South Laurel · DMV</strong>
+              <strong>South Laurel Â· DMV</strong>
             </div>
           </div>
         </section>
@@ -305,7 +343,7 @@
             <div class="releaseInfo">
               <span class="releaseBadge">Latest featured release</span>
               <h3>${DATA.featuredRelease.title}</h3>
-              <p class="releaseMeta">${DATA.featuredRelease.type} · ${DATA.featuredRelease.releaseDate} · Hip-Hop/Rap</p>
+              <p class="releaseMeta">${DATA.featuredRelease.type} Â· ${DATA.featuredRelease.releaseDate} Â· Hip-Hop/Rap</p>
 
               <div class="platforms">
                 <a class="platform" href="${DATA.featuredRelease.apple}" target="_blank" rel="noopener noreferrer">
@@ -403,12 +441,12 @@
           <div class="photoStrip">
             <div class="photoLarge reveal">
               <img src="${DATA.lifestyle}" alt="R$G MJ lifestyle photo" loading="lazy">
-              <span class="photoCaption">R$G MJ · Lifestyle</span>
+              <span class="photoCaption">R$G MJ Â· Lifestyle</span>
             </div>
 
             <div class="photoSmall reveal">
               <img src="${DATA.featuredRelease.cover}" alt="LIFE WAT U MAKE IT cover art" loading="lazy">
-              <span class="photoCaption">LIFE WAT U MAKE IT · 2026</span>
+              <span class="photoCaption">LIFE WAT U MAKE IT Â· 2026</span>
             </div>
           </div>
         </section>
@@ -454,16 +492,77 @@
             </div>
 
             <div class="pressQuote">
-              “R$G MJ is an independent hip-hop/rap artist from South Laurel, Maryland,
-              representing the DMV and building his catalog independently since 2021.”
+              âR$G MJ is an independent hip-hop/rap artist from South Laurel, Maryland,
+              representing the DMV and building his catalog independently since 2021.â
             </div>
           </div>
         </section>
+
+        <section class="section" id="contact">
+          <div class="contactShell reveal">
+            <div class="contactGrid">
+              <div class="contactCopy">
+                <div class="kicker">Direct inquiries</div>
+                <h3>Contact R$G MJ</h3>
+                <p>
+                  For interviews, editorial coverage, collaborations, business inquiries,
+                  bookings, or other professional communication, send a message directly
+                  through the form.
+                </p>
+                <div class="contactNote">
+                  Messages submitted here are delivered to R$G MJ by email.
+                  Include a valid email address so you can receive a reply.
+                </div>
+              </div>
+
+              <form class="contactForm" id="contactForm" novalidate>
+                <div class="formRow">
+                  <div class="field">
+                    <label for="contactName">Name</label>
+                    <input id="contactName" name="name" type="text" maxlength="80" autocomplete="name" placeholder="Your name" required>
+                  </div>
+                  <div class="field">
+                    <label for="contactEmail">Email</label>
+                    <input id="contactEmail" name="email" type="email" maxlength="160" autocomplete="email" placeholder="you@example.com" required>
+                  </div>
+                </div>
+
+                <div class="field">
+                  <label for="contactType">Inquiry type</label>
+                  <select id="contactType" name="type" required>
+                    <option value="General">General inquiry</option>
+                    <option value="Press / Editorial">Press / Editorial</option>
+                    <option value="Collaboration">Collaboration</option>
+                    <option value="Booking / Business">Booking / Business</option>
+                  </select>
+                </div>
+
+                <div class="field">
+                  <label for="contactMessage">Message</label>
+                  <textarea id="contactMessage" name="message" maxlength="3000" placeholder="Write your message..." required></textarea>
+                </div>
+
+                <div class="contactHoneypot" aria-hidden="true">
+                  <label for="contactCompany">Company</label>
+                  <input id="contactCompany" name="company" type="text" tabindex="-1" autocomplete="off">
+                </div>
+
+                <button class="contactSubmit" id="contactSubmit" type="submit">
+                  ${icons.send}
+                  <span>Send message</span>
+                </button>
+
+                <div class="formStatus" id="contactStatus" role="status" aria-live="polite"></div>
+              </form>
+            </div>
+          </div>
+        </section>
+
       </main>
 
       <footer class="footer">
         <div class="footerIn">
-          <div><strong>R$G MJ</strong> · Official Artist Page · <span id="year"></span></div>
+          <div><strong>R$G MJ</strong> Â· Official Artist Page Â· <span id="year"></span></div>
           <div class="miniLinks">
             <a href="${DATA.socials.instagram}" target="_blank" rel="noopener noreferrer">Instagram</a>
             <a href="${DATA.socials.spotify}" target="_blank" rel="noopener noreferrer">Spotify</a>
@@ -482,6 +581,69 @@
   document.querySelectorAll("#navlinks a").forEach((a) => {
     a.addEventListener("click", () => nav.classList.remove("open"));
   });
+
+
+  const contactForm = document.getElementById("contactForm");
+  const contactSubmit = document.getElementById("contactSubmit");
+  const contactStatus = document.getElementById("contactStatus");
+
+  if (contactForm && contactSubmit && contactStatus) {
+    contactForm.addEventListener("submit", async (event) => {
+      event.preventDefault();
+
+      const form = new FormData(contactForm);
+      const payload = {
+        name: String(form.get("name") || "").trim(),
+        email: String(form.get("email") || "").trim(),
+        type: String(form.get("type") || "General").trim(),
+        message: String(form.get("message") || "").trim(),
+        company: String(form.get("company") || "").trim()
+      };
+
+      contactStatus.className = "formStatus";
+      contactStatus.textContent = "";
+
+      if (!payload.name || !payload.email || !payload.message) {
+        contactStatus.textContent = "Fill out your name, email, and message before sending.";
+        contactStatus.className = "formStatus error show";
+        return;
+      }
+
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(payload.email)) {
+        contactStatus.textContent = "Enter a valid email address.";
+        contactStatus.className = "formStatus error show";
+        return;
+      }
+
+      contactSubmit.disabled = true;
+      contactSubmit.querySelector("span").textContent = "Sending...";
+
+      try {
+        const response = await fetch("/api/contact", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload)
+        });
+
+        let result = {};
+        try { result = await response.json(); } catch (_) {}
+
+        if (!response.ok || !result.success) {
+          throw new Error(result.error || "Unable to send message.");
+        }
+
+        contactForm.reset();
+        contactStatus.textContent = "Message sent. R$G MJ will receive it by email.";
+        contactStatus.className = "formStatus success show";
+      } catch (error) {
+        contactStatus.textContent = "Message couldnât be sent right now. Please try again.";
+        contactStatus.className = "formStatus error show";
+      } finally {
+        contactSubmit.disabled = false;
+        contactSubmit.querySelector("span").textContent = "Send message";
+      }
+    });
+  }
 
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
